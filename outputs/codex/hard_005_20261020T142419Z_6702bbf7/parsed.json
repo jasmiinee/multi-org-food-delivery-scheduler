@@ -1,0 +1,360 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 22,
+    "priority_weight": 42,
+    "mean_travel_minutes": 124.33,
+    "vehicles_used": 9
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:10",
+      "departure": "08:15",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H13",
+          "service_start": "09:10"
+        },
+        {
+          "request": "R2",
+          "household": "H10",
+          "service_start": "09:28"
+        },
+        {
+          "request": "R3",
+          "household": "H22",
+          "service_start": "10:10"
+        },
+        {
+          "request": "R4",
+          "household": "H1",
+          "service_start": "10:58"
+        },
+        {
+          "request": "R5",
+          "household": "H7",
+          "service_start": "12:04"
+        }
+      ],
+      "return": "13:28"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:10",
+      "departure": "08:15",
+      "route": [
+        {
+          "request": "R7",
+          "household": "H16",
+          "service_start": "09:04"
+        }
+      ],
+      "return": "10:03"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "08:10",
+      "departure": "08:15",
+      "route": [
+        {
+          "request": "R8",
+          "household": "H19",
+          "service_start": "09:10"
+        }
+      ],
+      "return": "10:15"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R9",
+          "household": "H8",
+          "service_start": "09:08"
+        },
+        {
+          "request": "R10",
+          "household": "H23",
+          "service_start": "09:48"
+        },
+        {
+          "request": "R11",
+          "household": "H5",
+          "service_start": "10:23"
+        },
+        {
+          "request": "R12",
+          "household": "H20",
+          "service_start": "10:58"
+        },
+        {
+          "request": "R13",
+          "household": "H17",
+          "service_start": "11:16"
+        },
+        {
+          "request": "R14",
+          "household": "H2",
+          "service_start": "11:55"
+        }
+      ],
+      "return": "12:45"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R15",
+          "household": "H11",
+          "service_start": "08:48"
+        }
+      ],
+      "return": "09:11"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": [],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R16",
+          "household": "H14",
+          "service_start": "09:11"
+        }
+      ],
+      "return": "09:57"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": [
+        "O3_TrainedAssistant"
+      ],
+      "loading_start": "08:50",
+      "departure": "08:55",
+      "route": [
+        {
+          "request": "R17",
+          "household": "H3",
+          "service_start": "10:11"
+        },
+        {
+          "request": "R18",
+          "household": "H12",
+          "service_start": "10:53"
+        },
+        {
+          "request": "R19",
+          "household": "H6",
+          "service_start": "11:13"
+        },
+        {
+          "request": "R20",
+          "household": "H9",
+          "service_start": "11:44"
+        },
+        {
+          "request": "R21",
+          "household": "H15",
+          "service_start": "12:28"
+        }
+      ],
+      "return": "13:01"
+    },
+    {
+      "vehicle": "V8",
+      "driver": "Driver_8",
+      "assistants": [],
+      "loading_start": "08:50",
+      "departure": "08:55",
+      "route": [
+        {
+          "request": "R22",
+          "household": "H18",
+          "service_start": "10:12"
+        }
+      ],
+      "return": "11:39"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": [],
+      "loading_start": "08:50",
+      "departure": "08:55",
+      "route": [
+        {
+          "request": "R23",
+          "household": "H21",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:15"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R3",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R6",
+      "status": "unserved",
+      "reason": "Requires 12 ambient crates; no O1 vehicle has sufficient ambient capacity."
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V2"
+    },
+    {
+      "request": "R8",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R11",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R13",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R14",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R15",
+      "status": "fulfilled",
+      "vehicle": "V5"
+    },
+    {
+      "request": "R16",
+      "status": "fulfilled",
+      "vehicle": "V6"
+    },
+    {
+      "request": "R17",
+      "status": "fulfilled",
+      "vehicle": "V7"
+    },
+    {
+      "request": "R18",
+      "status": "fulfilled",
+      "vehicle": "V7"
+    },
+    {
+      "request": "R19",
+      "status": "fulfilled",
+      "vehicle": "V7"
+    },
+    {
+      "request": "R20",
+      "status": "fulfilled",
+      "vehicle": "V7"
+    },
+    {
+      "request": "R21",
+      "status": "fulfilled",
+      "vehicle": "V7"
+    },
+    {
+      "request": "R22",
+      "status": "fulfilled",
+      "vehicle": "V8"
+    },
+    {
+      "request": "R23",
+      "status": "fulfilled",
+      "vehicle": "V9"
+    },
+    {
+      "request": "R24",
+      "status": "covered_by_alternative",
+      "covered_by": "R1"
+    },
+    {
+      "request": "R25",
+      "status": "covered_by_alternative",
+      "covered_by": "R13"
+    },
+    {
+      "request": "R26",
+      "status": "covered_by_alternative",
+      "covered_by": "R23"
+    },
+    {
+      "request": "R27",
+      "status": "covered_by_alternative",
+      "covered_by": "R12"
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H4",
+      "reason": "Its request requires 12 ambient crates, exceeding every O1 vehicle's ambient capacity."
+    }
+  ]
+}

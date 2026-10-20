@@ -1,0 +1,146 @@
+You are solving a one-day, multi-organisation food-delivery scheduling problem directly from natural language.
+
+Your task is to produce the final schedule yourself. Do not call, simulate, or claim to use an external optimizer or constraint solver.
+
+Apply every rule in the instance. In particular:
+
+1. A request may only use a vehicle belonging to the same organisation and leaving from that organisation's depot.
+2. Each used vehicle makes at most one trip, starting and ending at its own depot.
+3. Each driver may use only the vehicle they own. An assistant may be assigned to at most one vehicle and must belong to that organisation.
+4. Seats include the driver. The complete trip, from the beginning of loading until return, must fit the shifts of all team members.
+5. Sum ambient and chilled crates over the whole trip and check the two capacities separately. A request with chilled crates requires sufficient chilled capacity.
+6. There is no separate time-based limit on chilled deliveries in this experiment.
+7. Service starts must lie inside the stated windows. Early arrival is allowed, followed by waiting. Add the fixed service duration before travelling to the next stop.
+8. A specialised-needs household requires at least one trained person among the driver and assistants.
+9. At most one competing request may be fulfilled for a duplicate household. If one is fulfilled, mark the other request covered_by_alternative.
+10. Include every request exactly once in request_status.
+
+Optimize lexicographically:
+
+1. maximize the number of distinct households served;
+2. among those schedules, maximize their total priority weight;
+3. among those schedules, minimize mean travel minutes per used vehicle, calculated as the sum of all depot and inter-stop travel legs divided by the number of used vehicles; exclude loading, waiting and service time, and use 0 if no vehicle is used;
+4. among those schedules, minimize vehicles used;
+5. use vehicle ID as the final deterministic tie-breaker.
+
+Return only one JSON object conforming exactly to the supplied schema. Use status "candidate". Round mean_travel_minutes to two decimal places. Use HH:MM strings for every time. Do not include Markdown fences, commentary, calculations, or fields outside the schema. Objective values must describe the schedule you actually return; they will be recomputed independently.
+
+
+
+Use only the supplied problem text. Do not call tools or read files.
+
+REQUIRED JSON SCHEMA:
+{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://example.edu/cs3263/food-delivery-schedule.schema.json","title":"Food Delivery Candidate Schedule","type":"object","additionalProperties":false,"required":["status","objective","vehicles","request_status","unserved_households"],"properties":{"status":{"enum":["candidate","feasible","optimal","feasible_witness"]},"objective":{"type":"object","additionalProperties":false,"required":["households_served","priority_weight","mean_travel_minutes","vehicles_used"],"properties":{"households_served":{"type":"integer","minimum":0},"priority_weight":{"type":"integer","minimum":0},"mean_travel_minutes":{"type":"number","minimum":0},"vehicles_used":{"type":"integer","minimum":0}}},"vehicles":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["vehicle","driver","assistants","loading_start","departure","route","return"],"properties":{"vehicle":{"type":"string"},"driver":{"type":"string"},"assistants":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"loading_start":{"$ref":"#/$defs/time"},"departure":{"$ref":"#/$defs/time"},"route":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["request","household","service_start"],"properties":{"request":{"type":"string"},"household":{"type":"string"},"service_start":{"$ref":"#/$defs/time"}}}},"return":{"$ref":"#/$defs/time"}}}},"request_status":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["request","status"],"properties":{"request":{"type":"string"},"status":{"enum":["fulfilled","covered_by_alternative","unserved"]},"vehicle":{"type":"string"},"covered_by":{"type":"string"},"reason":{"type":"string"}}}},"unserved_households":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["household","reason"],"properties":{"household":{"type":"string"},"reason":{"type":"string","minLength":1}}}}},"$defs":{"time":{"type":"string","pattern":"^([01][0-9]|2[0-3]):[0-5][0-9]$"}}}
+
+INSTANCE:
+Food-delivery scheduling instance: easy_005
+Difficulty: easy
+
+Rules and objective
+- Each service takes 10 minutes.
+- Loading takes 5 minutes immediately before departure.
+- A delivery window constrains the service start time. Early arrival is allowed, followed by waiting.
+- Every used vehicle makes one loop from and back to its own depot, and makes at most one trip.
+- A vehicle may serve only requests belonging to its own organisation.
+- Drivers use only their own vehicle. Assistants may join at most one vehicle from their organisation.
+- Seats include the driver. The full trip, including loading and return, must fit every team member's shift.
+- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.
+- There is no separate time-based cold-chain limit in this version.
+- A specialised-needs household requires at least one trained driver or assistant on its vehicle.
+- At most one competing request may be fulfilled for a duplicate household.
+- First maximize households served; then priority weight; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.
+- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.
+
+Organisations and shifts
+- O1: depot D1; shifts: O1_DAY 07:15-12:12.
+- O2: depot D2; shifts: O2_DAY 07:35-12:37.
+
+Households
+- H1: priority 3; needs trained volunteer: no.
+- H2: priority 2; needs trained volunteer: no.
+- H3: priority 1; needs trained volunteer: no.
+- H4: priority 2; needs trained volunteer: no.
+- H5: priority 1; needs trained volunteer: no.
+- H6: priority 3; needs trained volunteer: yes.
+- H7: priority 1; needs trained volunteer: no.
+- H8: priority 3; needs trained volunteer: no.
+
+Volunteers
+- Driver_1: driver for O1; shift O1_DAY; trained: yes; own vehicle: V1.
+- Driver_2: driver for O1; shift O1_DAY; trained: no; own vehicle: V2.
+- O1_TrainedAssistant: assistant for O1; shift O1_DAY; trained: yes; own vehicle: none.
+- O1_Assistant: assistant for O1; shift O1_DAY; trained: no; own vehicle: none.
+- Driver_3: driver for O2; shift O2_DAY; trained: yes; own vehicle: V3.
+- Driver_4: driver for O2; shift O2_DAY; trained: no; own vehicle: V4.
+- O2_TrainedAssistant: assistant for O2; shift O2_DAY; trained: yes; own vehicle: none.
+- O2_Assistant: assistant for O2; shift O2_DAY; trained: no; own vehicle: none.
+
+Vehicles
+- V1: O1, depot D1, driver Driver_1, seats 3, ambient capacity 11, chilled capacity 5.
+- V2: O1, depot D1, driver Driver_2, seats 3, ambient capacity 5, chilled capacity 0.
+- V3: O2, depot D2, driver Driver_3, seats 3, ambient capacity 12, chilled capacity 5.
+- V4: O2, depot D2, driver Driver_4, seats 3, ambient capacity 7, chilled capacity 0.
+
+Delivery requests
+- R1: O1 serves H3 from D1; ambient 1; chilled 1; window 08:00-09:15; trained volunteer needed: no; household priority 1.
+- R2: O1 serves H7 from D1; ambient 3; chilled 0; window 08:35-09:55; trained volunteer needed: no; household priority 1.
+- R3: O1 serves H1 from D1; ambient 12; chilled 0; window 09:10-10:30; trained volunteer needed: no; household priority 3.
+- R4: O1 serves H5 from D1; ambient 1; chilled 0; window 09:01-10:21; trained volunteer needed: no; household priority 1.
+- R5: O2 serves H4 from D2; ambient 2; chilled 0; window 08:40-10:00; trained volunteer needed: no; household priority 2.
+- R6: O2 serves H6 from D2; ambient 3; chilled 0; window 09:18-10:38; trained volunteer needed: yes; household priority 3.
+- R7: O2 serves H2 from D2; ambient 3; chilled 1; window 10:18-11:38; trained volunteer needed: no; household priority 2.
+- R8: O2 serves H8 from D2; ambient 3; chilled 0; window 08:28-09:48; trained volunteer needed: no; household priority 3.
+- R9: O1 serves H4 from D1; ambient 1; chilled 2; window 09:07-10:27; trained volunteer needed: no; household priority 2.
+
+Duplicate households
+- H4: choose at most one of R5, R9.
+
+Travel times in minutes (symmetric)
+origin,destination,minutes
+D1,D2,46
+D1,H1,65
+D1,H2,74
+D1,H3,15
+D1,H4,16
+D1,H5,81
+D1,H6,41
+D1,H7,45
+D1,H8,36
+D2,H1,27
+D2,H2,29
+D2,H3,33
+D2,H4,40
+D2,H5,38
+D2,H6,26
+D2,H7,29
+D2,H8,28
+H1,H2,34
+H1,H3,50
+H1,H4,53
+H1,H5,48
+H1,H6,26
+H1,H7,25
+H1,H8,33
+H2,H3,62
+H2,H4,69
+H2,H5,14
+H2,H6,50
+H2,H7,51
+H2,H8,54
+H3,H4,9
+H3,H5,70
+H3,H6,26
+H3,H7,30
+H3,H8,21
+H4,H5,78
+H4,H6,28
+H4,H7,31
+H4,H8,21
+H5,H6,62
+H5,H7,64
+H5,H8,66
+H6,H7,5
+H6,H8,6
+H7,H8,9
+
+Produce the final schedule using the required JSON output format. Include every request in request_status.

@@ -1,0 +1,20 @@
+code,category,description
+PARSE_ERROR,format,Response is not a parseable JSON object
+SCHEMA_ERROR,format,JSON does not satisfy the shared output schema
+UNKNOWN_ID,reference,Output refers to an unknown request household vehicle or volunteer
+DUPLICATE_SERVICE,coverage,A household is served more than once
+MISSING_REQUEST_STATUS,coverage,A request is absent from request_status
+WRONG_ORGANISATION,eligibility,A vehicle or volunteer serves another organisation's request
+ROUTE_ERROR,routing,Route does not form one valid depot-to-depot trip
+TIME_WINDOW,timing,Service starts outside the request window
+TIME_PROPAGATION,timing,Reported times do not allow travel service or waiting
+SHIFT,timing,Loading departure service or return lies outside a team member's shift
+ASSISTANT_DOUBLE_BOOKED,team,An assistant is assigned to more than one vehicle
+SEAT_CAPACITY,team,Team size exceeds vehicle seats
+AMBIENT_CAPACITY,capacity,Ambient load exceeds ambient capacity
+CHILLED_CAPACITY,capacity,Chilled load exceeds chilled capacity
+TRAINING,eligibility,A specialised-needs household lacks a trained team member
+OBJECTIVE_MISMATCH,reporting,Reported household priority mean-travel or vehicle count does not match the returned schedule
+SUBOPTIMAL,quality,Schedule is feasible but worse than the exact reference objective
+OTHER,other,Violation does not fit another agreed category
+

@@ -1,0 +1,203 @@
+{
+  "status": "feasible_witness",
+  "objective": {
+    "households_served": 12,
+    "priority_weight": 18,
+    "mean_travel_minutes": 128.0,
+    "vehicles_used": 4
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:15",
+      "departure": "08:20",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H1",
+          "service_start": "09:11"
+        },
+        {
+          "request": "R2",
+          "household": "H7",
+          "service_start": "09:51"
+        },
+        {
+          "request": "R3",
+          "household": "H11",
+          "service_start": "10:29"
+        },
+        {
+          "request": "R4",
+          "household": "H3",
+          "service_start": "10:48"
+        },
+        {
+          "request": "R6",
+          "household": "H5",
+          "service_start": "12:03"
+        }
+      ],
+      "return": "13:18"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:15",
+      "departure": "08:20",
+      "route": [
+        {
+          "request": "R7",
+          "household": "H9",
+          "service_start": "09:10"
+        }
+      ],
+      "return": "10:10"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R8",
+          "household": "H6",
+          "service_start": "09:17"
+        },
+        {
+          "request": "R9",
+          "household": "H12",
+          "service_start": "09:38"
+        },
+        {
+          "request": "R10",
+          "household": "H4",
+          "service_start": "10:27"
+        },
+        {
+          "request": "R11",
+          "household": "H8",
+          "service_start": "10:50"
+        },
+        {
+          "request": "R12",
+          "household": "H2",
+          "service_start": "11:30"
+        }
+      ],
+      "return": "12:08"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R13",
+          "household": "H10",
+          "service_start": "08:56"
+        }
+      ],
+      "return": "09:22"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R3",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R5",
+      "status": "unserved",
+      "reason": "ambient demand exceeds every vehicle capacity in its organisation"
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V2"
+    },
+    {
+      "request": "R8",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R11",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R13",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R14",
+      "status": "covered_by_alternative",
+      "covered_by": "R11"
+    },
+    {
+      "request": "R15",
+      "status": "covered_by_alternative",
+      "covered_by": "R4"
+    },
+    {
+      "request": "R16",
+      "status": "covered_by_alternative",
+      "covered_by": "R6"
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H13",
+      "reason": "ambient demand exceeds every vehicle capacity in its organisation"
+    }
+  ]
+}

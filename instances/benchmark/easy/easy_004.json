@@ -1,0 +1,340 @@
+{
+  "metadata": {
+    "instance_id": "easy_004",
+    "difficulty": "easy",
+    "scenario": "fully_serviceable",
+    "seed": 4251,
+    "generator_version": "1.1.0-difficulty-calibrated",
+    "cold_chain_time_limit_enabled": false
+  },
+  "parameters": {
+    "service_minutes": 10,
+    "loading_minutes": 5,
+    "time_unit": "minutes_from_midnight",
+    "window_semantics": "service_start",
+    "max_trips_per_vehicle": 1
+  },
+  "organisations": [
+    {
+      "id": "O1",
+      "depot": "D1",
+      "shifts": [
+        {
+          "id": "O1_DAY",
+          "start": 435,
+          "end": 718
+        }
+      ]
+    },
+    {
+      "id": "O2",
+      "depot": "D2",
+      "shifts": [
+        {
+          "id": "O2_DAY",
+          "start": 455,
+          "end": 694
+        }
+      ]
+    }
+  ],
+  "households": [
+    {
+      "id": "H1",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H2",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H3",
+      "needs_trained_volunteer": true,
+      "priority": 2
+    },
+    {
+      "id": "H4",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H5",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H6",
+      "needs_trained_volunteer": false,
+      "priority": 2
+    }
+  ],
+  "volunteers": [
+    {
+      "id": "Driver_1",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_DAY",
+      "trained": true,
+      "vehicle_id": "V1"
+    },
+    {
+      "id": "Driver_2",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_DAY",
+      "trained": false,
+      "vehicle_id": "V2"
+    },
+    {
+      "id": "O1_TrainedAssistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O1_Assistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_DAY",
+      "trained": false,
+      "vehicle_id": null
+    },
+    {
+      "id": "Driver_3",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_DAY",
+      "trained": true,
+      "vehicle_id": "V3"
+    },
+    {
+      "id": "Driver_4",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_DAY",
+      "trained": false,
+      "vehicle_id": "V4"
+    },
+    {
+      "id": "O2_TrainedAssistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O2_Assistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_DAY",
+      "trained": false,
+      "vehicle_id": null
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "V1",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_1",
+      "seats": 3,
+      "ambient_capacity": 6,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V2",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_2",
+      "seats": 3,
+      "ambient_capacity": 5,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V3",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_3",
+      "seats": 3,
+      "ambient_capacity": 7,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V4",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_4",
+      "seats": 3,
+      "ambient_capacity": 5,
+      "chilled_capacity": 0
+    }
+  ],
+  "requests": [
+    {
+      "id": "R1",
+      "organisation": "O1",
+      "household": "H1",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 480,
+      "window_end": 556
+    },
+    {
+      "id": "R2",
+      "organisation": "O1",
+      "household": "H3",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 539,
+      "window_end": 619
+    },
+    {
+      "id": "R3",
+      "organisation": "O1",
+      "household": "H5",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 534,
+      "window_end": 614
+    },
+    {
+      "id": "R4",
+      "organisation": "O2",
+      "household": "H2",
+      "depot": "D2",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 507,
+      "window_end": 587
+    },
+    {
+      "id": "R5",
+      "organisation": "O2",
+      "household": "H6",
+      "depot": "D2",
+      "ambient_crates": 2,
+      "chilled_crates": 0,
+      "window_start": 538,
+      "window_end": 618
+    },
+    {
+      "id": "R6",
+      "organisation": "O2",
+      "household": "H4",
+      "depot": "D2",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 500,
+      "window_end": 580
+    },
+    {
+      "id": "R7",
+      "organisation": "O2",
+      "household": "H1",
+      "depot": "D2",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 469,
+      "window_end": 549
+    }
+  ],
+  "duplicate_households": [
+    {
+      "household": "H1",
+      "competing_requests": [
+        "R1",
+        "R7"
+      ]
+    }
+  ],
+  "travel_times": {
+    "D1": {
+      "D1": 0,
+      "D2": 46,
+      "H1": 16,
+      "H2": 55,
+      "H3": 69,
+      "H4": 47,
+      "H5": 74,
+      "H6": 74
+    },
+    "D2": {
+      "D1": 46,
+      "D2": 0,
+      "H1": 33,
+      "H2": 27,
+      "H3": 39,
+      "H4": 20,
+      "H5": 32,
+      "H6": 46
+    },
+    "H1": {
+      "D1": 16,
+      "D2": 33,
+      "H1": 0,
+      "H2": 40,
+      "H3": 53,
+      "H4": 31,
+      "H5": 59,
+      "H6": 59
+    },
+    "H2": {
+      "D1": 55,
+      "D2": 27,
+      "H1": 40,
+      "H2": 0,
+      "H3": 14,
+      "H4": 9,
+      "H5": 24,
+      "H6": 21
+    },
+    "H3": {
+      "D1": 69,
+      "D2": 39,
+      "H1": 53,
+      "H2": 14,
+      "H3": 0,
+      "H4": 23,
+      "H5": 22,
+      "H6": 7
+    },
+    "H4": {
+      "D1": 47,
+      "D2": 20,
+      "H1": 31,
+      "H2": 9,
+      "H3": 23,
+      "H4": 0,
+      "H5": 28,
+      "H6": 30
+    },
+    "H5": {
+      "D1": 74,
+      "D2": 32,
+      "H1": 59,
+      "H2": 24,
+      "H3": 22,
+      "H4": 28,
+      "H5": 0,
+      "H6": 27
+    },
+    "H6": {
+      "D1": 74,
+      "D2": 46,
+      "H1": 59,
+      "H2": 21,
+      "H3": 7,
+      "H4": 30,
+      "H5": 27,
+      "H6": 0
+    }
+  }
+}

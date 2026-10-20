@@ -1,0 +1,203 @@
+{
+  "status": "feasible_witness",
+  "objective": {
+    "households_served": 13,
+    "priority_weight": 28,
+    "mean_travel_minutes": 161.0,
+    "vehicles_used": 4
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:15",
+      "departure": "08:20",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H3",
+          "service_start": "09:06"
+        },
+        {
+          "request": "R2",
+          "household": "H7",
+          "service_start": "09:21"
+        },
+        {
+          "request": "R3",
+          "household": "H1",
+          "service_start": "09:40"
+        },
+        {
+          "request": "R4",
+          "household": "H9",
+          "service_start": "10:27"
+        },
+        {
+          "request": "R5",
+          "household": "H5",
+          "service_start": "10:55"
+        },
+        {
+          "request": "R6",
+          "household": "H11",
+          "service_start": "11:48"
+        }
+      ],
+      "return": "13:15"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:15",
+      "departure": "08:20",
+      "route": [
+        {
+          "request": "R7",
+          "household": "H13",
+          "service_start": "09:26"
+        }
+      ],
+      "return": "10:42"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R8",
+          "household": "H10",
+          "service_start": "09:23"
+        },
+        {
+          "request": "R9",
+          "household": "H12",
+          "service_start": "10:14"
+        },
+        {
+          "request": "R10",
+          "household": "H2",
+          "service_start": "11:15"
+        },
+        {
+          "request": "R11",
+          "household": "H4",
+          "service_start": "11:49"
+        },
+        {
+          "request": "R12",
+          "household": "H6",
+          "service_start": "12:13"
+        }
+      ],
+      "return": "12:47"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R13",
+          "household": "H8",
+          "service_start": "09:20"
+        }
+      ],
+      "return": "10:10"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R3",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V2"
+    },
+    {
+      "request": "R8",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R11",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R13",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R14",
+      "status": "covered_by_alternative",
+      "covered_by": "R9"
+    },
+    {
+      "request": "R15",
+      "status": "covered_by_alternative",
+      "covered_by": "R13"
+    },
+    {
+      "request": "R16",
+      "status": "covered_by_alternative",
+      "covered_by": "R7"
+    }
+  ],
+  "unserved_households": []
+}

@@ -1,0 +1,57 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 5,
+    "priority_weight": 9,
+    "mean_travel_minutes": 33.67,
+    "vehicles_used": 3
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Ana",
+      "assistants": ["Ben"],
+      "loading_start": "10:15",
+      "departure": "10:20",
+      "route": [
+        {"request": "R1", "household": "H1", "service_start": "10:30"},
+        {"request": "R2", "household": "H2", "service_start": "10:48"}
+      ],
+      "return": "11:13"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Carl",
+      "assistants": ["Eli"],
+      "loading_start": "10:28",
+      "departure": "10:33",
+      "route": [
+        {"request": "R5", "household": "H4", "service_start": "10:45"},
+        {"request": "R4", "household": "H3", "service_start": "11:15"}
+      ],
+      "return": "11:35"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Hana",
+      "assistants": [],
+      "loading_start": "13:07",
+      "departure": "13:12",
+      "route": [
+        {"request": "R6", "household": "H5", "service_start": "13:30"}
+      ],
+      "return": "13:58"
+    }
+  ],
+  "request_status": [
+    {"request": "R1", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R2", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R3", "status": "covered_by_alternative", "covered_by": "R4"},
+    {"request": "R4", "status": "fulfilled", "vehicle": "V3"},
+    {"request": "R5", "status": "fulfilled", "vehicle": "V3"},
+    {"request": "R6", "status": "fulfilled", "vehicle": "V5"},
+    {"request": "R7", "status": "covered_by_alternative", "covered_by": "R2"}
+  ],
+  "unserved_households": []
+}
+

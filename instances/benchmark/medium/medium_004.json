@@ -1,0 +1,731 @@
+{
+  "metadata": {
+    "instance_id": "medium_004",
+    "difficulty": "medium",
+    "scenario": "fully_serviceable",
+    "seed": 24251,
+    "generator_version": "1.1.0-difficulty-calibrated",
+    "cold_chain_time_limit_enabled": false
+  },
+  "parameters": {
+    "service_minutes": 10,
+    "loading_minutes": 5,
+    "time_unit": "minutes_from_midnight",
+    "window_semantics": "service_start",
+    "max_trips_per_vehicle": 1
+  },
+  "organisations": [
+    {
+      "id": "O1",
+      "depot": "D1",
+      "shifts": [
+        {
+          "id": "O1_DAY",
+          "start": 470,
+          "end": 706
+        }
+      ]
+    },
+    {
+      "id": "O2",
+      "depot": "D2",
+      "shifts": [
+        {
+          "id": "O2_DAY",
+          "start": 490,
+          "end": 716
+        }
+      ]
+    },
+    {
+      "id": "O3",
+      "depot": "D3",
+      "shifts": [
+        {
+          "id": "O3_DAY",
+          "start": 510,
+          "end": 896
+        }
+      ]
+    }
+  ],
+  "households": [
+    {
+      "id": "H1",
+      "needs_trained_volunteer": true,
+      "priority": 3
+    },
+    {
+      "id": "H2",
+      "needs_trained_volunteer": true,
+      "priority": 1
+    },
+    {
+      "id": "H3",
+      "needs_trained_volunteer": true,
+      "priority": 1
+    },
+    {
+      "id": "H4",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H5",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H6",
+      "needs_trained_volunteer": true,
+      "priority": 1
+    },
+    {
+      "id": "H7",
+      "needs_trained_volunteer": true,
+      "priority": 1
+    },
+    {
+      "id": "H8",
+      "needs_trained_volunteer": true,
+      "priority": 2
+    },
+    {
+      "id": "H9",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H10",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H11",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H12",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H13",
+      "needs_trained_volunteer": false,
+      "priority": 2
+    }
+  ],
+  "volunteers": [
+    {
+      "id": "Driver_1",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_DAY",
+      "trained": false,
+      "vehicle_id": "V1"
+    },
+    {
+      "id": "Driver_2",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_DAY",
+      "trained": false,
+      "vehicle_id": "V2"
+    },
+    {
+      "id": "O1_TrainedAssistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O1_Assistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_DAY",
+      "trained": false,
+      "vehicle_id": null
+    },
+    {
+      "id": "Driver_3",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_DAY",
+      "trained": false,
+      "vehicle_id": "V3"
+    },
+    {
+      "id": "Driver_4",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_DAY",
+      "trained": false,
+      "vehicle_id": "V4"
+    },
+    {
+      "id": "O2_TrainedAssistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O2_Assistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_DAY",
+      "trained": false,
+      "vehicle_id": null
+    },
+    {
+      "id": "Driver_5",
+      "organisation": "O3",
+      "role": "driver",
+      "shift_id": "O3_DAY",
+      "trained": false,
+      "vehicle_id": "V5"
+    },
+    {
+      "id": "Driver_6",
+      "organisation": "O3",
+      "role": "driver",
+      "shift_id": "O3_DAY",
+      "trained": false,
+      "vehicle_id": "V6"
+    },
+    {
+      "id": "O3_TrainedAssistant",
+      "organisation": "O3",
+      "role": "assistant",
+      "shift_id": "O3_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O3_Assistant",
+      "organisation": "O3",
+      "role": "assistant",
+      "shift_id": "O3_DAY",
+      "trained": false,
+      "vehicle_id": null
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "V1",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_1",
+      "seats": 2,
+      "ambient_capacity": 10,
+      "chilled_capacity": 7
+    },
+    {
+      "id": "V2",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_2",
+      "seats": 2,
+      "ambient_capacity": 3,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V3",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_3",
+      "seats": 2,
+      "ambient_capacity": 10,
+      "chilled_capacity": 3
+    },
+    {
+      "id": "V4",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_4",
+      "seats": 2,
+      "ambient_capacity": 4,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V5",
+      "organisation": "O3",
+      "home_depot": "D3",
+      "driver_id": "Driver_5",
+      "seats": 2,
+      "ambient_capacity": 12,
+      "chilled_capacity": 4
+    },
+    {
+      "id": "V6",
+      "organisation": "O3",
+      "home_depot": "D3",
+      "driver_id": "Driver_6",
+      "seats": 2,
+      "ambient_capacity": 2,
+      "chilled_capacity": 0
+    }
+  ],
+  "requests": [
+    {
+      "id": "R1",
+      "organisation": "O1",
+      "household": "H1",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 1,
+      "window_start": 515,
+      "window_end": 555
+    },
+    {
+      "id": "R2",
+      "organisation": "O1",
+      "household": "H10",
+      "depot": "D1",
+      "ambient_crates": 2,
+      "chilled_crates": 0,
+      "window_start": 530,
+      "window_end": 570
+    },
+    {
+      "id": "R3",
+      "organisation": "O1",
+      "household": "H4",
+      "depot": "D1",
+      "ambient_crates": 3,
+      "chilled_crates": 2,
+      "window_start": 561,
+      "window_end": 601
+    },
+    {
+      "id": "R4",
+      "organisation": "O1",
+      "household": "H7",
+      "depot": "D1",
+      "ambient_crates": 2,
+      "chilled_crates": 2,
+      "window_start": 617,
+      "window_end": 657
+    },
+    {
+      "id": "R5",
+      "organisation": "O1",
+      "household": "H13",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 561,
+      "window_end": 601
+    },
+    {
+      "id": "R6",
+      "organisation": "O2",
+      "household": "H8",
+      "depot": "D2",
+      "ambient_crates": 3,
+      "chilled_crates": 0,
+      "window_start": 533,
+      "window_end": 573
+    },
+    {
+      "id": "R7",
+      "organisation": "O2",
+      "household": "H2",
+      "depot": "D2",
+      "ambient_crates": 3,
+      "chilled_crates": 1,
+      "window_start": 578,
+      "window_end": 618
+    },
+    {
+      "id": "R8",
+      "organisation": "O2",
+      "household": "H5",
+      "depot": "D2",
+      "ambient_crates": 2,
+      "chilled_crates": 0,
+      "window_start": 638,
+      "window_end": 678
+    },
+    {
+      "id": "R9",
+      "organisation": "O2",
+      "household": "H11",
+      "depot": "D2",
+      "ambient_crates": 2,
+      "chilled_crates": 0,
+      "window_start": 533,
+      "window_end": 573
+    },
+    {
+      "id": "R10",
+      "organisation": "O3",
+      "household": "H12",
+      "depot": "D3",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 611,
+      "window_end": 651
+    },
+    {
+      "id": "R11",
+      "organisation": "O3",
+      "household": "H3",
+      "depot": "D3",
+      "ambient_crates": 3,
+      "chilled_crates": 1,
+      "window_start": 680,
+      "window_end": 720
+    },
+    {
+      "id": "R12",
+      "organisation": "O3",
+      "household": "H9",
+      "depot": "D3",
+      "ambient_crates": 3,
+      "chilled_crates": 1,
+      "window_start": 748,
+      "window_end": 788
+    },
+    {
+      "id": "R13",
+      "organisation": "O3",
+      "household": "H6",
+      "depot": "D3",
+      "ambient_crates": 3,
+      "chilled_crates": 0,
+      "window_start": 787,
+      "window_end": 827
+    },
+    {
+      "id": "R14",
+      "organisation": "O2",
+      "household": "H10",
+      "depot": "D2",
+      "ambient_crates": 2,
+      "chilled_crates": 1,
+      "window_start": 543,
+      "window_end": 583
+    },
+    {
+      "id": "R15",
+      "organisation": "O2",
+      "household": "H4",
+      "depot": "D2",
+      "ambient_crates": 3,
+      "chilled_crates": 0,
+      "window_start": 590,
+      "window_end": 630
+    }
+  ],
+  "duplicate_households": [
+    {
+      "household": "H10",
+      "competing_requests": [
+        "R2",
+        "R14"
+      ]
+    },
+    {
+      "household": "H4",
+      "competing_requests": [
+        "R3",
+        "R15"
+      ]
+    }
+  ],
+  "travel_times": {
+    "D1": {
+      "D1": 0,
+      "D2": 46,
+      "D3": 70,
+      "H1": 35,
+      "H2": 35,
+      "H3": 14,
+      "H4": 57,
+      "H5": 65,
+      "H6": 90,
+      "H7": 34,
+      "H8": 19,
+      "H9": 63,
+      "H10": 39,
+      "H11": 71,
+      "H12": 53,
+      "H13": 81
+    },
+    "D2": {
+      "D1": 46,
+      "D2": 0,
+      "D3": 46,
+      "H1": 38,
+      "H2": 27,
+      "H3": 40,
+      "H4": 35,
+      "H5": 23,
+      "H6": 44,
+      "H7": 16,
+      "H8": 33,
+      "H9": 17,
+      "H10": 38,
+      "H11": 33,
+      "H12": 45,
+      "H13": 35
+    },
+    "D3": {
+      "D1": 70,
+      "D2": 46,
+      "D3": 0,
+      "H1": 81,
+      "H2": 35,
+      "H3": 57,
+      "H4": 81,
+      "H5": 62,
+      "H6": 54,
+      "H7": 42,
+      "H8": 69,
+      "H9": 52,
+      "H10": 82,
+      "H11": 22,
+      "H12": 91,
+      "H13": 57
+    },
+    "H1": {
+      "D1": 35,
+      "D2": 38,
+      "D3": 81,
+      "H1": 0,
+      "H2": 50,
+      "H3": 42,
+      "H4": 25,
+      "H5": 45,
+      "H6": 77,
+      "H7": 39,
+      "H8": 17,
+      "H9": 48,
+      "H10": 5,
+      "H11": 71,
+      "H12": 18,
+      "H13": 65
+    },
+    "H2": {
+      "D1": 35,
+      "D2": 27,
+      "D3": 35,
+      "H1": 50,
+      "H2": 0,
+      "H3": 23,
+      "H4": 58,
+      "H5": 50,
+      "H6": 63,
+      "H7": 13,
+      "H8": 35,
+      "H9": 43,
+      "H10": 52,
+      "H11": 37,
+      "H12": 63,
+      "H13": 58
+    },
+    "H3": {
+      "D1": 14,
+      "D2": 40,
+      "D3": 57,
+      "H1": 42,
+      "H2": 23,
+      "H3": 0,
+      "H4": 60,
+      "H5": 62,
+      "H6": 83,
+      "H7": 26,
+      "H8": 25,
+      "H9": 58,
+      "H10": 46,
+      "H11": 60,
+      "H12": 59,
+      "H13": 76
+    },
+    "H4": {
+      "D1": 57,
+      "D2": 35,
+      "D3": 81,
+      "H1": 25,
+      "H2": 58,
+      "H3": 60,
+      "H4": 0,
+      "H5": 27,
+      "H6": 61,
+      "H7": 46,
+      "H8": 38,
+      "H9": 35,
+      "H10": 21,
+      "H11": 66,
+      "H12": 15,
+      "H13": 48
+    },
+    "H5": {
+      "D1": 65,
+      "D2": 23,
+      "D3": 62,
+      "H1": 45,
+      "H2": 50,
+      "H3": 62,
+      "H4": 27,
+      "H5": 0,
+      "H6": 34,
+      "H7": 39,
+      "H8": 48,
+      "H9": 10,
+      "H10": 42,
+      "H11": 42,
+      "H12": 42,
+      "H13": 21
+    },
+    "H6": {
+      "D1": 90,
+      "D2": 44,
+      "D3": 54,
+      "H1": 77,
+      "H2": 63,
+      "H3": 83,
+      "H4": 61,
+      "H5": 34,
+      "H6": 0,
+      "H7": 57,
+      "H8": 76,
+      "H9": 29,
+      "H10": 76,
+      "H11": 32,
+      "H12": 76,
+      "H13": 13
+    },
+    "H7": {
+      "D1": 34,
+      "D2": 16,
+      "D3": 42,
+      "H1": 39,
+      "H2": 13,
+      "H3": 26,
+      "H4": 46,
+      "H5": 39,
+      "H6": 57,
+      "H7": 0,
+      "H8": 27,
+      "H9": 33,
+      "H10": 41,
+      "H11": 37,
+      "H12": 52,
+      "H13": 50
+    },
+    "H8": {
+      "D1": 19,
+      "D2": 33,
+      "D3": 69,
+      "H1": 17,
+      "H2": 35,
+      "H3": 25,
+      "H4": 38,
+      "H5": 48,
+      "H6": 76,
+      "H7": 27,
+      "H8": 0,
+      "H9": 48,
+      "H10": 21,
+      "H11": 63,
+      "H12": 35,
+      "H13": 66
+    },
+    "H9": {
+      "D1": 63,
+      "D2": 17,
+      "D3": 52,
+      "H1": 48,
+      "H2": 43,
+      "H3": 58,
+      "H4": 35,
+      "H5": 10,
+      "H6": 29,
+      "H7": 33,
+      "H8": 48,
+      "H9": 0,
+      "H10": 46,
+      "H11": 33,
+      "H12": 49,
+      "H13": 19
+    },
+    "H10": {
+      "D1": 39,
+      "D2": 38,
+      "D3": 82,
+      "H1": 5,
+      "H2": 52,
+      "H3": 46,
+      "H4": 21,
+      "H5": 42,
+      "H6": 76,
+      "H7": 41,
+      "H8": 21,
+      "H9": 46,
+      "H10": 0,
+      "H11": 71,
+      "H12": 14,
+      "H13": 63
+    },
+    "H11": {
+      "D1": 71,
+      "D2": 33,
+      "D3": 22,
+      "H1": 71,
+      "H2": 37,
+      "H3": 60,
+      "H4": 66,
+      "H5": 42,
+      "H6": 32,
+      "H7": 37,
+      "H8": 63,
+      "H9": 33,
+      "H10": 71,
+      "H11": 0,
+      "H12": 77,
+      "H13": 35
+    },
+    "H12": {
+      "D1": 53,
+      "D2": 45,
+      "D3": 91,
+      "H1": 18,
+      "H2": 63,
+      "H3": 59,
+      "H4": 15,
+      "H5": 42,
+      "H6": 76,
+      "H7": 52,
+      "H8": 35,
+      "H9": 49,
+      "H10": 14,
+      "H11": 77,
+      "H12": 0,
+      "H13": 63
+    },
+    "H13": {
+      "D1": 81,
+      "D2": 35,
+      "D3": 57,
+      "H1": 65,
+      "H2": 58,
+      "H3": 76,
+      "H4": 48,
+      "H5": 21,
+      "H6": 13,
+      "H7": 50,
+      "H8": 66,
+      "H9": 19,
+      "H10": 63,
+      "H11": 35,
+      "H12": 63,
+      "H13": 0
+    }
+  }
+}

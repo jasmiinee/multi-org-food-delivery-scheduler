@@ -1,0 +1,119 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 6,
+    "priority_weight": 12,
+    "mean_travel_minutes": 82.75,
+    "vehicles_used": 4
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [],
+      "loading_start": "07:15",
+      "departure": "07:20",
+      "route": [
+        {
+          "request": "R2",
+          "household": "H3",
+          "service_start": "08:59"
+        },
+        {
+          "request": "R3",
+          "household": "H5",
+          "service_start": "09:31"
+        }
+      ],
+      "return": "10:55"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "07:39",
+      "departure": "07:44",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H1",
+          "service_start": "08:00"
+        }
+      ],
+      "return": "08:26"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "07:55",
+      "departure": "08:00",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H2",
+          "service_start": "08:27"
+        },
+        {
+          "request": "R5",
+          "household": "H6",
+          "service_start": "08:58"
+        }
+      ],
+      "return": "09:54"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "07:55",
+      "departure": "08:00",
+      "route": [
+        {
+          "request": "R6",
+          "household": "H4",
+          "service_start": "08:20"
+        }
+      ],
+      "return": "08:50"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V2"
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R3",
+      "status": "fulfilled",
+      "vehicle": "V1"
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V3"
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V4"
+    },
+    {
+      "request": "R7",
+      "status": "covered_by_alternative",
+      "covered_by": "R1"
+    }
+  ],
+  "unserved_households": []
+}

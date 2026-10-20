@@ -1,0 +1,84 @@
+Food-delivery scheduling instance: final_proposal_example
+Difficulty: worked_example
+
+Rules and objective
+- Each service takes 10 minutes.
+- Loading takes 5 minutes immediately before departure.
+- A delivery window constrains the service start time. Early arrival is allowed, followed by waiting.
+- Every used vehicle makes one loop from and back to its own depot, and makes at most one trip.
+- A vehicle may serve only requests belonging to its own organisation.
+- Drivers use only their own vehicle. Assistants may join at most one vehicle from their organisation.
+- Seats include the driver. The full trip, including loading and return, must fit every team member's shift.
+- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.
+- There is no separate time-based cold-chain limit in this version.
+- A specialised-needs household requires at least one trained driver or assistant on its vehicle.
+- At most one competing request may be fulfilled for a duplicate household.
+- First maximize households served; then priority weight; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.
+- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.
+
+Organisations and shifts
+- Org1: depot D1; shifts: Org1_Day 10:00-16:00.
+- Org2: depot D2; shifts: Org2_Morning 09:00-13:00, Org2_Afternoon 13:00-17:00.
+
+Households
+- H1: priority 1; needs trained volunteer: no.
+- H2: priority 3; needs trained volunteer: yes.
+- H3: priority 2; needs trained volunteer: no.
+- H4: priority 2; needs trained volunteer: yes.
+- H5: priority 1; needs trained volunteer: no.
+
+Volunteers
+- Ana: driver for Org1; shift Org1_Day; trained: no; own vehicle: V1.
+- Gus: driver for Org1; shift Org1_Day; trained: yes; own vehicle: V2.
+- Ben: assistant for Org1; shift Org1_Day; trained: yes; own vehicle: none.
+- Carl: driver for Org2; shift Org2_Morning; trained: no; own vehicle: V3.
+- Dina: driver for Org2; shift Org2_Morning; trained: no; own vehicle: V4.
+- Eli: assistant for Org2; shift Org2_Morning; trained: yes; own vehicle: none.
+- Hana: driver for Org2; shift Org2_Afternoon; trained: no; own vehicle: V5.
+- Fay: assistant for Org2; shift Org2_Afternoon; trained: no; own vehicle: none.
+
+Vehicles
+- V1: Org1, depot D1, driver Ana, seats 3, ambient capacity 6, chilled capacity 4.
+- V2: Org1, depot D1, driver Gus, seats 2, ambient capacity 3, chilled capacity 0.
+- V3: Org2, depot D2, driver Carl, seats 3, ambient capacity 5, chilled capacity 3.
+- V4: Org2, depot D2, driver Dina, seats 2, ambient capacity 3, chilled capacity 0.
+- V5: Org2, depot D2, driver Hana, seats 2, ambient capacity 3, chilled capacity 2.
+
+Delivery requests
+- R1: Org1 serves H1 from D1; ambient 2; chilled 0; window 10:30-11:00; trained volunteer needed: no; household priority 1.
+- R2: Org1 serves H2 from D1; ambient 3; chilled 1; window 10:45-11:15; trained volunteer needed: yes; household priority 3.
+- R3: Org1 serves H3 from D1; ambient 2; chilled 0; window 11:00-11:30; trained volunteer needed: no; household priority 2.
+- R4: Org2 serves H3 from D2; ambient 1; chilled 2; window 11:15-11:45; trained volunteer needed: no; household priority 2.
+- R5: Org2 serves H4 from D2; ambient 2; chilled 0; window 10:45-11:15; trained volunteer needed: yes; household priority 2.
+- R6: Org2 serves H5 from D2; ambient 3; chilled 0; window 13:30-14:00; trained volunteer needed: no; household priority 1.
+- R7: Org2 serves H2 from D2; ambient 2; chilled 0; window 13:30-14:00; trained volunteer needed: yes; household priority 3.
+
+Duplicate households
+- H2: choose at most one of R2, R7.
+- H3: choose at most one of R3, R4.
+
+Travel times in minutes (symmetric)
+origin,destination,minutes
+D1,D2,15
+D1,H1,10
+D1,H2,15
+D1,H3,20
+D1,H4,25
+D1,H5,30
+D2,H1,20
+D2,H2,15
+D2,H3,10
+D2,H4,12
+D2,H5,18
+H1,H2,8
+H1,H3,22
+H1,H4,28
+H1,H5,32
+H2,H3,14
+H2,H4,20
+H2,H5,24
+H3,H4,10
+H3,H5,15
+H4,H5,12
+
+Produce the final schedule using the required JSON output format. Include every request in request_status.

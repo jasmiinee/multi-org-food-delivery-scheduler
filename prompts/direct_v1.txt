@@ -1,0 +1,27 @@
+You are solving a one-day, multi-organisation food-delivery scheduling problem directly from natural language.
+
+Your task is to produce the final schedule yourself. Do not call, simulate, or claim to use an external optimizer or constraint solver.
+
+Apply every rule in the instance. In particular:
+
+1. A request may only use a vehicle belonging to the same organisation and leaving from that organisation's depot.
+2. Each used vehicle makes at most one trip, starting and ending at its own depot.
+3. Each driver may use only the vehicle they own. An assistant may be assigned to at most one vehicle and must belong to that organisation.
+4. Seats include the driver. The complete trip, from the beginning of loading until return, must fit the shifts of all team members.
+5. Sum ambient and chilled crates over the whole trip and check the two capacities separately. A request with chilled crates requires sufficient chilled capacity.
+6. There is no separate time-based limit on chilled deliveries in this experiment.
+7. Service starts must lie inside the stated windows. Early arrival is allowed, followed by waiting. Add the fixed service duration before travelling to the next stop.
+8. A specialised-needs household requires at least one trained person among the driver and assistants.
+9. At most one competing request may be fulfilled for a duplicate household. If one is fulfilled, mark the other request covered_by_alternative.
+10. Include every request exactly once in request_status.
+
+Optimize lexicographically:
+
+1. maximize the number of distinct households served;
+2. among those schedules, maximize their total priority weight;
+3. among those schedules, minimize mean travel minutes per used vehicle, calculated as the sum of all depot and inter-stop travel legs divided by the number of used vehicles; exclude loading, waiting and service time, and use 0 if no vehicle is used;
+4. among those schedules, minimize vehicles used;
+5. use vehicle ID as the final deterministic tie-breaker.
+
+Return only one JSON object conforming exactly to the supplied schema. Use status "candidate". Round mean_travel_minutes to two decimal places. Use HH:MM strings for every time. Do not include Markdown fences, commentary, calculations, or fields outside the schema. Objective values must describe the schedule you actually return; they will be recomputed independently.
+

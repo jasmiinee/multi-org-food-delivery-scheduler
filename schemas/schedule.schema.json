@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.edu/cs3263/food-delivery-schedule.schema.json",
+  "title": "Food Delivery Candidate Schedule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "objective", "vehicles", "request_status", "unserved_households"],
+  "properties": {
+    "status": {"enum": ["candidate", "feasible", "optimal", "feasible_witness"]},
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["households_served", "priority_weight", "mean_travel_minutes", "vehicles_used"],
+      "properties": {
+        "households_served": {"type": "integer", "minimum": 0},
+        "priority_weight": {"type": "integer", "minimum": 0},
+        "mean_travel_minutes": {"type": "number", "minimum": 0},
+        "vehicles_used": {"type": "integer", "minimum": 0}
+      }
+    },
+    "vehicles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["vehicle", "driver", "assistants", "loading_start", "departure", "route", "return"],
+        "properties": {
+          "vehicle": {"type": "string"},
+          "driver": {"type": "string"},
+          "assistants": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+          "loading_start": {"$ref": "#/$defs/time"},
+          "departure": {"$ref": "#/$defs/time"},
+          "route": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["request", "household", "service_start"],
+              "properties": {
+                "request": {"type": "string"},
+                "household": {"type": "string"},
+                "service_start": {"$ref": "#/$defs/time"}
+              }
+            }
+          },
+          "return": {"$ref": "#/$defs/time"}
+        }
+      }
+    },
+    "request_status": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["request", "status"],
+        "properties": {
+          "request": {"type": "string"},
+          "status": {"enum": ["fulfilled", "covered_by_alternative", "unserved"]},
+          "vehicle": {"type": "string"},
+          "covered_by": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "unserved_households": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["household", "reason"],
+        "properties": {
+          "household": {"type": "string"},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "time": {
+      "type": "string",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    }
+  }
+}
+

@@ -1,0 +1,90 @@
+Food-delivery scheduling instance: easy_004
+Difficulty: easy
+
+Rules and objective
+- Each service takes 10 minutes.
+- Loading takes 5 minutes immediately before departure.
+- A delivery window constrains the service start time. Early arrival is allowed, followed by waiting.
+- Every used vehicle makes one loop from and back to its own depot, and makes at most one trip.
+- A vehicle may serve only requests belonging to its own organisation.
+- Drivers use only their own vehicle. Assistants may join at most one vehicle from their organisation.
+- Seats include the driver. The full trip, including loading and return, must fit every team member's shift.
+- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.
+- There is no separate time-based cold-chain limit in this version.
+- A specialised-needs household requires at least one trained driver or assistant on its vehicle.
+- At most one competing request may be fulfilled for a duplicate household.
+- First maximize households served; then priority weight; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.
+- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.
+
+Organisations and shifts
+- O1: depot D1; shifts: O1_DAY 07:15-11:58.
+- O2: depot D2; shifts: O2_DAY 07:35-11:34.
+
+Households
+- H1: priority 3; needs trained volunteer: no.
+- H2: priority 1; needs trained volunteer: no.
+- H3: priority 2; needs trained volunteer: yes.
+- H4: priority 3; needs trained volunteer: no.
+- H5: priority 1; needs trained volunteer: no.
+- H6: priority 2; needs trained volunteer: no.
+
+Volunteers
+- Driver_1: driver for O1; shift O1_DAY; trained: yes; own vehicle: V1.
+- Driver_2: driver for O1; shift O1_DAY; trained: no; own vehicle: V2.
+- O1_TrainedAssistant: assistant for O1; shift O1_DAY; trained: yes; own vehicle: none.
+- O1_Assistant: assistant for O1; shift O1_DAY; trained: no; own vehicle: none.
+- Driver_3: driver for O2; shift O2_DAY; trained: yes; own vehicle: V3.
+- Driver_4: driver for O2; shift O2_DAY; trained: no; own vehicle: V4.
+- O2_TrainedAssistant: assistant for O2; shift O2_DAY; trained: yes; own vehicle: none.
+- O2_Assistant: assistant for O2; shift O2_DAY; trained: no; own vehicle: none.
+
+Vehicles
+- V1: O1, depot D1, driver Driver_1, seats 3, ambient capacity 6, chilled capacity 0.
+- V2: O1, depot D1, driver Driver_2, seats 3, ambient capacity 5, chilled capacity 0.
+- V3: O2, depot D2, driver Driver_3, seats 3, ambient capacity 7, chilled capacity 0.
+- V4: O2, depot D2, driver Driver_4, seats 3, ambient capacity 5, chilled capacity 0.
+
+Delivery requests
+- R1: O1 serves H1 from D1; ambient 1; chilled 0; window 08:00-09:16; trained volunteer needed: no; household priority 3.
+- R2: O1 serves H3 from D1; ambient 1; chilled 0; window 08:59-10:19; trained volunteer needed: yes; household priority 2.
+- R3: O1 serves H5 from D1; ambient 1; chilled 0; window 08:54-10:14; trained volunteer needed: no; household priority 1.
+- R4: O2 serves H2 from D2; ambient 1; chilled 0; window 08:27-09:47; trained volunteer needed: no; household priority 1.
+- R5: O2 serves H6 from D2; ambient 2; chilled 0; window 08:58-10:18; trained volunteer needed: no; household priority 2.
+- R6: O2 serves H4 from D2; ambient 1; chilled 0; window 08:20-09:40; trained volunteer needed: no; household priority 3.
+- R7: O2 serves H1 from D2; ambient 1; chilled 0; window 07:49-09:09; trained volunteer needed: no; household priority 3.
+
+Duplicate households
+- H1: choose at most one of R1, R7.
+
+Travel times in minutes (symmetric)
+origin,destination,minutes
+D1,D2,46
+D1,H1,16
+D1,H2,55
+D1,H3,69
+D1,H4,47
+D1,H5,74
+D1,H6,74
+D2,H1,33
+D2,H2,27
+D2,H3,39
+D2,H4,20
+D2,H5,32
+D2,H6,46
+H1,H2,40
+H1,H3,53
+H1,H4,31
+H1,H5,59
+H1,H6,59
+H2,H3,14
+H2,H4,9
+H2,H5,24
+H2,H6,21
+H3,H4,23
+H3,H5,22
+H3,H6,7
+H4,H5,28
+H4,H6,30
+H5,H6,27
+
+Produce the final schedule using the required JSON output format. Include every request in request_status.
