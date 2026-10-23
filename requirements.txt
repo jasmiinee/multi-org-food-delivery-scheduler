@@ -1,1 +1,2 @@
 pydantic>=2.10,<3
+ortools==9.14.6206
