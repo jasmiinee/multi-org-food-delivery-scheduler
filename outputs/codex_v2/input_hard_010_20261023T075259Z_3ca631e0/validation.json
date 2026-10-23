@@ -1,0 +1,11 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "PARSE_ERROR",
+      "message": "parsed.json not found. LLM failed to output valid JSON."
+    }
+  ],
+  "recomputed_metrics": {},
+  "claimed_metrics": {}
+}

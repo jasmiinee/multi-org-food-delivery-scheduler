@@ -1,0 +1,17 @@
+{
+  "is_feasible": true,
+  "violations": [],
+  "recomputed_metrics": {
+    "households_served": 22,
+    "requests_fulfilled": 22,
+    "priority_weight": 42,
+    "mean_travel_minutes": 124.33,
+    "vehicles_used": 9
+  },
+  "claimed_metrics": {
+    "households_served": 22,
+    "priority_weight": 42,
+    "mean_travel_minutes": 124.33,
+    "vehicles_used": 9
+  }
+}
