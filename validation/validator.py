@@ -94,11 +94,20 @@ class ScheduleValidator:
                 r_id = stop.get('request')
                 if r_id not in self.req_dict:
                     self.add_violation("UNKNOWN_ID", f"Request {r_id} is not in the instance.")
+                
+                hh_id = stop.get('household')
+                if hh_id not in self.hh_dict:
+                    self.add_violation("UNKNOWN_ID", f"Household {hh_id} in route is not in the instance.")
+                
+                if hh_id not in self.travel_times:
+                    self.add_violation("UNKNOWN_ID", f"Household {hh_id} missing from travel_times matrix.")
 
     def _check_request_status(self):
         all_reqs = set(self.req_dict.keys())
         seen_reqs = set()
         fulfilled_counts = {}
+        fulfilled_reqs = set()
+        unserved_hhs = set()
 
         for status_obj in self.schedule.get('request_status', []):
             r_id = status_obj.get('request')
@@ -113,6 +122,7 @@ class ScheduleValidator:
             seen_reqs.add(r_id)
 
             if status == 'fulfilled':
+                fulfilled_reqs.add(r_id) # Track them
                 hh = self.req_dict[r_id]['household']
                 fulfilled_counts[hh] = fulfilled_counts.get(hh, 0) + 1
             elif status not in ['covered_by_alternative', 'unserved']:
@@ -128,6 +138,28 @@ class ScheduleValidator:
             for hh, count in fulfilled_counts.items():
                 if count > 1:
                     self.add_violation("DUPLICATE_SERVICE", f"Household {hh} is served {count} times.")
+
+        # Cross-reference unserved_households list
+        for uh in self.schedule.get('unserved_households', []):
+            hh_id = uh.get('household')
+            if hh_id not in self.hh_dict:
+                self.add_violation("UNKNOWN_ID", f"Unserved list refers to unknown household {hh_id}.")
+                continue
+            unserved_hhs.add(hh_id)
+            
+            # If a household is in unserved list, it shouldn't have any fulfilled requests
+            if hh_id in fulfilled_counts:
+                self.add_violation("OTHER", f"Household {hh_id} is in unserved_households but has fulfilled requests.")
+
+        # Ensure all fulfilled requests actually appear in a route
+        routed_reqs = set()
+        for v_out in self.schedule.get('vehicles', []):
+            for stop in v_out.get('route', []):
+                routed_reqs.add(stop.get('request'))
+
+        for r_id in fulfilled_reqs:
+            if r_id not in routed_reqs:
+                self.add_violation("OTHER", f"Request {r_id} is marked fulfilled but never appears in any vehicle route.")
 
     def _check_vehicles_and_routes(self) -> set:
         used_vehicles = set()
@@ -185,7 +217,7 @@ class ScheduleValidator:
                 s_start_str = stop.get('service_start', '00:00')
                 s_start = self.parse_time_str(s_start_str)
 
-                if r_id not in self.req_dict:
+                if r_id not in self.req_dict or hh_id not in self.travel_times:
                     continue
                 
                 req = self.req_dict[r_id]
