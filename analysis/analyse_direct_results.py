@@ -15,12 +15,15 @@ FIELDS = [
     "instance",
     "model",
     "temperature",
+    "protocol",
+    "reasoning_effort",
     "parsed_successfully",
     "schema_valid",
     "feasible",
     "optimal",
     "households_served",
     "priority_weight",
+    "requests_fulfilled",
     "mean_travel_minutes",
     "violation_codes",
 ]
@@ -40,6 +43,8 @@ def main() -> None:
     violations: Counter[str] = Counter()
     for run_file in sorted(args.runs.rglob("run.json")):
         run = load_json(run_file)
+        if run.get("dry_run", False):
+            continue
         validation_file = run_file.parent / "validation.json"
         validation = load_json(validation_file) if validation_file.exists() else {}
         codes = [item["code"] for item in validation.get("violations", []) if "code" in item]
@@ -51,12 +56,15 @@ def main() -> None:
                 "instance": run.get("instance", ""),
                 "model": run.get("model", ""),
                 "temperature": run.get("temperature", ""),
+                "protocol": run.get("protocol", "v1"),
+                "reasoning_effort": run.get("reasoning_effort", ""),
                 "parsed_successfully": run.get("parsed_successfully", False),
                 "schema_valid": run.get("schema_valid", False),
                 "feasible": validation.get("valid", "NOT_VALIDATED"),
                 "optimal": validation.get("optimal", "NOT_VALIDATED"),
                 "households_served": objective.get("households_served", ""),
                 "priority_weight": objective.get("priority_weight", ""),
+                "requests_fulfilled": objective.get("requests_fulfilled", ""),
                 "mean_travel_minutes": objective.get("mean_travel_minutes", ""),
                 "violation_codes": ";".join(codes),
             }

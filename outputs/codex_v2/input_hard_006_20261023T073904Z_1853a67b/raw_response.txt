@@ -1,0 +1,171 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 16,
+    "priority_weight": 32,
+    "mean_travel_minutes": 152.43,
+    "vehicles_used": 7,
+    "requests_fulfilled": 17
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [],
+      "loading_start": "10:59",
+      "departure": "11:04",
+      "route": [
+        {"request": "R7", "household": "H11", "service_start": "11:55"},
+        {"request": "R6", "household": "H5", "service_start": "13:06"}
+      ],
+      "return": "14:46"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "09:11",
+      "departure": "09:16",
+      "route": [
+        {"request": "R17", "household": "H17", "service_start": "09:55"},
+        {"request": "R4", "household": "H14", "service_start": "10:50"}
+      ],
+      "return": "11:57"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": ["O1_TrainedAssistant"],
+      "loading_start": "11:25",
+      "departure": "11:30",
+      "route": [
+        {"request": "R5", "household": "H4", "service_start": "12:15"},
+        {"request": "R19", "household": "H15", "service_start": "13:06"}
+      ],
+      "return": "14:40"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": ["O2_TrainedAssistant"],
+      "loading_start": "08:10",
+      "departure": "08:15",
+      "route": [
+        {"request": "R1", "household": "H20", "service_start": "09:45"},
+        {"request": "R23", "household": "H18", "service_start": "10:18"},
+        {"request": "R12", "household": "H19", "service_start": "11:10"},
+        {"request": "R22", "household": "H9", "service_start": "13:00"},
+        {"request": "R16", "household": "H1", "service_start": "13:47"}
+      ],
+      "return": "15:07"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [],
+      "loading_start": "08:36",
+      "departure": "08:41",
+      "route": [
+        {"request": "R8", "household": "H12", "service_start": "09:00"},
+        {"request": "R18", "household": "H2", "service_start": "10:25"}
+      ],
+      "return": "11:17"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": [],
+      "loading_start": "12:20",
+      "departure": "12:25",
+      "route": [
+        {"request": "R20", "household": "H7", "service_start": "13:05"},
+        {"request": "R15", "household": "H17", "service_start": "13:52"}
+      ],
+      "return": "14:48"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": ["O3_TrainedAssistant"],
+      "loading_start": "11:45",
+      "departure": "11:50",
+      "route": [
+        {"request": "R13", "household": "H6", "service_start": "11:55"},
+        {"request": "R3", "household": "H3", "service_start": "12:52"}
+      ],
+      "return": "13:44"
+    }
+  ],
+  "request_status": [
+    {"request": "R1", "status": "fulfilled", "vehicle": "V4"},
+    {
+      "request": "R2",
+      "status": "unserved",
+      "reason": "V7 is the only O3 vehicle with chilled capacity; its earliest arrival is 09:40, after the 09:30 window closes."
+    },
+    {"request": "R3", "status": "fulfilled", "vehicle": "V9"},
+    {"request": "R4", "status": "fulfilled", "vehicle": "V2"},
+    {"request": "R5", "status": "fulfilled", "vehicle": "V3"},
+    {"request": "R6", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R7", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R8", "status": "fulfilled", "vehicle": "V5"},
+    {
+      "request": "R9",
+      "status": "unserved",
+      "reason": "The earliest departure from D3 is 08:25; travel to H8 gives arrival at 09:32, after the 09:10 window closes."
+    },
+    {
+      "request": "R10",
+      "status": "unserved",
+      "reason": "The earliest departure from D1 is 08:05; travel to H19 gives arrival at 09:52, after the 09:30 window closes."
+    },
+    {
+      "request": "R11",
+      "status": "unserved",
+      "reason": "Its window conflicts with the selected O1 midday deliveries. Serving it would reduce household coverage or priority; V2's shift ends before its window."
+    },
+    {"request": "R12", "status": "fulfilled", "vehicle": "V4"},
+    {"request": "R13", "status": "fulfilled", "vehicle": "V9"},
+    {
+      "request": "R14",
+      "status": "unserved",
+      "reason": "Adding H3 before H11 on V1 or H4 on V3 misses those requests' latest service starts; serving it afterward misses its own window."
+    },
+    {"request": "R15", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R16", "status": "fulfilled", "vehicle": "V4"},
+    {"request": "R17", "status": "fulfilled", "vehicle": "V2"},
+    {"request": "R18", "status": "fulfilled", "vehicle": "V5"},
+    {"request": "R19", "status": "fulfilled", "vehicle": "V3"},
+    {"request": "R20", "status": "fulfilled", "vehicle": "V7"},
+    {
+      "request": "R21",
+      "status": "unserved",
+      "reason": "After V3's H15 delivery, arrival would be 14:17, beyond its window. Adding it after V1's H5 delivery would return at 15:12, beyond the driver's shift."
+    },
+    {"request": "R22", "status": "fulfilled", "vehicle": "V4"},
+    {"request": "R23", "status": "fulfilled", "vehicle": "V4"},
+    {
+      "request": "R24",
+      "status": "unserved",
+      "reason": "V4 is the only available trained O2 vehicle for late deliveries. H1 and H16 cannot both meet their windows, and H1 has higher priority."
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H8",
+      "reason": "The earliest O3 arrival is later than its request's service window."
+    },
+    {
+      "household": "H10",
+      "reason": "R2 cannot be reached within its window; fulfilling R11 would reduce the selected household coverage or priority."
+    },
+    {
+      "household": "H13",
+      "reason": "The trained O1 routes cannot add its delivery within both its service window and their shifts."
+    },
+    {
+      "household": "H16",
+      "reason": "Its late trained delivery competes with H1 on V4; H1 has higher priority."
+    }
+  ]
+}

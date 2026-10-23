@@ -1,0 +1,183 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 20,
+    "priority_weight": 50,
+    "mean_travel_minutes": 124.78,
+    "vehicles_used": 9,
+    "requests_fulfilled": 25
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": ["O1_TrainedAssistant"],
+      "loading_start": "08:51",
+      "departure": "08:56",
+      "route": [
+        {"request": "R2", "household": "H2", "service_start": "09:05"},
+        {"request": "R5", "household": "H12", "service_start": "10:30"},
+        {"request": "R27", "household": "H19", "service_start": "11:27"},
+        {"request": "R7", "household": "H14", "service_start": "12:00"},
+        {"request": "R12", "household": "H5", "service_start": "12:35"},
+        {"request": "R16", "household": "H3", "service_start": "13:35"}
+      ],
+      "return": "14:32"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "09:55",
+      "departure": "10:00",
+      "route": [
+        {"request": "R25", "household": "H17", "service_start": "10:40"}
+      ],
+      "return": "11:30"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "10:00",
+      "departure": "10:05",
+      "route": [
+        {"request": "R17", "household": "H7", "service_start": "11:50"}
+      ],
+      "return": "13:01"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "08:11",
+      "departure": "08:16",
+      "route": [
+        {"request": "R28", "household": "H15", "service_start": "09:00"},
+        {"request": "R8", "household": "H8", "service_start": "09:50"},
+        {"request": "R3", "household": "H21", "service_start": "10:20"}
+      ],
+      "return": "10:58"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [],
+      "loading_start": "08:31",
+      "departure": "08:36",
+      "route": [
+        {"request": "R9", "household": "H18", "service_start": "08:50"}
+      ],
+      "return": "09:14"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": ["O2_TrainedAssistant"],
+      "loading_start": "10:10",
+      "departure": "10:15",
+      "route": [
+        {"request": "R19", "household": "H16", "service_start": "11:13"},
+        {"request": "R22", "household": "H13", "service_start": "11:55"}
+      ],
+      "return": "12:57"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": ["O3_TrainedAssistant"],
+      "loading_start": "09:01",
+      "departure": "09:06",
+      "route": [
+        {"request": "R4", "household": "H15", "service_start": "09:40"},
+        {"request": "R15", "household": "H17", "service_start": "11:05"},
+        {"request": "R14", "household": "H23", "service_start": "12:05"},
+        {"request": "R24", "household": "H9", "service_start": "12:54"},
+        {"request": "R18", "household": "H4", "service_start": "13:19"}
+      ],
+      "return": "14:12"
+    },
+    {
+      "vehicle": "V8",
+      "driver": "Driver_8",
+      "assistants": [],
+      "loading_start": "08:25",
+      "departure": "08:30",
+      "route": [
+        {"request": "R1", "household": "H19", "service_start": "08:55"},
+        {"request": "R26", "household": "H10", "service_start": "10:05"},
+        {"request": "R13", "household": "H11", "service_start": "11:00"}
+      ],
+      "return": "11:54"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": [],
+      "loading_start": "10:20",
+      "departure": "10:25",
+      "route": [
+        {"request": "R6", "household": "H18", "service_start": "11:12"},
+        {"request": "R21", "household": "H7", "service_start": "12:15"},
+        {"request": "R11", "household": "H22", "service_start": "13:30"}
+      ],
+      "return": "14:34"
+    }
+  ],
+  "request_status": [
+    {"request": "R1", "status": "fulfilled", "vehicle": "V8"},
+    {"request": "R2", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R3", "status": "fulfilled", "vehicle": "V4"},
+    {"request": "R4", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R5", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R6", "status": "fulfilled", "vehicle": "V9"},
+    {"request": "R7", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R8", "status": "fulfilled", "vehicle": "V4"},
+    {"request": "R9", "status": "fulfilled", "vehicle": "V5"},
+    {
+      "request": "R10",
+      "status": "unserved",
+      "reason": "The O2 trained assistant is assigned to V6, whose shift and depot travel prevent reaching H20 within this request's window."
+    },
+    {"request": "R11", "status": "fulfilled", "vehicle": "V9"},
+    {"request": "R12", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R13", "status": "fulfilled", "vehicle": "V8"},
+    {"request": "R14", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R15", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R16", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R17", "status": "fulfilled", "vehicle": "V3"},
+    {"request": "R18", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R19", "status": "fulfilled", "vehicle": "V6"},
+    {
+      "request": "R20",
+      "status": "unserved",
+      "reason": "V1 is O1's only vehicle with chilled capacity, and its three chilled spaces are allocated to R2 and R16."
+    },
+    {"request": "R21", "status": "fulfilled", "vehicle": "V9"},
+    {"request": "R22", "status": "fulfilled", "vehicle": "V6"},
+    {
+      "request": "R23",
+      "status": "unserved",
+      "reason": "V1 is O1's only vehicle with chilled capacity, and its three chilled spaces are allocated to R2 and R16."
+    },
+    {"request": "R24", "status": "fulfilled", "vehicle": "V7"},
+    {"request": "R25", "status": "fulfilled", "vehicle": "V2"},
+    {"request": "R26", "status": "fulfilled", "vehicle": "V8"},
+    {"request": "R27", "status": "fulfilled", "vehicle": "V1"},
+    {"request": "R28", "status": "fulfilled", "vehicle": "V4"}
+  ],
+  "unserved_households": [
+    {
+      "household": "H1",
+      "reason": "R20 cannot fit alongside the scheduled requests within O1's chilled capacity."
+    },
+    {
+      "household": "H6",
+      "reason": "R23 cannot fit alongside the scheduled requests within O1's chilled capacity."
+    },
+    {
+      "household": "H20",
+      "reason": "The vehicle carrying O2's trained assistant cannot reach H20 within R10's service-start window."
+    }
+  ]
+}

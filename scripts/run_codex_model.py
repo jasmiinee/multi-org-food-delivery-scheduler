@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -33,19 +35,58 @@ def write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
+def resolve_codex(executable: str = "codex") -> str | None:
+    """Prefer the requested command, then the VS Code bundled CLI on Windows."""
+    found = shutil.which(executable)
+    if found:
+        return found
+    # A custom --codex value is an explicit choice; never silently replace it.
+    if executable != "codex" or sys.platform != "win32":
+        return None
+    architecture = {
+        "amd64": "x86_64", "x86_64": "x86_64",
+        "arm64": "aarch64", "aarch64": "aarch64",
+    }.get(platform.machine().lower())
+    if architecture is None:
+        return None
+    candidates = []
+    for editor in (".vscode", ".vscode-insiders"):
+        extensions = Path.home() / editor / "extensions"
+        for extension in extensions.glob("openai.chatgpt-*"):
+            version = re.match(r"openai\.chatgpt-(\d+(?:\.\d+)*)(?:-|$)", extension.name)
+            if version is None:
+                continue
+            candidate = extension / "bin" / f"windows-{architecture}" / "codex.exe"
+            if candidate.is_file():
+                candidates.append((tuple(map(int, version.group(1).split("."))), str(candidate)))
+    # Compare numeric versions: 26.10 is newer than 26.9.
+    return max(candidates)[1] if candidates else None
+
+
 def discover_instances(directory: Path) -> list[Path]:
     levels = {"easy": 0, "medium": 1, "hard": 2}
     return sorted(directory.rglob("*.txt"), key=lambda p: (levels.get(p.parent.name, 3), str(p)))
 
 
+def validate_protocol(instance_text: str, protocol: str) -> None:
+    declares_v2 = "Protocol: v2 (independent requests)" in instance_text
+    if declares_v2 != (protocol == "v2"):
+        raise ValueError("Instance text and --protocol disagree; select v2 for input-first independent-request cases and v1 for the legacy benchmark")
+
+
 def run_trial(
     instance_path: Path, output_dir: Path, *, codex_path: str, model: str,
     reasoning_effort: str = "medium", timeout: float = 600, dry_run: bool = False,
-    cli_version: str | None = None,
+    cli_version: str | None = None, protocol: str = "v1",
 ) -> dict[str, Any]:
-    prompt = (ROOT / "prompts/direct_v1.txt").read_text(encoding="utf-8")
-    schema = json.loads((ROOT / "schemas/schedule.schema.json").read_text(encoding="utf-8"))
+    prompt_name, schema_name = {
+        "v1": ("direct_v1.txt", "schedule.schema.json"),
+        "v2": ("direct_v2.txt", "schedule_v2.schema.json"),
+    }[protocol]
+    prompt = (ROOT / "prompts" / prompt_name).read_text(encoding="utf-8")
+    schema = json.loads((ROOT / "schemas" / schema_name).read_text(encoding="utf-8"))
     instance_text = instance_path.read_text(encoding="utf-8")
+    validate_protocol(instance_text, protocol)
     effective_prompt = (
         prompt + "\n\nUse only the supplied problem text. Do not call tools or read files."
         + "\n\nREQUIRED JSON SCHEMA:\n" + json.dumps(schema, separators=(",", ":"))
@@ -69,7 +110,7 @@ def run_trial(
     command.extend(["--output-last-message", str(raw_path), "-"])
     record: dict[str, Any] = {
         "run_id": run_id, "instance": instance_path.stem, "model": model,
-        "provider": "codex_cli", "authentication": "chatgpt",
+        "provider": "codex_cli", "authentication": "chatgpt", "protocol": protocol,
         "temperature": None, "reasoning_effort": reasoning_effort,
         "timestamp_utc": timestamp, "cli_version": cli_version,
         "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
@@ -144,7 +185,7 @@ def run_trial(
         try:
             parsed, fence_removed = extract_json(raw)
             write_json(run_dir / "parsed.json", parsed)
-            errors = schema_errors(parsed)
+            errors = schema_errors(parsed, protocol=protocol)
             record.update(
                 parsed_successfully=True, schema_valid=not errors,
                 markdown_fence_removed=fence_removed, schema_errors=errors,
@@ -168,10 +209,11 @@ def main() -> None:
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument("--instance-text", type=Path)
     source.add_argument("--instances-dir", type=Path)
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "outputs/codex")
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--protocol", choices=("v1", "v2"), default="v1")
     parser.add_argument("--model", required=True, help="Codex model ID available to your sign-in")
     parser.add_argument("--reasoning-effort", default="medium", choices=("low", "medium", "high", "xhigh", "max"))
-    parser.add_argument("--codex", default="codex", help="Codex executable name or full path")
+    parser.add_argument("--codex", default="codex", help="Codex name or path; defaults to PATH, then the VS Code bundled CLI on Windows")
     parser.add_argument("--timeout", type=float, default=600, help="Maximum seconds per instance")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
@@ -180,9 +222,15 @@ def main() -> None:
     instances = [args.instance_text] if args.instance_text else discover_instances(args.instances_dir)
     if not instances or any(not p.is_file() for p in instances):
         parser.error("No readable instance text files found")
-    codex_path = shutil.which(args.codex)
+    for instance in instances:
+        try:
+            validate_protocol(instance.read_text(encoding="utf-8"), args.protocol)
+        except ValueError as error:
+            parser.error(str(error))
+    output_dir = args.output_dir or ROOT / "outputs" / ("codex_v2" if args.protocol == "v2" else "codex")
+    codex_path = resolve_codex(args.codex)
     if not codex_path and not args.dry_run:
-        parser.error("Codex CLI was not found. Install it or supply --codex PATH, then run codex login.")
+        parser.error("Codex CLI was not found on PATH or in the VS Code extension. Install Codex CLI or supply --codex with the full executable path.")
     version = None
     if not args.dry_run:
         try:
@@ -197,9 +245,9 @@ def main() -> None:
     for instance in instances:
         print(f"Starting {instance.stem}...", flush=True)
         record = run_trial(
-            instance, args.output_dir, codex_path=codex_path or args.codex,
+            instance, output_dir, codex_path=codex_path or args.codex,
             model=args.model, reasoning_effort=args.reasoning_effort,
-            timeout=args.timeout, dry_run=args.dry_run, cli_version=version,
+            timeout=args.timeout, dry_run=args.dry_run, cli_version=version, protocol=args.protocol,
         )
         if not args.dry_run:
             failed |= not (record["schema_valid"] and record["direct_protocol_valid"])

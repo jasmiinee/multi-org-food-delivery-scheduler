@@ -1,0 +1,453 @@
+{
+  "$defs": {
+    "Household": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "needs_trained_volunteer": {
+          "title": "Needs Trained Volunteer",
+          "type": "boolean"
+        },
+        "priority": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "needs_trained_volunteer",
+        "priority"
+      ],
+      "title": "Household",
+      "type": "object"
+    },
+    "IndependentDuplicateHousehold": {
+      "additionalProperties": false,
+      "properties": {
+        "household": {
+          "title": "Household",
+          "type": "string"
+        },
+        "request_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "title": "Request Ids",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "household",
+        "request_ids"
+      ],
+      "title": "IndependentDuplicateHousehold",
+      "type": "object"
+    },
+    "InputFirstMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "instance_id": {
+          "title": "Instance Id",
+          "type": "string"
+        },
+        "difficulty": {
+          "const": "hard",
+          "title": "Difficulty",
+          "type": "string"
+        },
+        "scenario": {
+          "const": "unclassified",
+          "title": "Scenario",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "generator_version": {
+          "title": "Generator Version",
+          "type": "string"
+        },
+        "cold_chain_time_limit_enabled": {
+          "const": false,
+          "title": "Cold Chain Time Limit Enabled",
+          "type": "boolean"
+        },
+        "protocol_version": {
+          "const": "v2",
+          "title": "Protocol Version",
+          "type": "string"
+        },
+        "generation_method": {
+          "const": "input_first",
+          "title": "Generation Method",
+          "type": "string"
+        },
+        "feasibility_status": {
+          "const": "not_checked",
+          "title": "Feasibility Status",
+          "type": "string"
+        },
+        "challenge_profile": {
+          "title": "Challenge Profile",
+          "type": "string"
+        }
+      },
+      "required": [
+        "instance_id",
+        "difficulty",
+        "scenario",
+        "seed",
+        "generator_version",
+        "cold_chain_time_limit_enabled",
+        "protocol_version",
+        "generation_method",
+        "feasibility_status",
+        "challenge_profile"
+      ],
+      "title": "InputFirstMetadata",
+      "type": "object"
+    },
+    "InputFirstParameters": {
+      "additionalProperties": false,
+      "properties": {
+        "service_minutes": {
+          "exclusiveMinimum": 0,
+          "title": "Service Minutes",
+          "type": "integer"
+        },
+        "loading_minutes": {
+          "minimum": 0,
+          "title": "Loading Minutes",
+          "type": "integer"
+        },
+        "time_unit": {
+          "const": "minutes_from_midnight",
+          "title": "Time Unit",
+          "type": "string"
+        },
+        "window_semantics": {
+          "const": "service_start",
+          "title": "Window Semantics",
+          "type": "string"
+        },
+        "max_trips_per_vehicle": {
+          "const": 1,
+          "title": "Max Trips Per Vehicle",
+          "type": "integer"
+        },
+        "duplicate_policy": {
+          "const": "independent_requests",
+          "title": "Duplicate Policy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service_minutes",
+        "loading_minutes",
+        "time_unit",
+        "window_semantics",
+        "max_trips_per_vehicle",
+        "duplicate_policy"
+      ],
+      "title": "InputFirstParameters",
+      "type": "object"
+    },
+    "Organisation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "depot": {
+          "title": "Depot",
+          "type": "string"
+        },
+        "shifts": {
+          "items": {
+            "$ref": "#/$defs/Shift"
+          },
+          "minItems": 1,
+          "title": "Shifts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "depot",
+        "shifts"
+      ],
+      "title": "Organisation",
+      "type": "object"
+    },
+    "Request": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "organisation": {
+          "title": "Organisation",
+          "type": "string"
+        },
+        "household": {
+          "title": "Household",
+          "type": "string"
+        },
+        "depot": {
+          "title": "Depot",
+          "type": "string"
+        },
+        "ambient_crates": {
+          "minimum": 0,
+          "title": "Ambient Crates",
+          "type": "integer"
+        },
+        "chilled_crates": {
+          "minimum": 0,
+          "title": "Chilled Crates",
+          "type": "integer"
+        },
+        "window_start": {
+          "maximum": 1439,
+          "minimum": 0,
+          "title": "Window Start",
+          "type": "integer"
+        },
+        "window_end": {
+          "maximum": 1439,
+          "minimum": 0,
+          "title": "Window End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "organisation",
+        "household",
+        "depot",
+        "ambient_crates",
+        "chilled_crates",
+        "window_start",
+        "window_end"
+      ],
+      "title": "Request",
+      "type": "object"
+    },
+    "Shift": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "start": {
+          "maximum": 1439,
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "maximum": 1440,
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end"
+      ],
+      "title": "Shift",
+      "type": "object"
+    },
+    "Vehicle": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "organisation": {
+          "title": "Organisation",
+          "type": "string"
+        },
+        "home_depot": {
+          "title": "Home Depot",
+          "type": "string"
+        },
+        "driver_id": {
+          "title": "Driver Id",
+          "type": "string"
+        },
+        "seats": {
+          "minimum": 1,
+          "title": "Seats",
+          "type": "integer"
+        },
+        "ambient_capacity": {
+          "minimum": 0,
+          "title": "Ambient Capacity",
+          "type": "integer"
+        },
+        "chilled_capacity": {
+          "minimum": 0,
+          "title": "Chilled Capacity",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "organisation",
+        "home_depot",
+        "driver_id",
+        "seats",
+        "ambient_capacity",
+        "chilled_capacity"
+      ],
+      "title": "Vehicle",
+      "type": "object"
+    },
+    "Volunteer": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "organisation": {
+          "title": "Organisation",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "driver",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "shift_id": {
+          "title": "Shift Id",
+          "type": "string"
+        },
+        "trained": {
+          "title": "Trained",
+          "type": "boolean"
+        },
+        "vehicle_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vehicle Id"
+        }
+      },
+      "required": [
+        "id",
+        "organisation",
+        "role",
+        "shift_id",
+        "trained",
+        "vehicle_id"
+      ],
+      "title": "Volunteer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/InputFirstMetadata"
+    },
+    "parameters": {
+      "$ref": "#/$defs/InputFirstParameters"
+    },
+    "organisations": {
+      "items": {
+        "$ref": "#/$defs/Organisation"
+      },
+      "minItems": 1,
+      "title": "Organisations",
+      "type": "array"
+    },
+    "households": {
+      "items": {
+        "$ref": "#/$defs/Household"
+      },
+      "minItems": 1,
+      "title": "Households",
+      "type": "array"
+    },
+    "volunteers": {
+      "items": {
+        "$ref": "#/$defs/Volunteer"
+      },
+      "minItems": 1,
+      "title": "Volunteers",
+      "type": "array"
+    },
+    "vehicles": {
+      "items": {
+        "$ref": "#/$defs/Vehicle"
+      },
+      "minItems": 1,
+      "title": "Vehicles",
+      "type": "array"
+    },
+    "requests": {
+      "items": {
+        "$ref": "#/$defs/Request"
+      },
+      "minItems": 1,
+      "title": "Requests",
+      "type": "array"
+    },
+    "duplicate_households": {
+      "items": {
+        "$ref": "#/$defs/IndependentDuplicateHousehold"
+      },
+      "title": "Duplicate Households",
+      "type": "array"
+    },
+    "travel_times": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "type": "integer"
+        },
+        "type": "object"
+      },
+      "title": "Travel Times",
+      "type": "object"
+    }
+  },
+  "required": [
+    "metadata",
+    "parameters",
+    "organisations",
+    "households",
+    "volunteers",
+    "vehicles",
+    "requests",
+    "duplicate_households",
+    "travel_times"
+  ],
+  "title": "Input-first independent-request instance",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.edu/cs3263/instance_v2.schema.json"
+}

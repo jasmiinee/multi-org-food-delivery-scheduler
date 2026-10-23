@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 
 class StrictModel(BaseModel):
@@ -139,3 +139,53 @@ class Schedule(StrictModel):
     request_status: list[RequestStatus]
     unserved_households: list[UnservedHousehold]
 
+
+
+# V2 is a separate contract; the original classes retain the legacy semantics.
+class InputFirstMetadata(Metadata):
+    difficulty: Literal["hard"]
+    scenario: Literal["unclassified"]
+    protocol_version: Literal["v2"]
+    generation_method: Literal["input_first"]
+    feasibility_status: Literal["not_checked"]
+    challenge_profile: str
+
+
+class InputFirstParameters(Parameters):
+    duplicate_policy: Literal["independent_requests"]
+
+
+class IndependentDuplicateHousehold(StrictModel):
+    household: str
+    request_ids: list[str] = Field(min_length=2)
+
+
+class InputFirstInstance(Instance):
+    metadata: InputFirstMetadata
+    parameters: InputFirstParameters
+    duplicate_households: list[IndependentDuplicateHousehold]
+
+
+class IndependentObjective(Objective):
+    requests_fulfilled: int = Field(ge=0)
+
+
+class IndependentRequestStatus(StrictModel):
+    request: str
+    status: Literal["fulfilled", "unserved"]
+    vehicle: str | None = None
+    reason: str | None = None
+
+    @model_validator(mode="after")
+    def check_status_details(self):
+        if self.status == "fulfilled" and not self.vehicle:
+            raise ValueError("A fulfilled request requires a vehicle")
+        if self.status == "unserved" and not (self.reason and self.reason.strip()):
+            raise ValueError("An unserved request requires a reason")
+        return self
+
+
+class IndependentSchedule(Schedule):
+    status: Literal["candidate", "feasible", "optimal"]
+    objective: IndependentObjective
+    request_status: list[IndependentRequestStatus]
