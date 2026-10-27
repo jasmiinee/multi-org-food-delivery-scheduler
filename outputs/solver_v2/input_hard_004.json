@@ -1,0 +1,388 @@
+{
+  "status": "optimal",
+  "objective": {
+    "households_served": 16,
+    "priority_weight": 30,
+    "mean_travel_minutes": 125.0,
+    "vehicles_used": 7,
+    "requests_fulfilled": 16
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:29",
+      "departure": "08:34",
+      "route": [
+        {
+          "request": "R21",
+          "household": "H18",
+          "service_start": "11:05"
+        },
+        {
+          "request": "R9",
+          "household": "H25",
+          "service_start": "11:32"
+        },
+        {
+          "request": "R17",
+          "household": "H8",
+          "service_start": "12:00"
+        },
+        {
+          "request": "R10",
+          "household": "H24",
+          "service_start": "12:22"
+        },
+        {
+          "request": "R19",
+          "household": "H17",
+          "service_start": "13:55"
+        }
+      ],
+      "return": "15:00"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:29",
+      "departure": "08:34",
+      "route": [
+        {
+          "request": "R14",
+          "household": "H23",
+          "service_start": "09:40"
+        }
+      ],
+      "return": "10:56"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "10:00",
+      "departure": "10:05",
+      "route": [
+        {
+          "request": "R6",
+          "household": "H5",
+          "service_start": "12:20"
+        }
+      ],
+      "return": "13:34"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "08:10",
+      "departure": "08:15",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H11",
+          "service_start": "10:55"
+        },
+        {
+          "request": "R27",
+          "household": "H16",
+          "service_start": "11:50"
+        },
+        {
+          "request": "R26",
+          "household": "H4",
+          "service_start": "13:40"
+        }
+      ],
+      "return": "14:56"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "10:10",
+      "departure": "10:15",
+      "route": [
+        {
+          "request": "R22",
+          "household": "H1",
+          "service_start": "12:40"
+        }
+      ],
+      "return": "13:32"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": [],
+      "loading_start": "09:02",
+      "departure": "09:07",
+      "route": [
+        {
+          "request": "R16",
+          "household": "H12",
+          "service_start": "11:15"
+        },
+        {
+          "request": "R30",
+          "household": "H15",
+          "service_start": "11:45"
+        }
+      ],
+      "return": "12:44"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": [
+        "O3_TrainedAssistant"
+      ],
+      "loading_start": "10:20",
+      "departure": "10:25",
+      "route": [
+        {
+          "request": "R24",
+          "household": "H13",
+          "service_start": "12:35"
+        },
+        {
+          "request": "R12",
+          "household": "H2",
+          "service_start": "13:00"
+        },
+        {
+          "request": "R20",
+          "household": "H20",
+          "service_start": "14:00"
+        }
+      ],
+      "return": "14:45"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R2",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R3",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R5",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R16",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R7",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R8",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R25",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R11",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R13",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R14",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R15",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R21",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R17",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R18",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R19",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R20",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R22",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R23",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R24",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R26",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R28",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R27",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R29",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R30",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H7",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H14",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H3",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H22",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H21",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H19",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H10",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H9",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H6",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    }
+  ]
+}

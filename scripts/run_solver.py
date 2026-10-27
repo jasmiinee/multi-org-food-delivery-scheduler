@@ -1,10 +1,10 @@
-"""Run the CP-SAT solver on the worked example and all benchmark instances.
+"""Run the CP-SAT solver on v1 benchmarks and input-first v2 instances.
 
 From the project root, run:
-    .venv-solver/bin/python scripts/run_solver_model.py
+    .venv-solver/bin/python scripts/run_solver.py
 
-Choose another output directory to keep results from separate model versions:
-    .venv-solver/bin/python scripts/run_solver_model.py --output-dir outputs/cpsat_v2
+V1 benchmark results go to outputs/solver/; v2 input-first results go to
+outputs/solver_v2/. Override either directory with the corresponding option.
 """
 
 from __future__ import annotations
@@ -16,12 +16,8 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-INSTANCE_DIRS = (
-    PROJECT_ROOT / "instances" / "example",
-    PROJECT_ROOT / "instances" / "benchmark" / "easy",
-    PROJECT_ROOT / "instances" / "benchmark" / "medium",
-    PROJECT_ROOT / "instances" / "benchmark" / "hard",
-)
+V1_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "benchmark"
+V2_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "input_first"
 
 
 def main() -> int:
@@ -30,29 +26,42 @@ def main() -> int:
         "--output-dir",
         type=Path,
         default=Path("outputs/solver"),
-        help="Directory for per-instance JSON results and error logs",
+        help="Output directory for v1 benchmark results (default: outputs/solver)",
+    )
+    parser.add_argument(
+        "--v2-output-dir",
+        type=Path,
+        default=Path("outputs/solver_v2"),
+        help="Output directory for v2 input-first results (default: outputs/solver_v2)",
     )
     parser.add_argument("--time-limit", type=float, default=60.0)
     parser.add_argument("--workers", type=int, default=8)
     args = parser.parse_args()
 
-    output_dir = args.output_dir
-    if not output_dir.is_absolute():
-        output_dir = PROJECT_ROOT / output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    output_dirs = {"v1": args.output_dir, "v2": args.v2_output_dir}
+    for protocol, path in output_dirs.items():
+        if not path.is_absolute():
+            output_dirs[protocol] = PROJECT_ROOT / path
 
-    instances = sorted(
-        path
-        for directory in INSTANCE_DIRS
-        for path in directory.glob("*.json")
+    instances = [
+        (path, "v1")
+        for path in V1_INSTANCE_ROOT.rglob("*.json")
         if not path.name.endswith(".witness.json")
-    )
+    ] + [
+        (path, "v2")
+        for path in V2_INSTANCE_ROOT.rglob("*.json")
+        if not path.name.endswith(".witness.json")
+        and path.name != "generation_manifest.json"
+    ]
+    instances.sort(key=lambda item: (item[1], str(item[0])))
     if not instances:
         print("No instance JSON files found.", file=sys.stderr)
         return 1
 
     failures = 0
-    for instance_path in instances:
+    for instance_path, protocol in instances:
+        output_dir = output_dirs[protocol]
+        output_dir.mkdir(parents=True, exist_ok=True)
         name = instance_path.stem
         result_path = output_dir / f"{name}.json"
         error_path = output_dir / f"{name}.stderr.log"
@@ -93,7 +102,8 @@ def main() -> int:
                 result_path.unlink()
 
     print(f"Finished: {len(instances) - failures}/{len(instances)} succeeded.")
-    print(f"Results folder: {output_dir}")
+    print(f"V1 benchmark results: {output_dirs['v1']}")
+    print(f"V2 input-first results: {output_dirs['v2']}")
     return 1 if failures else 0
 
 

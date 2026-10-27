@@ -16,7 +16,7 @@ from typing import Any
 
 from ortools.sat.python import cp_model
 
-from models import Instance, Schedule
+from models import IndependentSchedule, InputFirstInstance, Instance, Schedule
 
 
 def _clock(minutes: int) -> str:
@@ -38,7 +38,8 @@ def _run(model: cp_model.CpModel, expression: Any, *, maximize: bool,
     return solver, status, int(round(solver.ObjectiveValue()))
 
 
-def _build(instance: Instance):
+def _build(instance: Instance | InputFirstInstance):
+    is_v2 = isinstance(instance, InputFirstInstance)
     p = instance.parameters
     orgs = {x.id: x for x in instance.organisations}
     households = {x.id: x for x in instance.households}
@@ -96,7 +97,15 @@ def _build(instance: Instance):
     served = {h: model.NewBoolVar(f"served_{h}") for h in households}
     for h in households:
         alternatives = [fulfilled[r.id] for r in requests.values() if r.household == h]
-        model.Add(sum(alternatives) == served[h])
+        if is_v2:
+            # V2 counts a household once even when multiple organisations
+            # fulfill separate requests for that household.
+            for request_fulfilled in alternatives:
+                model.Add(request_fulfilled <= served[h])
+            model.Add(served[h] <= sum(alternatives))
+        else:
+            # V1 treats duplicate requests as alternatives: at most one wins.
+            model.Add(sum(alternatives) == served[h])
 
     service_start = {
         r: model.NewIntVar(rd.window_start, rd.window_end, f"start_{r}")
@@ -184,7 +193,8 @@ def _build(instance: Instance):
     # above also enforces at-most-one request for every household.
     known_duplicate_requests = set()
     for group in instance.duplicate_households:
-        for r in group.competing_requests:
+        group_requests = group.request_ids if is_v2 else group.competing_requests
+        for r in group_requests:
             if r not in requests or requests[r].household != group.household:
                 raise ValueError(f"Invalid duplicate group for request {r}")
             known_duplicate_requests.add(r)
@@ -200,6 +210,7 @@ def _build(instance: Instance):
     return {
         "model": model, "instance": instance, "orgs": orgs, "households": households,
         "requests": requests, "vehicles": vehicles, "volunteers": volunteers,
+        "is_v2": is_v2,
         "shifts": shifts, "assign": assign, "fulfilled": fulfilled, "served": served,
         "used": used, "ride": ride, "service_start": service_start,
         "departure": departure, "return_time": return_time,
@@ -208,7 +219,7 @@ def _build(instance: Instance):
     }
 
 
-def _extract(ctx, solver, status: str) -> Schedule:
+def _extract(ctx, solver, status: str) -> Schedule | IndependentSchedule:
     instance = ctx["instance"]
     requests, vehicles = ctx["requests"], ctx["vehicles"]
     assignments: dict[str, str] = {}
@@ -250,37 +261,55 @@ def _extract(ctx, solver, status: str) -> Schedule:
     request_status = []
     unserved_households = []
     for h, alternatives in by_household.items():
-        winner = next((r for r in alternatives if r in assignments), None)
-        for r in alternatives:
-            if r == winner:
-                request_status.append({"request": r, "status": "fulfilled",
-                                       "vehicle": assignments[r]})
-            elif winner:
-                request_status.append({"request": r, "status": "covered_by_alternative",
-                                       "covered_by": winner})
-            else:
-                request_status.append({"request": r, "status": "unserved"})
-        if winner is None:
+        winners = [r for r in alternatives if r in assignments]
+        if ctx["is_v2"]:
+            for r in alternatives:
+                if r in assignments:
+                    request_status.append({"request": r, "status": "fulfilled",
+                                           "vehicle": assignments[r]})
+                else:
+                    request_status.append({
+                        "request": r,
+                        "status": "unserved",
+                        "reason": _unserved_reason(ctx, h, [r]),
+                    })
+        else:
+            winner = winners[0] if winners else None
+            for r in alternatives:
+                if r == winner:
+                    request_status.append({"request": r, "status": "fulfilled",
+                                           "vehicle": assignments[r]})
+                elif winner:
+                    request_status.append({"request": r, "status": "covered_by_alternative",
+                                           "covered_by": winner})
+                else:
+                    request_status.append({"request": r, "status": "unserved"})
+        if not winners:
             unserved_households.append({
                 "household": h,
                 "reason": _unserved_reason(ctx, h, alternatives),
             })
 
     count = len(out_vehicles)
+    objective = {
+        "households_served": sum(1 for h in ctx["households"]
+                                  if any(r in assignments for r in by_household[h])),
+        "priority_weight": sum(ctx["households"][h].priority for h in by_household
+                                if any(r in assignments for r in by_household[h])),
+        "mean_travel_minutes": round(total_travel / count, 2) if count else 0,
+        "vehicles_used": count,
+    }
+    if ctx["is_v2"]:
+        objective["requests_fulfilled"] = len(assignments)
     payload = {
         "status": status,
-        "objective": {
-            "households_served": sum(1 for h in ctx["households"]
-                                      if any(r in assignments for r in by_household[h])),
-            "priority_weight": sum(ctx["households"][h].priority for h in by_household
-                                    if any(r in assignments for r in by_household[h])),
-            "mean_travel_minutes": round(total_travel / count, 2) if count else 0,
-            "vehicles_used": count,
-        },
+        "objective": objective,
         "vehicles": out_vehicles,
         "request_status": request_status,
         "unserved_households": unserved_households,
     }
+    if ctx["is_v2"]:
+        return IndependentSchedule.model_validate(payload)
     return Schedule.model_validate(payload)
 
 
@@ -295,9 +324,9 @@ def _unserved_reason(ctx, household: str, alternatives: list[str]) -> str:
     return "No feasible route was found within vehicle, shift, window, and volunteer constraints."
 
 
-def solve(instance: Instance, *, time_limit: float = 60.0, workers: int = 8,
-          log: bool = False) -> Schedule:
-    """Solve lexicographically: service, priority, mean travel, fleet size, IDs.
+def solve(instance: Instance | InputFirstInstance, *, time_limit: float = 60.0,
+          workers: int = 8, log: bool = False) -> Schedule | IndependentSchedule:
+    """Solve v1 or v2 lexicographically using its corresponding objective.
 
     For each possible nonzero fleet size, mean travel minimization is equivalent
     to total travel minimization. Candidate ratios are compared as exact integer
@@ -307,7 +336,10 @@ def solve(instance: Instance, *, time_limit: float = 60.0, workers: int = 8,
     model = ctx["model"]
     all_optimal = True
 
-    for expr, maximize in ((ctx["served_count"], True), (ctx["priority"], True)):
+    stages = [(ctx["served_count"], True), (ctx["priority"], True)]
+    if ctx["is_v2"]:
+        stages.append((sum(ctx["fulfilled"].values()), True))
+    for expr, maximize in stages:
         solver, status, value = _run(model, expr, maximize=maximize,
                                      seconds=time_limit, workers=workers, log=log)
         if value is None:
@@ -400,7 +432,11 @@ def main() -> None:
     parser.add_argument("--log", action="store_true")
     args = parser.parse_args()
 
-    instance = Instance.model_validate_json(args.instance.read_text(encoding="utf-8"))
+    raw_instance = json.loads(args.instance.read_text(encoding="utf-8"))
+    if raw_instance.get("metadata", {}).get("protocol_version") == "v2":
+        instance = InputFirstInstance.model_validate(raw_instance)
+    else:
+        instance = Instance.model_validate(raw_instance)
     result = solve(instance, time_limit=args.time_limit, workers=args.workers, log=args.log)
     print(result.model_dump_json(indent=2, by_alias=True))
 
