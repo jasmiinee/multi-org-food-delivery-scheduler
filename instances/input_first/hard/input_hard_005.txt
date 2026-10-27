@@ -1,0 +1,474 @@
+Food-delivery scheduling instance: input_hard_005
+Difficulty: hard
+Protocol: v2 (independent requests)
+
+Rules and objective
+- Duplicate requests are separate deliveries. Fulfil both when jointly feasible under the objective order; do not merge their items or windows.
+- A household is served when at least one of its requests is fulfilled; count the household and its priority once.
+- Every unfulfilled request is unserved and needs a reason, even if another organisation delivered to its household. Do not use covered_by_alternative.
+- Each service takes 10 minutes.
+- Loading takes 5 minutes immediately before departure.
+- A delivery window constrains the service start time. Early arrival is allowed, followed by waiting.
+- Every used vehicle makes one loop from and back to its own depot, and makes at most one trip.
+- A vehicle may serve only requests belonging to its own organisation.
+- Drivers use only their own vehicle. Assistants may join at most one vehicle from their organisation.
+- Seats include the driver. The full trip, including loading and return, must fit every team member's shift.
+- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.
+- There is no separate time-based cold-chain limit in this version.
+- A specialised-needs household requires at least one trained driver or assistant on its vehicle.
+- Each request may be fulfilled at most once. Different organisations may each fulfil their own request for the same household.
+- First maximize distinct households served; then their priority weight counted once per household; then maximize fulfilled requests; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.
+- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.
+
+Organisations and shifts
+- O1: depot D1; shifts: O1_DAY 08:00-14:00, O1_EARLY 08:00-11:00, O1_LATE 12:30-15:00.
+- O2: depot D2; shifts: O2_DAY 08:10-14:10, O2_EARLY 08:10-11:10, O2_LATE 12:40-15:10.
+- O3: depot D3; shifts: O3_DAY 08:20-14:20, O3_EARLY 08:20-11:20, O3_LATE 12:50-15:20.
+
+Households
+- H1: priority 2; needs trained volunteer: no.
+- H2: priority 3; needs trained volunteer: no.
+- H3: priority 2; needs trained volunteer: no.
+- H4: priority 2; needs trained volunteer: no.
+- H5: priority 2; needs trained volunteer: no.
+- H6: priority 1; needs trained volunteer: no.
+- H7: priority 2; needs trained volunteer: no.
+- H8: priority 2; needs trained volunteer: no.
+- H9: priority 1; needs trained volunteer: yes.
+- H10: priority 2; needs trained volunteer: no.
+- H11: priority 1; needs trained volunteer: no.
+- H12: priority 3; needs trained volunteer: yes.
+- H13: priority 2; needs trained volunteer: no.
+- H14: priority 1; needs trained volunteer: no.
+- H15: priority 1; needs trained volunteer: no.
+- H16: priority 3; needs trained volunteer: yes.
+- H17: priority 1; needs trained volunteer: no.
+- H18: priority 3; needs trained volunteer: no.
+- H19: priority 3; needs trained volunteer: no.
+- H20: priority 2; needs trained volunteer: yes.
+- H21: priority 2; needs trained volunteer: yes.
+- H22: priority 3; needs trained volunteer: yes.
+- H23: priority 3; needs trained volunteer: no.
+- H24: priority 3; needs trained volunteer: no.
+
+Volunteers
+- Driver_1: driver for O1; shift O1_DAY; trained: yes; own vehicle: V1.
+- Driver_2: driver for O1; shift O1_EARLY; trained: yes; own vehicle: V2.
+- Driver_3: driver for O1; shift O1_LATE; trained: no; own vehicle: V3.
+- O1_TrainedAssistant: assistant for O1; shift O1_DAY; trained: yes; own vehicle: none.
+- O1_Assistant: assistant for O1; shift O1_LATE; trained: no; own vehicle: none.
+- Driver_4: driver for O2; shift O2_DAY; trained: yes; own vehicle: V4.
+- Driver_5: driver for O2; shift O2_EARLY; trained: no; own vehicle: V5.
+- Driver_6: driver for O2; shift O2_LATE; trained: no; own vehicle: V6.
+- O2_TrainedAssistant: assistant for O2; shift O2_DAY; trained: yes; own vehicle: none.
+- O2_Assistant: assistant for O2; shift O2_LATE; trained: no; own vehicle: none.
+- Driver_7: driver for O3; shift O3_DAY; trained: no; own vehicle: V7.
+- Driver_8: driver for O3; shift O3_EARLY; trained: yes; own vehicle: V8.
+- Driver_9: driver for O3; shift O3_LATE; trained: no; own vehicle: V9.
+- O3_TrainedAssistant: assistant for O3; shift O3_DAY; trained: yes; own vehicle: none.
+- O3_Assistant: assistant for O3; shift O3_LATE; trained: no; own vehicle: none.
+
+Vehicles
+- V1: O1, depot D1, driver Driver_1, seats 3, ambient capacity 9, chilled capacity 4.
+- V2: O1, depot D1, driver Driver_2, seats 2, ambient capacity 9, chilled capacity 0.
+- V3: O1, depot D1, driver Driver_3, seats 3, ambient capacity 10, chilled capacity 0.
+- V4: O2, depot D2, driver Driver_4, seats 3, ambient capacity 7, chilled capacity 3.
+- V5: O2, depot D2, driver Driver_5, seats 3, ambient capacity 9, chilled capacity 0.
+- V6: O2, depot D2, driver Driver_6, seats 3, ambient capacity 7, chilled capacity 0.
+- V7: O3, depot D3, driver Driver_7, seats 2, ambient capacity 8, chilled capacity 5.
+- V8: O3, depot D3, driver Driver_8, seats 3, ambient capacity 7, chilled capacity 0.
+- V9: O3, depot D3, driver Driver_9, seats 2, ambient capacity 7, chilled capacity 0.
+
+Delivery requests
+- R1: O2 serves H16 from D2; ambient 2; chilled 0; window 12:10-12:40; trained volunteer needed: yes; household priority 3.
+- R2: O3 serves H1 from D3; ambient 2; chilled 0; window 10:10-10:40; trained volunteer needed: no; household priority 2.
+- R3: O1 serves H2 from D1; ambient 3; chilled 0; window 13:30-14:00; trained volunteer needed: no; household priority 3.
+- R4: O1 serves H6 from D1; ambient 3; chilled 2; window 11:55-12:15; trained volunteer needed: no; household priority 1.
+- R5: O3 serves H4 from D3; ambient 1; chilled 0; window 10:50-11:20; trained volunteer needed: no; household priority 2.
+- R6: O1 serves H20 from D1; ambient 2; chilled 0; window 09:25-09:45; trained volunteer needed: yes; household priority 2.
+- R7: O3 serves H22 from D3; ambient 1; chilled 0; window 12:20-13:00; trained volunteer needed: yes; household priority 3.
+- R8: O2 serves H13 from D2; ambient 2; chilled 0; window 11:00-11:40; trained volunteer needed: no; household priority 2.
+- R9: O3 serves H19 from D3; ambient 1; chilled 0; window 10:20-10:40; trained volunteer needed: no; household priority 3.
+- R10: O1 serves H21 from D1; ambient 1; chilled 0; window 10:35-11:05; trained volunteer needed: yes; household priority 2.
+- R11: O1 serves H15 from D1; ambient 2; chilled 1; window 11:25-12:05; trained volunteer needed: no; household priority 1.
+- R12: O1 serves H7 from D1; ambient 2; chilled 1; window 14:00-14:30; trained volunteer needed: no; household priority 2.
+- R13: O3 serves H3 from D3; ambient 3; chilled 0; window 11:20-11:50; trained volunteer needed: no; household priority 2.
+- R14: O2 serves H6 from D2; ambient 1; chilled 0; window 09:15-09:35; trained volunteer needed: no; household priority 1.
+- R15: O3 serves H17 from D3; ambient 3; chilled 2; window 13:20-14:00; trained volunteer needed: no; household priority 1.
+- R16: O2 serves H1 from D2; ambient 1; chilled 0; window 11:00-11:40; trained volunteer needed: no; household priority 2.
+- R17: O2 serves H15 from D2; ambient 1; chilled 2; window 11:05-11:25; trained volunteer needed: no; household priority 1.
+- R18: O3 serves H24 from D3; ambient 3; chilled 2; window 10:20-11:00; trained volunteer needed: no; household priority 3.
+- R19: O1 serves H14 from D1; ambient 1; chilled 0; window 09:30-10:00; trained volunteer needed: no; household priority 1.
+- R20: O2 serves H5 from D2; ambient 3; chilled 1; window 12:00-12:20; trained volunteer needed: no; household priority 2.
+- R21: O2 serves H11 from D2; ambient 3; chilled 0; window 12:45-13:05; trained volunteer needed: no; household priority 1.
+- R22: O3 serves H23 from D3; ambient 1; chilled 0; window 11:20-11:50; trained volunteer needed: no; household priority 3.
+- R23: O3 serves H12 from D3; ambient 3; chilled 1; window 09:50-10:20; trained volunteer needed: yes; household priority 3.
+- R24: O2 serves H8 from D2; ambient 3; chilled 0; window 12:10-12:40; trained volunteer needed: no; household priority 2.
+- R25: O1 serves H10 from D1; ambient 2; chilled 0; window 10:05-10:25; trained volunteer needed: no; household priority 2.
+- R26: O3 serves H21 from D3; ambient 1; chilled 0; window 11:55-12:25; trained volunteer needed: yes; household priority 2.
+- R27: O3 serves H18 from D3; ambient 3; chilled 2; window 09:35-09:55; trained volunteer needed: no; household priority 3.
+- R28: O1 serves H5 from D1; ambient 1; chilled 0; window 11:35-12:05; trained volunteer needed: no; household priority 2.
+- R29: O2 serves H9 from D2; ambient 1; chilled 0; window 13:15-13:45; trained volunteer needed: yes; household priority 1.
+
+Duplicate households
+- H1: independent requests R2, R16; each requires its own delivery.
+- H5: independent requests R20, R28; each requires its own delivery.
+- H6: independent requests R4, R14; each requires its own delivery.
+- H15: independent requests R11, R17; each requires its own delivery.
+- H21: independent requests R10, R26; each requires its own delivery.
+
+Travel times in minutes (symmetric)
+origin,destination,minutes
+D1,D2,50
+D1,D3,52
+D1,H1,47
+D1,H2,60
+D1,H3,21
+D1,H4,44
+D1,H5,37
+D1,H6,21
+D1,H7,44
+D1,H8,62
+D1,H9,64
+D1,H10,53
+D1,H11,32
+D1,H12,52
+D1,H13,57
+D1,H14,39
+D1,H15,44
+D1,H16,45
+D1,H17,68
+D1,H18,72
+D1,H19,12
+D1,H20,59
+D1,H21,50
+D1,H22,55
+D1,H23,54
+D1,H24,34
+D2,D3,52
+D2,H1,12
+D2,H2,60
+D2,H3,45
+D2,H4,15
+D2,H5,58
+D2,H6,31
+D2,H7,63
+D2,H8,18
+D2,H9,46
+D2,H10,42
+D2,H11,48
+D2,H12,5
+D2,H13,22
+D2,H14,13
+D2,H15,23
+D2,H16,7
+D2,H17,48
+D2,H18,40
+D2,H19,41
+D2,H20,57
+D2,H21,66
+D2,H22,63
+D2,H23,27
+D2,H24,56
+D3,H1,41
+D3,H2,9
+D3,H3,32
+D3,H4,38
+D3,H5,22
+D3,H6,45
+D3,H7,22
+D3,H8,47
+D3,H9,20
+D3,H10,12
+D3,H11,20
+D3,H12,49
+D3,H13,37
+D3,H14,50
+D3,H15,29
+D3,H16,47
+D3,H17,24
+D3,H18,36
+D3,H19,53
+D3,H20,8
+D3,H21,19
+D3,H22,13
+D3,H23,30
+D3,H24,24
+H1,H2,49
+H1,H3,37
+H1,H4,4
+H1,H5,48
+H1,H6,27
+H1,H7,53
+H1,H8,16
+H1,H9,35
+H1,H10,31
+H1,H11,38
+H1,H12,9
+H1,H13,14
+H1,H14,15
+H1,H15,12
+H1,H16,8
+H1,H17,38
+H1,H18,32
+H1,H19,39
+H1,H20,46
+H1,H21,55
+H1,H22,52
+H1,H23,17
+H1,H24,47
+H2,H3,40
+H2,H4,46
+H2,H5,27
+H2,H6,54
+H2,H7,24
+H2,H8,54
+H2,H9,22
+H2,H10,19
+H2,H11,28
+H2,H12,57
+H2,H13,43
+H2,H14,59
+H2,H15,37
+H2,H16,55
+H2,H17,25
+H2,H18,39
+H2,H19,61
+H2,H20,3
+H2,H21,19
+H2,H22,11
+H2,H23,36
+H2,H24,29
+H3,H4,34
+H3,H5,19
+H3,H6,21
+H3,H7,26
+H3,H8,52
+H3,H9,45
+H3,H10,34
+H3,H11,12
+H3,H12,45
+H3,H13,44
+H3,H14,36
+H3,H15,31
+H3,H16,39
+H3,H17,49
+H3,H18,55
+H3,H19,24
+H3,H20,39
+H3,H21,32
+H3,H22,35
+H3,H23,39
+H3,H24,16
+H4,H5,45
+H4,H6,25
+H4,H7,50
+H4,H8,19
+H4,H9,34
+H4,H10,28
+H4,H11,34
+H4,H12,13
+H4,H13,14
+H4,H14,16
+H4,H15,9
+H4,H16,10
+H4,H17,36
+H4,H18,32
+H4,H19,37
+H4,H20,43
+H4,H21,51
+H4,H22,49
+H4,H23,15
+H4,H24,43
+H5,H6,39
+H5,H7,8
+H5,H8,60
+H5,H9,41
+H5,H10,31
+H5,H11,11
+H5,H12,57
+H5,H13,50
+H5,H14,52
+H5,H15,38
+H5,H16,52
+H5,H17,45
+H5,H18,56
+H5,H19,42
+H5,H20,28
+H5,H21,14
+H5,H22,19
+H5,H23,44
+H5,H24,3
+H6,H7,45
+H6,H8,43
+H6,H9,51
+H6,H10,41
+H6,H11,29
+H6,H12,32
+H6,H13,38
+H6,H14,19
+H6,H15,27
+H6,H16,25
+H6,H17,54
+H6,H18,55
+H6,H19,12
+H6,H20,52
+H6,H21,50
+H6,H22,52
+H6,H23,37
+H6,H24,36
+H7,H8,64
+H7,H9,42
+H7,H10,32
+H7,H11,17
+H7,H12,62
+H7,H13,53
+H7,H14,58
+H7,H15,42
+H7,H16,57
+H7,H17,45
+H7,H18,57
+H7,H19,49
+H7,H20,25
+H7,H21,7
+H7,H22,15
+H7,H23,47
+H7,H24,11
+H8,H9,35
+H8,H10,36
+H8,H11,50
+H8,H12,14
+H8,H13,11
+H8,H14,28
+H8,H15,22
+H8,H16,20
+H8,H17,36
+H8,H18,24
+H8,H19,54
+H8,H20,51
+H8,H21,64
+H8,H22,59
+H8,H23,18
+H8,H24,59
+H9,H10,12
+H9,H11,36
+H9,H12,42
+H9,H13,25
+H9,H14,49
+H9,H15,26
+H9,H16,43
+H9,H17,4
+H9,H18,17
+H9,H19,62
+H9,H20,20
+H9,H21,39
+H9,H22,31
+H9,H23,20
+H9,H24,42
+H10,H11,25
+H10,H12,39
+H10,H13,25
+H10,H14,43
+H10,H15,20
+H10,H16,38
+H10,H17,16
+H10,H18,26
+H10,H19,51
+H10,H20,16
+H10,H21,30
+H10,H22,24
+H10,H23,18
+H10,H24,31
+H11,H12,46
+H11,H13,40
+H11,H14,41
+H11,H15,28
+H11,H16,41
+H11,H17,40
+H11,H18,48
+H11,H19,35
+H11,H20,27
+H11,H21,21
+H11,H22,24
+H11,H23,35
+H11,H24,9
+H12,H13,18
+H12,H14,15
+H12,H15,20
+H12,H16,8
+H12,H17,44
+H12,H18,36
+H12,H19,42
+H12,H20,54
+H12,H21,63
+H12,H22,60
+H12,H23,23
+H12,H24,55
+H13,H14,28
+H13,H15,14
+H13,H16,20
+H13,H17,27
+H13,H18,19
+H13,H19,50
+H13,H20,40
+H13,H21,53
+H13,H22,49
+H13,H23,8
+H13,H24,49
+H14,H15,24
+H14,H16,9
+H14,H17,51
+H14,H18,47
+H14,H19,29
+H14,H20,57
+H14,H21,61
+H14,H22,60
+H14,H23,31
+H14,H24,49
+H15,H16,18
+H15,H17,29
+H15,H18,28
+H15,H19,39
+H15,H20,35
+H15,H21,44
+H15,H22,40
+H15,H23,10
+H15,H24,37
+H16,H17,45
+H16,H18,39
+H16,H19,35
+H16,H20,52
+H16,H21,60
+H16,H22,57
+H16,H23,24
+H16,H24,50
+H17,H18,15
+H17,H19,65
+H17,H20,22
+H17,H21,42
+H17,H22,34
+H17,H23,22
+H17,H24,46
+H18,H19,66
+H18,H20,36
+H18,H21,55
+H18,H22,48
+H18,H23,18
+H18,H24,56
+H19,H20,60
+H19,H21,55
+H19,H22,58
+H19,H23,49
+H19,H24,39
+H20,H21,21
+H20,H22,12
+H20,H23,33
+H20,H24,30
+H21,H22,9
+H21,H23,47
+H21,H24,17
+H22,H23,42
+H22,H24,22
+H23,H24,43
+
+Produce the final schedule using the required JSON output format. Include every request in request_status.

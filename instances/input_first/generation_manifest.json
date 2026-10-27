@@ -1,0 +1,109 @@
+{
+  "generator_version": "2.0.0-input-first",
+  "protocol": "v2",
+  "base_seed": 20261023,
+  "construction": "Resources, geography and requests are sampled before any scheduling. No solver, route construction, feasibility rejection or witness generation is used.",
+  "selection": "Every generated case is retained; profile labels are not included in model input text.",
+  "cases": [
+    {
+      "instance_id": "input_hard_001",
+      "challenge_profile": "mixed_resource_pressure",
+      "seed": 20261023,
+      "households": 22,
+      "requests": 27,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_002",
+      "challenge_profile": "tight_windows",
+      "seed": 20262023,
+      "households": 24,
+      "requests": 29,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_003",
+      "challenge_profile": "scarce_training",
+      "seed": 20263023,
+      "households": 23,
+      "requests": 28,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_004",
+      "challenge_profile": "chilled_capacity_pressure",
+      "seed": 20264023,
+      "households": 25,
+      "requests": 30,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_005",
+      "challenge_profile": "staggered_shifts",
+      "seed": 20265023,
+      "households": 24,
+      "requests": 29,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_006",
+      "challenge_profile": "distant_depots",
+      "seed": 20266023,
+      "households": 20,
+      "requests": 24,
+      "duplicate_households": 4,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_007",
+      "challenge_profile": "aggregate_ambient_shortage",
+      "seed": 20267023,
+      "households": 25,
+      "requests": 30,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_008",
+      "challenge_profile": "one_seat_training_conflict",
+      "seed": 20268023,
+      "households": 21,
+      "requests": 25,
+      "duplicate_households": 4,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_009",
+      "challenge_profile": "training_shift_gap",
+      "seed": 20269023,
+      "households": 22,
+      "requests": 27,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_hard_010",
+      "challenge_profile": "combined_pressure",
+      "seed": 20270023,
+      "households": 25,
+      "requests": 30,
+      "duplicate_households": 5,
+      "vehicles": 9,
+      "feasibility_status": "not_checked"
+    }
+  ]
+}

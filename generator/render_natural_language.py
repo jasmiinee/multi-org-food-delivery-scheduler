@@ -21,6 +21,7 @@ def yes_no(value: bool) -> str:
 def render_instance(instance: dict[str, Any]) -> str:
     metadata = instance["metadata"]
     params = instance["parameters"]
+    is_v2 = metadata.get("protocol_version") == "v2"
     organisations = {item["id"]: item for item in instance["organisations"]}
     households = {item["id"]: item for item in instance["households"]}
 
@@ -39,12 +40,29 @@ def render_instance(instance: dict[str, Any]) -> str:
         "- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.",
         "- There is no separate time-based cold-chain limit in this version.",
         "- A specialised-needs household requires at least one trained driver or assistant on its vehicle.",
-        "- At most one competing request may be fulfilled for a duplicate household.",
-        "- First maximize households served; then priority weight; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.",
+        (
+            "- Each request may be fulfilled at most once. Different organisations may each fulfil their own request for the same household."
+            if is_v2 else
+            "- At most one competing request may be fulfilled for a duplicate household."
+        ),
+        (
+            "- First maximize distinct households served; then their priority weight counted once per household; then maximize fulfilled requests; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID."
+            if is_v2 else
+            "- First maximize households served; then priority weight; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID."
+        ),
         "- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.",
         "",
         "Organisations and shifts",
     ]
+
+    if is_v2:
+        lines.insert(2, "Protocol: v2 (independent requests)")
+        index = lines.index("Rules and objective") + 1
+        lines[index:index] = [
+            "- Duplicate requests are separate deliveries. Fulfil both when jointly feasible under the objective order; do not merge their items or windows.",
+            "- A household is served when at least one of its requests is fulfilled; count the household and its priority once.",
+            "- Every unfulfilled request is unserved and needs a reason, even if another organisation delivered to its household. Do not use covered_by_alternative.",
+        ]
 
     for org in instance["organisations"]:
         shifts = ", ".join(
@@ -91,10 +109,16 @@ def render_instance(instance: dict[str, Any]) -> str:
     lines.extend(["", "Duplicate households"])
     if instance["duplicate_households"]:
         for duplicate in instance["duplicate_households"]:
-            lines.append(
-                f"- {duplicate['household']}: choose at most one of "
-                f"{', '.join(duplicate['competing_requests'])}."
-            )
+            if is_v2:
+                lines.append(
+                    f"- {duplicate['household']}: independent requests "
+                    f"{', '.join(duplicate['request_ids'])}; each requires its own delivery."
+                )
+            else:
+                lines.append(
+                    f"- {duplicate['household']}: choose at most one of "
+                    f"{', '.join(duplicate['competing_requests'])}."
+                )
     else:
         lines.append("- None.")
 

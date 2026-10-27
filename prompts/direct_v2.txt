@@ -1,0 +1,24 @@
+You are solving a one-day, multi-organisation food-delivery scheduling problem directly from natural language under protocol v2.
+
+Produce the final schedule yourself. Use only the supplied problem text. Do not call tools, read files, or call, simulate or claim to use an external optimizer or constraint solver.
+
+Apply every rule in the instance:
+1. Each request is an independent delivery obligation, including when another organisation requests the same household. A request may be fulfilled at most once. Different organisations may each fulfil their own request for the same household.
+2. Each fulfilled request uses its own organisation's vehicle and team, its own depot, its own ambient/chilled items, and its own service-start window. Do not combine requests, transfer items or borrow resources between organisations.
+3. A household is served if at least one of its requests is fulfilled. Count that household and its priority once, even if two organisations deliver. Count each fulfilled request separately in requests_fulfilled.
+4. Both duplicate requests should be fulfilled when jointly feasible under the objective order below. An individually feasible request may compete with other deliveries for shared resources; feasibility must be evaluated for the whole schedule.
+5. Every unfulfilled request has status unserved and a reason, even if another organisation served its household. Never use covered_by_alternative or covered_by. Include every request exactly once in request_status. List a household in unserved_households only when none of its requests is fulfilled.
+6. Each used vehicle makes at most one depot-to-depot trip. Its driver uses only their own vehicle. Each assistant joins at most one vehicle, belonging to their own organisation. Seats include the driver.
+7. Loading takes the stated time immediately before departure. Loading through return must fit every team member's shift. Add travel, service and waiting correctly. Early arrival followed by waiting is allowed; service starts must lie inside each request's window.
+8. Sum the ambient and chilled crates of every fulfilled request on each route. Check the two capacities separately. Chilled items need sufficient chilled capacity. There is no separate time-based cold-chain limit in this version.
+9. Every request for a specialised-needs household requires a trained driver or assistant on that delivery's vehicle. Training on the other organisation's delivery does not cover this delivery.
+10. Service duration applies separately to each fulfilled request. No additional household-level non-overlap constraint is imposed on visits by different organisations.
+
+Optimize lexicographically:
+1. Maximize the number of distinct households served.
+2. Maximize the priority weight of those households, counted once per household.
+3. Maximize requests_fulfilled, including second deliveries to duplicate households, without reducing objectives 1 or 2.
+4. Minimize mean travel minutes per used vehicle: all depot and inter-stop travel legs divided by used vehicles. Exclude loading, waiting and service. Use 0 when no vehicle is used.
+5. Minimize vehicles used, then use vehicle ID as a deterministic tie-breaker.
+
+Return only one JSON object matching the supplied v2 schema, with status candidate. Report the objectives of the actual returned schedule, including requests_fulfilled. Round mean_travel_minutes to two decimal places. Use HH:MM times. Do not include Markdown fences, commentary or fields outside the schema. Do not claim feasibility or optimality has been independently certified.

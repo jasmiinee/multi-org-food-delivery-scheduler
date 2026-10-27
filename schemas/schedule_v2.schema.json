@@ -1,0 +1,278 @@
+{
+  "$defs": {
+    "IndependentObjective": {
+      "additionalProperties": false,
+      "properties": {
+        "households_served": {
+          "minimum": 0,
+          "title": "Households Served",
+          "type": "integer"
+        },
+        "priority_weight": {
+          "minimum": 0,
+          "title": "Priority Weight",
+          "type": "integer"
+        },
+        "mean_travel_minutes": {
+          "minimum": 0,
+          "title": "Mean Travel Minutes",
+          "type": "number"
+        },
+        "vehicles_used": {
+          "minimum": 0,
+          "title": "Vehicles Used",
+          "type": "integer"
+        },
+        "requests_fulfilled": {
+          "minimum": 0,
+          "title": "Requests Fulfilled",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "households_served",
+        "priority_weight",
+        "mean_travel_minutes",
+        "vehicles_used",
+        "requests_fulfilled"
+      ],
+      "title": "IndependentObjective",
+      "type": "object"
+    },
+    "IndependentRequestStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "title": "Request",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "fulfilled",
+            "unserved"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "vehicle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vehicle"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "request",
+        "status"
+      ],
+      "title": "IndependentRequestStatus",
+      "type": "object",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "fulfilled"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "vehicle"
+            ],
+            "properties": {
+              "vehicle": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unserved"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reason"
+            ],
+            "properties": {
+              "reason": {
+                "type": "string",
+                "pattern": "\\S"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RouteStop": {
+      "additionalProperties": false,
+      "properties": {
+        "request": {
+          "title": "Request",
+          "type": "string"
+        },
+        "household": {
+          "title": "Household",
+          "type": "string"
+        },
+        "service_start": {
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "title": "Service Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request",
+        "household",
+        "service_start"
+      ],
+      "title": "RouteStop",
+      "type": "object"
+    },
+    "UnservedHousehold": {
+      "additionalProperties": false,
+      "properties": {
+        "household": {
+          "title": "Household",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "household",
+        "reason"
+      ],
+      "title": "UnservedHousehold",
+      "type": "object"
+    },
+    "VehicleSchedule": {
+      "additionalProperties": false,
+      "properties": {
+        "vehicle": {
+          "title": "Vehicle",
+          "type": "string"
+        },
+        "driver": {
+          "title": "Driver",
+          "type": "string"
+        },
+        "assistants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assistants",
+          "type": "array"
+        },
+        "loading_start": {
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "title": "Loading Start",
+          "type": "string"
+        },
+        "departure": {
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "title": "Departure",
+          "type": "string"
+        },
+        "route": {
+          "items": {
+            "$ref": "#/$defs/RouteStop"
+          },
+          "minItems": 1,
+          "title": "Route",
+          "type": "array"
+        },
+        "return": {
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "title": "Return",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vehicle",
+        "driver",
+        "assistants",
+        "loading_start",
+        "departure",
+        "route",
+        "return"
+      ],
+      "title": "VehicleSchedule",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "candidate",
+        "feasible",
+        "optimal"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "objective": {
+      "$ref": "#/$defs/IndependentObjective"
+    },
+    "vehicles": {
+      "items": {
+        "$ref": "#/$defs/VehicleSchedule"
+      },
+      "title": "Vehicles",
+      "type": "array"
+    },
+    "request_status": {
+      "items": {
+        "$ref": "#/$defs/IndependentRequestStatus"
+      },
+      "title": "Request Status",
+      "type": "array"
+    },
+    "unserved_households": {
+      "items": {
+        "$ref": "#/$defs/UnservedHousehold"
+      },
+      "title": "Unserved Households",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "objective",
+    "vehicles",
+    "request_status",
+    "unserved_households"
+  ],
+  "title": "Independent-request candidate schedule",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.edu/cs3263/schedule_v2.schema.json"
+}
