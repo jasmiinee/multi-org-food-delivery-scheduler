@@ -5,7 +5,7 @@ import csv
 from validator import ScheduleValidator
 
 # List of directories
-RUN_DIRECTORIES = [
+CODEX_FILES = [
     # V1 Directories (Easy, Hard, Medium)
     "outputs/codex/easy_001_20261020T140256Z_7f9b9b28",
     "outputs/codex/easy_002_20261020T140532Z_f3eb35c7",
@@ -62,7 +62,7 @@ def main():
     print(f"{'Instance':<20} | {'Feasible?':<10} | {'HH':<4} | {'Reqs':<5} | {'Priority':<8} | {'Travel':<8} | {'Violations'}")
     print("-" * 85)
 
-    for run_dir in RUN_DIRECTORIES:
+    for run_dir in CODEX_FILES:
         if not os.path.exists(run_dir):
             print(f"Directory not found: {run_dir}")
             continue
@@ -118,7 +118,9 @@ def main():
             print(f"Error processing {run_dir}: {e}")
 
     # Updated to save in a centralized output path
-    csv_path = "validation_summary_all.csv"
+    reports_dir = "reports"
+    os.makedirs(reports_dir, exist_ok=True)
+    csv_path = os.path.join(reports_dir, "codex_validation_summary.csv")
     if summary_data:
         with open(csv_path, 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=summary_data[0].keys())
