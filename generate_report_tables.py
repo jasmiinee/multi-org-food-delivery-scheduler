@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 def load_data():
     codex_df = pd.read_csv('reports/codex_validation_summary.csv')
@@ -11,9 +12,9 @@ def load_data():
 
     for df in [codex_df, solver_df]:
         df['mean_travel_minutes'] = pd.to_numeric(df['mean_travel_minutes'], errors='coerce')
-        df['households_served'] = pd.to_numeric(df['households_served'], errors='coerce')
         df['priority_weight'] = pd.to_numeric(df['priority_weight'], errors='coerce')
-        df['requests_fulfilled'] = pd.to_numeric(df['requests_fulfilled'], errors='coerce')
+        df['households_served_num'] = pd.to_numeric(df['households_served'].astype(str).str.split('/').str[0], errors='coerce')
+        df['requests_fulfilled_num'] = pd.to_numeric(df['requests_fulfilled'].astype(str).str.split('/').str[0], errors='coerce')
         
     return codex_df, solver_df
 
@@ -28,7 +29,7 @@ def generate_table1_divergent(codex_df, solver_df):
     # 3. Travel time differs by more than 0.1 mins
     div_mask = (
         (merged['is_feasible_codex'] != merged['is_feasible_solver']) |
-        (merged['households_served_codex'] != merged['households_served_solver']) |
+        (merged['households_served_num_codex'] != merged['households_served_num_solver']) |
         (abs(merged['mean_travel_minutes_codex'] - merged['mean_travel_minutes_solver']) > 0.1)
     )
     divergent = merged[div_mask].copy()
@@ -49,6 +50,8 @@ def generate_table1_divergent(codex_df, solver_df):
         'instance', 
         'is_feasible_codex', 
         'is_feasible_solver', 
+        'households_served_codex',
+        'households_served_solver',
         'mean_travel_minutes_codex', 
         'mean_travel_minutes_solver', 
         'Travel Gap (%)'
@@ -56,27 +59,28 @@ def generate_table1_divergent(codex_df, solver_df):
         'instance': 'Instance',
         'is_feasible_codex': 'Codex Feasible',
         'is_feasible_solver': 'Solver Feasible',
+        'households_served_codex': 'Codex HH',
+        'households_served_solver': 'Solver HH',
         'mean_travel_minutes_codex': 'Codex Travel',
         'mean_travel_minutes_solver': 'Solver Travel'
     })
     
     table1.to_csv('reports/table1_optimality_gap.csv', index=False)
-    print("✅ Table 1 (Divergent Cases) saved to reports/table1_optimality_gap.csv")
+    print("Table 1 (Divergent Cases) saved to reports/table1_optimality_gap.csv")
     
 def generate_table2_aggregate(codex_df, solver_df):
-    """Table 2: Aggregate Metrics (No V1/V2 split)"""
+    """Table 2: Aggregate Metrics"""
     
     def get_metrics(df, method_name):
         total_instances = len(df)
         feasible_count = df['is_feasible'].sum()
         feasibility_rate = (feasible_count / total_instances) * 100
         
-        # Only average over feasible instances for Travel & Households
+        # Only average over feasible instances
         feasible_df = df[df['is_feasible'] == True]
         
-        # Convert to numeric in case they read as strings, coerce errors to NaN
-        avg_travel = pd.to_numeric(feasible_df['mean_travel_minutes'], errors='coerce').mean()
-        avg_hh = pd.to_numeric(feasible_df['households_served'], errors='coerce').mean()
+        avg_travel = feasible_df['mean_travel_minutes'].mean()
+        avg_hh = feasible_df['households_served_num'].mean()
         
         return {
             'Method': method_name,
@@ -93,10 +97,9 @@ def generate_table2_aggregate(codex_df, solver_df):
     table2 = pd.DataFrame(agg_data)
     
     table2.to_csv('reports/table2_aggregate_metrics.csv', index=False)
-    print("✅ Table 2 (Aggregate Metrics) saved to reports/table2_aggregate_metrics.csv")
+    print("Table 2 (Aggregate Metrics) saved to reports/table2_aggregate_metrics.csv")
 
 if __name__ == "__main__":
-    import os
     os.makedirs('reports', exist_ok=True)
     
     print("Loading data...")

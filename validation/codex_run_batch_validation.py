@@ -59,8 +59,8 @@ def get_instance_path(run_dir: str) -> str:
 def main():
     summary_data = []
     
-    print(f"{'Instance':<20} | {'Feasible?':<10} | {'HH':<4} | {'Reqs':<5} | {'Priority':<8} | {'Travel':<8} | {'Violations'}")
-    print("-" * 85)
+    print(f"{'Instance':<20} | {'Feasible?':<10} | {'HH (S/T)':<9} | {'Reqs (S/T)':<10} | {'Priority':<8} | {'Travel':<8} | {'Violations'}")
+    print("-" * 95)
 
     for run_dir in CODEX_FILES:
         if not os.path.exists(run_dir):
@@ -72,6 +72,12 @@ def main():
             schedule_path = os.path.join(run_dir, "parsed.json")
             validation_out_path = os.path.join(run_dir, "validation.json")
 
+            with open(instance_path, 'r') as f:
+                instance_data = json.load(f)
+            
+            total_hh = len(instance_data.get('households', []))
+            total_reqs = len(instance_data.get('requests', []))
+
             if not os.path.exists(schedule_path):
                 report = {
                     "is_feasible": False,
@@ -79,35 +85,41 @@ def main():
                     "recomputed_metrics": {},
                     "claimed_metrics": {}
                 }
+                served_hh_display = "-"
+                served_reqs_display = "-"
+                priority = "-"
+                travel = "-"
             else:
-                with open(instance_path, 'r') as f:
-                    instance_data = json.load(f)
                 with open(schedule_path, 'r') as f:
                     schedule_data = json.load(f)
 
                 validator = ScheduleValidator(instance_data, schedule_data)
                 report = validator.validate()
 
+                metrics = report.get("recomputed_metrics", {})
+                served_hh = metrics.get("households_served", "-")
+                served_reqs = metrics.get("requests_fulfilled", "-")
+                priority = metrics.get("priority_weight", "-")
+                travel = metrics.get("mean_travel_minutes", "-")
+
+                # Format as Served/Total
+                served_hh_display = f"{served_hh}/{total_hh}" if served_hh != "-" else "-"
+                served_reqs_display = f"{served_reqs}/{total_reqs}" if served_reqs != "-" else "-"
+
             with open(validation_out_path, 'w') as f:
                 json.dump(report, f, indent=2)
 
             is_feasible = report["is_feasible"]
             violations = len(report["violations"])
-            metrics = report.get("recomputed_metrics", {})
-            
-            served_hh = metrics.get("households_served", "-")
-            served_reqs = metrics.get("requests_fulfilled", "-")
-            priority = metrics.get("priority_weight", "-")
-            travel = metrics.get("mean_travel_minutes", "-")
 
             feasible_str = "YES" if is_feasible else "NO"
-            print(f"{instance_name:<20} | {feasible_str:<10} | {str(served_hh):<4} | {str(served_reqs):<5} | {str(priority):<8} | {str(travel):<8} | {violations}")
+            print(f"{instance_name:<20} | {feasible_str:<10} | {served_hh_display:<9} | {served_reqs_display:<10} | {str(priority):<8} | {str(travel):<8} | {violations}")
 
             summary_data.append({
                 "instance": instance_name,
                 "is_feasible": is_feasible,
-                "households_served": served_hh,
-                "requests_fulfilled": served_reqs,
+                "households_served": served_hh_display,
+                "requests_fulfilled": served_reqs_display,
                 "priority_weight": priority,
                 "mean_travel_minutes": travel,
                 "num_violations": violations,

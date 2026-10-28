@@ -59,8 +59,8 @@ def get_instance_path(filepath: str) -> str:
 def main():
     summary_data = []
     
-    print(f"{'Instance':<20} | {'Feasible?':<10} | {'HH':<4} | {'Reqs':<5} | {'Priority':<8} | {'Travel':<8} | {'Violations'}")
-    print("-" * 85)
+    print(f"{'Instance':<20} | {'Feasible?':<10} | {'HH (S/T)':<9} | {'Reqs (S/T)':<10} | {'Priority':<8} | {'Travel':<8} | {'Violations'}")
+    print("-" * 95)
 
     for schedule_path in SOLVER_FILES:
         if not os.path.exists(schedule_path):
@@ -79,6 +79,10 @@ def main():
 
             with open(instance_path, 'r') as f:
                 instance_data = json.load(f)
+            
+            total_hh = len(instance_data.get('households', []))
+            total_reqs = len(instance_data.get('requests', []))
+
             with open(schedule_path, 'r') as f:
                 schedule_data = json.load(f)
 
@@ -97,14 +101,17 @@ def main():
             priority = metrics.get("priority_weight", "-")
             travel = metrics.get("mean_travel_minutes", "-")
 
+            served_hh_display = f"{served_hh}/{total_hh}" if served_hh != "-" else "-"
+            served_reqs_display = f"{served_reqs}/{total_reqs}" if served_reqs != "-" else "-"
+
             feasible_str = "YES" if is_feasible else "NO"
-            print(f"{instance_name:<20} | {feasible_str:<10} | {str(served_hh):<4} | {str(served_reqs):<5} | {str(priority):<8} | {str(travel):<8} | {violations}")
+            print(f"{instance_name:<20} | {feasible_str:<10} | {served_hh_display:<9} | {served_reqs_display:<10} | {str(priority):<8} | {str(travel):<8} | {violations}")
 
             summary_data.append({
                 "instance": instance_name,
                 "is_feasible": is_feasible,
-                "households_served": served_hh,
-                "requests_fulfilled": served_reqs,
+                "households_served": served_hh_display,
+                "requests_fulfilled": served_reqs_display,
                 "priority_weight": priority,
                 "mean_travel_minutes": travel,
                 "num_violations": violations,
