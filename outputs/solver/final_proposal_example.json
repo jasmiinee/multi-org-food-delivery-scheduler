@@ -1,0 +1,142 @@
+{
+  "status": "optimal",
+  "objective": {
+    "households_served": 5,
+    "priority_weight": 9,
+    "mean_travel_minutes": 26.0,
+    "vehicles_used": 5
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Ana",
+      "assistants": [
+        "Ben"
+      ],
+      "loading_start": "10:00",
+      "departure": "10:05",
+      "route": [
+        {
+          "request": "R2",
+          "household": "H2",
+          "service_start": "10:45"
+        }
+      ],
+      "return": "11:10"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Gus",
+      "assistants": [],
+      "loading_start": "10:00",
+      "departure": "10:05",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H1",
+          "service_start": "10:30"
+        }
+      ],
+      "return": "10:50"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Carl",
+      "assistants": [],
+      "loading_start": "09:00",
+      "departure": "09:05",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H3",
+          "service_start": "11:15"
+        }
+      ],
+      "return": "11:35"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Dina",
+      "assistants": [
+        "Eli"
+      ],
+      "loading_start": "09:00",
+      "departure": "09:05",
+      "route": [
+        {
+          "request": "R5",
+          "household": "H4",
+          "service_start": "10:45"
+        }
+      ],
+      "return": "11:07"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Hana",
+      "assistants": [],
+      "loading_start": "13:00",
+      "departure": "13:05",
+      "route": [
+        {
+          "request": "R6",
+          "household": "H5",
+          "service_start": "13:30"
+        }
+      ],
+      "return": "13:58"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "covered_by": null,
+      "reason": null
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "covered_by": null,
+      "reason": null
+    },
+    {
+      "request": "R7",
+      "status": "covered_by_alternative",
+      "vehicle": null,
+      "covered_by": "R2",
+      "reason": null
+    },
+    {
+      "request": "R3",
+      "status": "covered_by_alternative",
+      "vehicle": null,
+      "covered_by": "R4",
+      "reason": null
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "covered_by": null,
+      "reason": null
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "covered_by": null,
+      "reason": null
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "covered_by": null,
+      "reason": null
+    }
+  ],
+  "unserved_households": []
+}
