@@ -1,10 +1,11 @@
-"""Run the CP-SAT solver on v1 benchmarks and input-first v2 instances.
+"""Run the CP-SAT solver on v1 benchmarks and v2 input-first instances.
 
 From the project root, run:
     .venv-solver/bin/python scripts/run_solver.py
 
-V1 benchmark results go to outputs/solver/; v2 input-first results go to
-outputs/solver_v2/. Override either directory with the corresponding option.
+V1 benchmark, v2 input-first, and v2.1 results go to outputs/solver/,
+outputs/solver_v2/, and outputs/solver_v2.1/ respectively. Override each
+directory with its corresponding option.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 V1_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "benchmark"
 V2_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "input_first"
+V21_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "v2.1"
 
 
 def main() -> int:
@@ -34,11 +36,21 @@ def main() -> int:
         default=Path("outputs/solver_v2"),
         help="Output directory for v2 input-first results (default: outputs/solver_v2)",
     )
+    parser.add_argument(
+        "--v21-output-dir",
+        type=Path,
+        default=Path("outputs/solver_v2.1"),
+        help="Output directory for v2.1 results (default: outputs/solver_v2.1)",
+    )
     parser.add_argument("--time-limit", type=float, default=60.0)
     parser.add_argument("--workers", type=int, default=8)
     args = parser.parse_args()
 
-    output_dirs = {"v1": args.output_dir, "v2": args.v2_output_dir}
+    output_dirs = {
+        "v1": args.output_dir,
+        "v2": args.v2_output_dir,
+        "v2.1": args.v21_output_dir,
+    }
     for protocol, path in output_dirs.items():
         if not path.is_absolute():
             output_dirs[protocol] = PROJECT_ROOT / path
@@ -50,6 +62,11 @@ def main() -> int:
     ] + [
         (path, "v2")
         for path in V2_INSTANCE_ROOT.rglob("*.json")
+        if not path.name.endswith(".witness.json")
+        and path.name != "generation_manifest.json"
+    ] + [
+        (path, "v2.1")
+        for path in V21_INSTANCE_ROOT.rglob("*.json")
         if not path.name.endswith(".witness.json")
         and path.name != "generation_manifest.json"
     ]
@@ -104,6 +121,7 @@ def main() -> int:
     print(f"Finished: {len(instances) - failures}/{len(instances)} succeeded.")
     print(f"V1 benchmark results: {output_dirs['v1']}")
     print(f"V2 input-first results: {output_dirs['v2']}")
+    print(f"V2.1 results: {output_dirs['v2.1']}")
     return 1 if failures else 0
 
 

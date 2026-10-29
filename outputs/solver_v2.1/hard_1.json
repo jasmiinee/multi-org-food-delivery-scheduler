@@ -1,0 +1,587 @@
+{
+  "status": "optimal",
+  "objective": {
+    "households_served": 24,
+    "priority_weight": 55,
+    "mean_travel_minutes": 77.83,
+    "vehicles_used": 12,
+    "requests_fulfilled": 33
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:00",
+      "departure": "08:05",
+      "route": [
+        {
+          "request": "R24",
+          "household": "H3",
+          "service_start": "09:07"
+        },
+        {
+          "request": "R41",
+          "household": "H21",
+          "service_start": "09:35"
+        },
+        {
+          "request": "R28",
+          "household": "H18",
+          "service_start": "10:25"
+        },
+        {
+          "request": "R14",
+          "household": "H16",
+          "service_start": "10:39"
+        }
+      ],
+      "return": "11:20"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:00",
+      "departure": "08:05",
+      "route": [
+        {
+          "request": "R40",
+          "household": "H11",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:35"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "10:00",
+      "departure": "10:05",
+      "route": [
+        {
+          "request": "R5",
+          "household": "H12",
+          "service_start": "11:04"
+        },
+        {
+          "request": "R7",
+          "household": "H14",
+          "service_start": "11:25"
+        }
+      ],
+      "return": "12:06"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "09:42",
+      "departure": "09:47",
+      "route": [
+        {
+          "request": "R38",
+          "household": "H17",
+          "service_start": "10:20"
+        },
+        {
+          "request": "R43",
+          "household": "H20",
+          "service_start": "10:40"
+        },
+        {
+          "request": "R18",
+          "household": "H4",
+          "service_start": "11:16"
+        }
+      ],
+      "return": "12:00"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R8",
+          "household": "H7",
+          "service_start": "09:05"
+        },
+        {
+          "request": "R23",
+          "household": "H8",
+          "service_start": "09:29"
+        },
+        {
+          "request": "R42",
+          "household": "H19",
+          "service_start": "11:25"
+        },
+        {
+          "request": "R21",
+          "household": "H5",
+          "service_start": "12:20"
+        },
+        {
+          "request": "R27",
+          "household": "H16",
+          "service_start": "13:30"
+        }
+      ],
+      "return": "14:13"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": [],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H9",
+          "service_start": "09:00"
+        },
+        {
+          "request": "R26",
+          "household": "H6",
+          "service_start": "09:21"
+        }
+      ],
+      "return": "10:02"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": [],
+      "loading_start": "10:10",
+      "departure": "10:15",
+      "route": [
+        {
+          "request": "R37",
+          "household": "H13",
+          "service_start": "10:50"
+        },
+        {
+          "request": "R9",
+          "household": "H20",
+          "service_start": "11:29"
+        },
+        {
+          "request": "R13",
+          "household": "H17",
+          "service_start": "11:43"
+        }
+      ],
+      "return": "12:21"
+    },
+    {
+      "vehicle": "V8",
+      "driver": "Driver_8",
+      "assistants": [],
+      "loading_start": "09:59",
+      "departure": "10:04",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H12",
+          "service_start": "10:30"
+        },
+        {
+          "request": "R20",
+          "household": "H15",
+          "service_start": "10:44"
+        }
+      ],
+      "return": "11:24"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": [],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R2",
+          "household": "H23",
+          "service_start": "09:00"
+        },
+        {
+          "request": "R31",
+          "household": "H25",
+          "service_start": "09:30"
+        },
+        {
+          "request": "R29",
+          "household": "H6",
+          "service_start": "12:00"
+        },
+        {
+          "request": "R36",
+          "household": "H9",
+          "service_start": "12:20"
+        }
+      ],
+      "return": "12:53"
+    },
+    {
+      "vehicle": "V10",
+      "driver": "Driver_10",
+      "assistants": [],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R30",
+          "household": "H27",
+          "service_start": "09:05"
+        },
+        {
+          "request": "R35",
+          "household": "H22",
+          "service_start": "09:21"
+        },
+        {
+          "request": "R19",
+          "household": "H1",
+          "service_start": "11:00"
+        }
+      ],
+      "return": "11:35"
+    },
+    {
+      "vehicle": "V11",
+      "driver": "Driver_11",
+      "assistants": [
+        "O3_TrainedAssistant"
+      ],
+      "loading_start": "10:20",
+      "departure": "10:25",
+      "route": [
+        {
+          "request": "R12",
+          "household": "H10",
+          "service_start": "12:15"
+        },
+        {
+          "request": "R10",
+          "household": "H8",
+          "service_start": "12:45"
+        },
+        {
+          "request": "R6",
+          "household": "H16",
+          "service_start": "13:30"
+        }
+      ],
+      "return": "14:00"
+    },
+    {
+      "vehicle": "V12",
+      "driver": "Driver_12",
+      "assistants": [],
+      "loading_start": "10:20",
+      "departure": "10:25",
+      "route": [
+        {
+          "request": "R11",
+          "household": "H4",
+          "service_start": "11:05"
+        }
+      ],
+      "return": "11:33"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V8",
+      "reason": null
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R44",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R3",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R19",
+      "status": "fulfilled",
+      "vehicle": "V10",
+      "reason": null
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R36",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V11",
+      "reason": null
+    },
+    {
+      "request": "R14",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R27",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R17",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R8",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R22",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No vehicle in the organisation has enough capacity for an alternative request."
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    },
+    {
+      "request": "R43",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V11",
+      "reason": null
+    },
+    {
+      "request": "R23",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R11",
+      "status": "fulfilled",
+      "vehicle": "V12",
+      "reason": null
+    },
+    {
+      "request": "R18",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V11",
+      "reason": null
+    },
+    {
+      "request": "R34",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No vehicle in the organisation has enough capacity for an alternative request."
+    },
+    {
+      "request": "R13",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    },
+    {
+      "request": "R38",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R15",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R21",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R16",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R28",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R20",
+      "status": "fulfilled",
+      "vehicle": "V8",
+      "reason": null
+    },
+    {
+      "request": "R24",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R25",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R26",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R29",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R30",
+      "status": "fulfilled",
+      "vehicle": "V10",
+      "reason": null
+    },
+    {
+      "request": "R31",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R32",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R33",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R35",
+      "status": "fulfilled",
+      "vehicle": "V10",
+      "reason": null
+    },
+    {
+      "request": "R37",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    },
+    {
+      "request": "R39",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R40",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R41",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R42",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H24",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H28",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H2",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "household": "H26",
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    }
+  ]
+}
