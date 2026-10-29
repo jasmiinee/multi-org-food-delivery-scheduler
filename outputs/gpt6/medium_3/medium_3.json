@@ -1,0 +1,231 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 10,
+        "priority_weight": 20,
+        "mean_travel_minutes": 81.5,
+        "vehicles_used": 4,
+        "requests_fulfilled": 11
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [],
+            "loading_start": "08:00",
+            "departure": "08:05",
+            "route": [
+                {
+                    "request": "R7",
+                    "household": "H13",
+                    "service_start": "11:50"
+                },
+                {
+                    "request": "R10",
+                    "household": "H3",
+                    "service_start": "12:55"
+                },
+                {
+                    "request": "R2",
+                    "household": "H1",
+                    "service_start": "13:28"
+                }
+            ],
+            "return": "13:47"
+        },
+        {
+            "vehicle": "V2",
+            "driver": "Driver_2",
+            "assistants": [],
+            "loading_start": "08:00",
+            "departure": "08:05",
+            "route": [
+                {
+                    "request": "R6",
+                    "household": "H4",
+                    "service_start": "11:40"
+                },
+                {
+                    "request": "R9",
+                    "household": "H9",
+                    "service_start": "12:22"
+                }
+            ],
+            "return": "12:56"
+        },
+        {
+            "vehicle": "V3",
+            "driver": "Driver_3",
+            "assistants": [],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R8",
+                    "household": "H11",
+                    "service_start": "08:55"
+                },
+                {
+                    "request": "R16",
+                    "household": "H2",
+                    "service_start": "10:15"
+                },
+                {
+                    "request": "R1",
+                    "household": "H10",
+                    "service_start": "12:20"
+                },
+                {
+                    "request": "R5",
+                    "household": "H14",
+                    "service_start": "13:10"
+                }
+            ],
+            "return": "13:43"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R13",
+                    "household": "H12",
+                    "service_start": "10:20"
+                },
+                {
+                    "request": "R14",
+                    "household": "H6",
+                    "service_start": "12:25"
+                }
+            ],
+            "return": "13:07"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R2",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R3",
+            "status": "unserved",
+            "reason": "V1's chilled capacity is allocated to R7 and R10; V2 has no chilled capacity."
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "reason": "The available vehicle capacity and remaining service windows prevent adding this request to the selected routes."
+        },
+        {
+            "request": "R5",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R6",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R7",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R8",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R9",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R10",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R11",
+            "status": "unserved",
+            "reason": "No remaining route can accommodate this request within its service window and vehicle capacity."
+        },
+        {
+            "request": "R12",
+            "status": "unserved",
+            "reason": "V1's chilled capacity is allocated to R7 and R10; V2 has no chilled capacity."
+        },
+        {
+            "request": "R13",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R14",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R15",
+            "status": "unserved",
+            "reason": "The selected O2 routes cannot accommodate this additional chilled delivery within capacity and service windows."
+        },
+        {
+            "request": "R16",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R17",
+            "status": "unserved",
+            "reason": "The remaining O2 vehicle capacity and service windows do not permit this additional delivery."
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H5",
+            "reason": "Its only request, R11, is unserved."
+        },
+        {
+            "household": "H7",
+            "reason": "Its only request, R12, is unserved."
+        },
+        {
+            "household": "H8",
+            "reason": "Both independent requests, R3 and R17, are unserved."
+        },
+        {
+            "household": "H9",
+            "reason": "R9 is fulfilled, so this household is served."
+        },
+        {
+            "household": "H4",
+            "reason": "R6 is fulfilled, so this household is served."
+        },
+        {
+            "household": "H5",
+            "reason": "R11 is unserved."
+        }
+    ]
+}

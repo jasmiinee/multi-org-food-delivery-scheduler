@@ -51,7 +51,7 @@ def main() -> int:
         (path, "v2")
         for path in V2_INSTANCE_ROOT.rglob("*.json")
         if not path.name.endswith(".witness.json")
-        and path.name != "generation_manifest.json"
+        and path.name not in {"generation_manifest.json", "generation_manifest_easy.json", "generation_manifest_medium.json"}
     ]
     instances.sort(key=lambda item: (item[1], str(item[0])))
     if not instances:

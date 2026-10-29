@@ -1,0 +1,372 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 8,
+        "priority_weight": 14,
+        "mean_travel_minutes": 96.5,
+        "vehicles_used": 6,
+        "requests_fulfilled": 10
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [
+                "O1_TrainedAssistant"
+            ],
+            "loading_start": "08:00",
+            "departure": "08:05",
+            "route": [
+                {
+                    "request": "R29",
+                    "household": "H23",
+                    "service_start": "09:00"
+                },
+                {
+                    "request": "R15",
+                    "household": "H16",
+                    "service_start": "13:20"
+                }
+            ],
+            "return": "14:21"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [
+                "O2_TrainedAssistant"
+            ],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R27",
+                    "household": "H11",
+                    "service_start": "10:05"
+                },
+                {
+                    "request": "R10",
+                    "household": "H1",
+                    "service_start": "11:55"
+                }
+            ],
+            "return": "12:56"
+        },
+        {
+            "vehicle": "V6",
+            "driver": "Driver_6",
+            "assistants": [],
+            "loading_start": "10:10",
+            "departure": "10:15",
+            "route": [
+                {
+                    "request": "R17",
+                    "household": "H2",
+                    "service_start": "12:00"
+                }
+            ],
+            "return": "13:15"
+        },
+        {
+            "vehicle": "V7",
+            "driver": "Driver_7",
+            "assistants": [
+                "O3_TrainedAssistant"
+            ],
+            "loading_start": "08:20",
+            "departure": "08:25",
+            "route": [
+                {
+                    "request": "R8",
+                    "household": "H11",
+                    "service_start": "08:50"
+                },
+                {
+                    "request": "R11",
+                    "household": "H23",
+                    "service_start": "09:30"
+                }
+            ],
+            "return": "09:48"
+        },
+        {
+            "vehicle": "V8",
+            "driver": "Driver_8",
+            "assistants": [],
+            "loading_start": "08:20",
+            "departure": "08:25",
+            "route": [
+                {
+                    "request": "R19",
+                    "household": "H5",
+                    "service_start": "09:05"
+                },
+                {
+                    "request": "R5",
+                    "household": "H17",
+                    "service_start": "09:55"
+                }
+            ],
+            "return": "10:37"
+        },
+        {
+            "vehicle": "V9",
+            "driver": "Driver_9",
+            "assistants": [],
+            "loading_start": "10:20",
+            "departure": "10:25",
+            "route": [
+                {
+                    "request": "R6",
+                    "household": "H10",
+                    "service_start": "10:45"
+                }
+            ],
+            "return": "11:40"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O3 vehicle route was allocated to this request."
+        },
+        {
+            "request": "R2",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The service window closes before a feasible arrival from D3."
+        },
+        {
+            "request": "R3",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request."
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The service window closes before a feasible arrival from D3."
+        },
+        {
+            "request": "R5",
+            "status": "fulfilled",
+            "vehicle": "V8",
+            "reason": null
+        },
+        {
+            "request": "R6",
+            "status": "fulfilled",
+            "vehicle": "V9",
+            "reason": null
+        },
+        {
+            "request": "R7",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The required chilled capacity and return-time constraints prevent allocation to the available O1 routes."
+        },
+        {
+            "request": "R8",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R9",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No trained O3 team and vehicle combination was allocated to this request."
+        },
+        {
+            "request": "R10",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R11",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R12",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R13",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R14",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R15",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R16",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R17",
+            "status": "fulfilled",
+            "vehicle": "V6",
+            "reason": null
+        },
+        {
+            "request": "R18",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R19",
+            "status": "fulfilled",
+            "vehicle": "V8",
+            "reason": null
+        },
+        {
+            "request": "R20",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The required chilled capacity and return-time constraints prevent allocation to the available O1 routes."
+        },
+        {
+            "request": "R21",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O3 vehicle route with a trained team was allocated to this request."
+        },
+        {
+            "request": "R22",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R23",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R24",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O3 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R25",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route with a trained team was allocated to this request."
+        },
+        {
+            "request": "R26",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R27",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R28",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O3 vehicle route was allocated to this request with sufficient chilled capacity."
+        },
+        {
+            "request": "R29",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R30",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle route was allocated to this request with sufficient chilled capacity."
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H19",
+            "reason": "R1 is unserved."
+        },
+        {
+            "household": "H15",
+            "reason": "R2 is unserved."
+        },
+        {
+            "household": "H22",
+            "reason": "Both independent requests, R3 and R7, are unserved."
+        },
+        {
+            "household": "H3",
+            "reason": "R4 is unserved."
+        },
+        {
+            "household": "H25",
+            "reason": "R9 is unserved."
+        },
+        {
+            "household": "H13",
+            "reason": "R12 is unserved."
+        },
+        {
+            "household": "H7",
+            "reason": "R13 is unserved."
+        },
+        {
+            "household": "H21",
+            "reason": "R14 is unserved."
+        },
+        {
+            "household": "H9",
+            "reason": "R16 is unserved."
+        },
+        {
+            "household": "H4",
+            "reason": "R22 is unserved."
+        },
+        {
+            "household": "H18",
+            "reason": "R23 is unserved."
+        },
+        {
+            "household": "H12",
+            "reason": "R25 is unserved."
+        },
+        {
+            "household": "H20",
+            "reason": "R26 is unserved."
+        },
+        {
+            "household": "H6",
+            "reason": "R28 is unserved."
+        },
+        {
+            "household": "H8",
+            "reason": "R30 is unserved."
+        }
+    ]
+}

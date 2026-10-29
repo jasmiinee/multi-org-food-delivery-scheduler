@@ -1,0 +1,59 @@
+{
+  "generator_version": "2.1.0-input-first",
+  "protocol": "v2",
+  "base_seed": 20261029,
+  "construction": "Resources, geography and requests are sampled before any scheduling. No solver, route construction, feasibility rejection or witness generation is used.",
+  "selection": "Every generated case is retained; profile labels are not included in model input text.",
+  "cases": [
+    {
+      "instance_id": "input_medium_001",
+      "challenge_profile": "mixed_resources",
+      "seed": 20461029,
+      "households": 12,
+      "requests": 14,
+      "duplicate_households": 2,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_medium_002",
+      "challenge_profile": "three_organisations",
+      "seed": 20462029,
+      "households": 13,
+      "requests": 16,
+      "duplicate_households": 3,
+      "vehicles": 6,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_medium_003",
+      "challenge_profile": "narrower_windows",
+      "seed": 20463029,
+      "households": 14,
+      "requests": 17,
+      "duplicate_households": 3,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_medium_004",
+      "challenge_profile": "refrigeration_and_training",
+      "seed": 20464029,
+      "households": 15,
+      "requests": 18,
+      "duplicate_households": 3,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_medium_005",
+      "challenge_profile": "capacity_pressure",
+      "seed": 20465029,
+      "households": 14,
+      "requests": 17,
+      "duplicate_households": 3,
+      "vehicles": 6,
+      "feasibility_status": "not_checked"
+    }
+  ]
+}

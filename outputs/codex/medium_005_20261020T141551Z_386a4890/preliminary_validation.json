@@ -1,9 +1,0 @@
-{
-  "checker": "Existing tests/test_deliverables.py feasibility helper plus request-status, depot and vehicle-count checks",
-  "preliminary": true,
-  "valid": true,
-  "issues": [],
-  "coverage_optimal": true,
-  "travel_optimality": "not checked",
-  "requires_member_3_validation": true
-}
