@@ -4,25 +4,8 @@ import re
 import csv
 from validator import ScheduleValidator
 
-# List of directories
+# Combined V2 and V2.1 directories
 CODEX_FILES = [
-    # V1 Directories (Easy, Hard, Medium)
-    "outputs/codex/easy_001_20261020T140256Z_7f9b9b28",
-    "outputs/codex/easy_002_20261020T140532Z_f3eb35c7",
-    "outputs/codex/easy_003_20261020T140620Z_63a371d7",
-    "outputs/codex/easy_004_20261020T140744Z_ef1bb522",
-    "outputs/codex/easy_005_20261020T140817Z_49a3f4dd",
-    "outputs/codex/hard_001_20261020T141733Z_c5914643",
-    "outputs/codex/hard_002_20261020T141914Z_a8c21404",
-    "outputs/codex/hard_003_20261020T142059Z_33c89f9a",
-    "outputs/codex/hard_004_20261020T142223Z_3456e03a",
-    "outputs/codex/hard_005_20261020T142419Z_6702bbf7",
-    "outputs/codex/medium_001_20261020T140906Z_95d7a92d",
-    "outputs/codex/medium_002_20261020T141038Z_2f15097b",
-    "outputs/codex/medium_003_20261020T141201Z_bea485ea",
-    "outputs/codex/medium_004_20261020T141430Z_e92dce6b",
-    "outputs/codex/medium_005_20261020T141551Z_386a4890",
-    
     # V2 Directories
     "outputs/codex_v2/input_hard_001_20261023T071519Z_dc9d20f9",
     "outputs/codex_v2/input_hard_002_20261023T071913Z_7a678e5c",
@@ -33,28 +16,40 @@ CODEX_FILES = [
     "outputs/codex_v2/input_hard_007_20261023T074330Z_6b5d4f38",
     "outputs/codex_v2/input_hard_008_20261023T074641Z_44092f98",
     "outputs/codex_v2/input_hard_009_20261023T074928Z_dda3ef0e",
-    "outputs/codex_v2/input_hard_010_20261023T075259Z_3ca631e0"
+    "outputs/codex_v2/input_hard_010_20261023T075259Z_3ca631e0",
+    
+    # V2.1 Directories
+    "outputs/codex_v2.1/hard_1",
+    "outputs/codex_v2.1/hard_2",
+    "outputs/codex_v2.1/hard_3",
+    "outputs/codex_v2.1/hard_4"
 ]
 
-def get_instance_path(run_dir: str) -> str:
-    """Extracts the instance name and builds the path for both V1 and V2."""
+def get_instance_path(run_dir: str) -> tuple[str, str]:
+    """Extracts the instance name and builds the path for V2 and V2.1."""
     basename = os.path.basename(run_dir)
     
-    # Regex updated to handle optional 'input_' prefix
-    match = re.match(r"^(?:input_)?(easy|medium|hard)_(\d{3})_", basename)
-    if not match:
-        raise ValueError(f"Could not parse instance name from directory: {basename}")
-    
-    level = match.group(1)
-    
-    if basename.startswith("input_"):
-        # V2 Logic
+    # V2.1 Logic (e.g., hard_1)
+    if "v2.1" in run_dir:
+        # Check inside the directory hard_1/hard_1.json
+        possible_paths = [
+            os.path.join("instances/v2.1/hard", basename, f"{basename}.json"),
+            os.path.join("instances/v2.1/hard", f"{basename}.json"),
+            os.path.join("instances/v2.1", f"{basename}.json")
+        ]
+        for p in possible_paths:
+            if os.path.exists(p) and os.path.isfile(p):
+                return p, basename
+        return possible_paths[0], basename
+
+    # V2 Logic
+    else:
+        match = re.match(r"^(?:input_)?(easy|medium|hard)_(\d{3})_", basename)
+        if not match:
+            raise ValueError(f"Could not parse instance name from directory: {basename}")
+        level = match.group(1)
         instance_name = f"input_{level}_{match.group(2)}"
         return os.path.join("instances/input_first", level, f"{instance_name}.json"), instance_name
-    else:
-        # V1 Logic
-        instance_name = f"{level}_{match.group(2)}"
-        return os.path.join("instances/benchmark", level, f"{instance_name}.json"), instance_name
 
 def main():
     summary_data = []
@@ -68,9 +63,20 @@ def main():
             continue
 
         try:
+            basename = os.path.basename(run_dir)
             instance_path, instance_name = get_instance_path(run_dir)
-            schedule_path = os.path.join(run_dir, "parsed.json")
+            
+            # V2.1 saves schedule as hard_1.json, V2 saves as parsed.json
+            if "v2.1" in run_dir:
+                schedule_path = os.path.join(run_dir, f"{basename}.json")
+            else:
+                schedule_path = os.path.join(run_dir, "parsed.json")
+                
             validation_out_path = os.path.join(run_dir, "validation.json")
+
+            if not os.path.exists(instance_path):
+                print(f"❌ Instance file missing for {instance_name} at {instance_path}")
+                continue
 
             with open(instance_path, 'r') as f:
                 instance_data = json.load(f)
@@ -81,7 +87,7 @@ def main():
             if not os.path.exists(schedule_path):
                 report = {
                     "is_feasible": False,
-                    "violations": [{"code": "PARSE_ERROR", "message": "parsed.json not found. LLM failed to output valid JSON."}],
+                    "violations": [{"code": "PARSE_ERROR", "message": f"Schedule not found at {schedule_path}"}],
                     "recomputed_metrics": {},
                     "claimed_metrics": {}
                 }
@@ -129,7 +135,7 @@ def main():
         except Exception as e:
             print(f"Error processing {run_dir}: {e}")
 
-    # Updated to save in a centralized output path
+    # Save to a single combined CSV
     reports_dir = "reports"
     os.makedirs(reports_dir, exist_ok=True)
     csv_path = os.path.join(reports_dir, "codex_validation_summary.csv")
@@ -138,7 +144,7 @@ def main():
             writer = csv.DictWriter(f, fieldnames=summary_data[0].keys())
             writer.writeheader()
             writer.writerows(summary_data)
-        print(f"\nBatch complete. Summary saved to {csv_path}")
+        print(f"\n✅ Batch complete. Summary saved to {csv_path}")
 
 if __name__ == "__main__":
     main()

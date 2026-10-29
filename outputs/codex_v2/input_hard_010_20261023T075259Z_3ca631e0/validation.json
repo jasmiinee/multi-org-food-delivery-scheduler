@@ -3,7 +3,7 @@
   "violations": [
     {
       "code": "PARSE_ERROR",
-      "message": "parsed.json not found. LLM failed to output valid JSON."
+      "message": "Schedule not found at outputs/codex_v2/input_hard_010_20261023T075259Z_3ca631e0/parsed.json"
     }
   ],
   "recomputed_metrics": {},
