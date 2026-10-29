@@ -1,0 +1,490 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 11,
+        "priority_weight": 30,
+        "mean_travel_minutes": 67.33,
+        "vehicles_used": 12,
+        "requests_fulfilled": 12
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [],
+            "loading_start": "08:42",
+            "departure": "08:47",
+            "route": [
+                {
+                    "request": "R31",
+                    "household": "H1",
+                    "service_start": "09:00"
+                }
+            ],
+            "return": "09:13"
+        },
+        {
+            "vehicle": "V2",
+            "driver": "Driver_2",
+            "assistants": [],
+            "loading_start": "09:07",
+            "departure": "09:12",
+            "route": [
+                {
+                    "request": "R7",
+                    "household": "H3",
+                    "service_start": "09:30"
+                }
+            ],
+            "return": "09:58"
+        },
+        {
+            "vehicle": "V3",
+            "driver": "Driver_3",
+            "assistants": [],
+            "loading_start": "11:19",
+            "departure": "11:24",
+            "route": [
+                {
+                    "request": "R13",
+                    "household": "H11",
+                    "service_start": "12:10"
+                }
+            ],
+            "return": "13:06"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [
+                "O2_TrainedAssistant"
+            ],
+            "loading_start": "09:53",
+            "departure": "09:58",
+            "route": [
+                {
+                    "request": "R33",
+                    "household": "H22",
+                    "service_start": "10:40"
+                }
+            ],
+            "return": "11:32"
+        },
+        {
+            "vehicle": "V5",
+            "driver": "Driver_5",
+            "assistants": [],
+            "loading_start": "08:38",
+            "departure": "08:43",
+            "route": [
+                {
+                    "request": "R18",
+                    "household": "H6",
+                    "service_start": "09:00"
+                }
+            ],
+            "return": "09:27"
+        },
+        {
+            "vehicle": "V6",
+            "driver": "Driver_6",
+            "assistants": [],
+            "loading_start": "11:28",
+            "departure": "11:33",
+            "route": [
+                {
+                    "request": "R19",
+                    "household": "H19",
+                    "service_start": "12:20"
+                }
+            ],
+            "return": "13:17"
+        },
+        {
+            "vehicle": "V7",
+            "driver": "Driver_7",
+            "assistants": [],
+            "loading_start": "08:59",
+            "departure": "09:04",
+            "route": [
+                {
+                    "request": "R9",
+                    "household": "H16",
+                    "service_start": "09:25"
+                }
+            ],
+            "return": "09:56"
+        },
+        {
+            "vehicle": "V8",
+            "driver": "Driver_8",
+            "assistants": [
+                "O3_TrainedAssistant"
+            ],
+            "loading_start": "09:59",
+            "departure": "10:04",
+            "route": [
+                {
+                    "request": "R27",
+                    "household": "H25",
+                    "service_start": "10:45"
+                }
+            ],
+            "return": "11:36"
+        },
+        {
+            "vehicle": "V9",
+            "driver": "Driver_9",
+            "assistants": [],
+            "loading_start": "11:10",
+            "departure": "11:15",
+            "route": [
+                {
+                    "request": "R2",
+                    "household": "H5",
+                    "service_start": "12:30"
+                }
+            ],
+            "return": "13:45"
+        },
+        {
+            "vehicle": "V10",
+            "driver": "Driver_10",
+            "assistants": [
+                "O4_TrainedAssistant"
+            ],
+            "loading_start": "08:54",
+            "departure": "08:59",
+            "route": [
+                {
+                    "request": "R15",
+                    "household": "H14",
+                    "service_start": "09:20"
+                }
+            ],
+            "return": "09:51"
+        },
+        {
+            "vehicle": "V11",
+            "driver": "Driver_11",
+            "assistants": [],
+            "loading_start": "08:47",
+            "departure": "08:52",
+            "route": [
+                {
+                    "request": "R3",
+                    "household": "H11",
+                    "service_start": "09:10"
+                }
+            ],
+            "return": "09:38"
+        },
+        {
+            "vehicle": "V12",
+            "driver": "Driver_12",
+            "assistants": [],
+            "loading_start": "11:40",
+            "departure": "11:45",
+            "route": [
+                {
+                    "request": "R1",
+                    "household": "H4",
+                    "service_start": "12:40"
+                }
+            ],
+            "return": "13:45"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "fulfilled",
+            "vehicle": "V12"
+        },
+        {
+            "request": "R2",
+            "status": "fulfilled",
+            "vehicle": "V9"
+        },
+        {
+            "request": "R3",
+            "status": "fulfilled",
+            "vehicle": "V11"
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R5",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R6",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R7",
+            "status": "fulfilled",
+            "vehicle": "V2"
+        },
+        {
+            "request": "R8",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R9",
+            "status": "fulfilled",
+            "vehicle": "V7"
+        },
+        {
+            "request": "R10",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R11",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R12",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R13",
+            "status": "fulfilled",
+            "vehicle": "V3"
+        },
+        {
+            "request": "R14",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R15",
+            "status": "fulfilled",
+            "vehicle": "V10"
+        },
+        {
+            "request": "R16",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R17",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R18",
+            "status": "fulfilled",
+            "vehicle": "V5"
+        },
+        {
+            "request": "R19",
+            "status": "fulfilled",
+            "vehicle": "V6"
+        },
+        {
+            "request": "R20",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R21",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R22",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R23",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R24",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R25",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R26",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R27",
+            "status": "fulfilled",
+            "vehicle": "V8"
+        },
+        {
+            "request": "R28",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R29",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R30",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R31",
+            "status": "fulfilled",
+            "vehicle": "V1"
+        },
+        {
+            "request": "R32",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R33",
+            "status": "fulfilled",
+            "vehicle": "V4"
+        },
+        {
+            "request": "R34",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R35",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R36",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R37",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R38",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R39",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R40",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R41",
+            "status": "unserved",
+            "reason": "Ambient crate requirement exceeds the capacity of every O4 vehicle."
+        },
+        {
+            "request": "R42",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R43",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        },
+        {
+            "request": "R44",
+            "status": "unserved",
+            "reason": "Not selected for the candidate schedule under vehicle, shift, and route constraints."
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H2",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H7",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H8",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H9",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H10",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H12",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H13",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H15",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H17",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H18",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H20",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H21",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H23",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H24",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H26",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H27",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H28",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        }
+    ]
+}
