@@ -5,21 +5,7 @@ import csv
 from validator import ScheduleValidator
 
 SOLVER_FILES = [
-    "outputs/solver/easy_001.json",
-    "outputs/solver/easy_002.json",
-    "outputs/solver/easy_003.json",
-    "outputs/solver/easy_004.json",
-    "outputs/solver/easy_005.json",
-    "outputs/solver/hard_001.json",
-    "outputs/solver/hard_002.json",
-    "outputs/solver/hard_003.json",
-    "outputs/solver/hard_004.json",
-    "outputs/solver/hard_005.json",
-    "outputs/solver/medium_001.json",
-    "outputs/solver/medium_002.json",
-    "outputs/solver/medium_003.json",
-    "outputs/solver/medium_004.json",
-    "outputs/solver/medium_005.json",
+    # V2 Files
     "outputs/solver_v2/input_hard_001.json",
     "outputs/solver_v2/input_hard_002.json",
     "outputs/solver_v2/input_hard_003.json",
@@ -29,32 +15,35 @@ SOLVER_FILES = [
     "outputs/solver_v2/input_hard_007.json",
     "outputs/solver_v2/input_hard_008.json",
     "outputs/solver_v2/input_hard_009.json",
-    "outputs/solver_v2/input_hard_010.json"
+    "outputs/solver_v2/input_hard_010.json",
+    
+    # V2.1 Files
+    "outputs/solver_v2.1/hard_1.json",
+    "outputs/solver_v2.1/hard_2.json",
+    "outputs/solver_v2.1/hard_3.json",
+    "outputs/solver_v2.1/hard_4.json"
 ]
 
-def get_instance_path(filepath: str) -> str:
-    """Extracts the instance name and builds the path for both V1 and V2."""
+def get_instance_path(filepath: str) -> tuple[str, str]:
+    """Extracts the instance name and builds the path for V2 and V2.1."""
     basename = os.path.basename(filepath).replace('.json', '')
     
-    # Handle the example file specifically
-    if basename == "final_proposal_example":
-        return "instances/example/final_proposal_example.json", basename
+    # V2.1 Logic
+    if "solver_v2.1" in filepath:
+        # basename is like "hard_1"
+        instance_path = os.path.join("instances/v2.1/hard", basename, f"{basename}.json")
+        return instance_path, basename
 
-    # Regex updated to handle optional 'input_' prefix and no trailing underscore
-    match = re.match(r"^(?:input_)?(easy|medium|hard)_(\d{3})", basename)
-    if not match:
-        raise ValueError(f"Could not parse instance name from file: {basename}")
-    
-    level = match.group(1)
-    
-    if basename.startswith("input_"):
-        # V2 Logic
+    # V2 Logic
+    else:
+        # basename is like "input_hard_001"
+        match = re.match(r"^(?:input_)?(easy|medium|hard)_(\d{3})", basename)
+        if not match:
+            raise ValueError(f"Could not parse instance name from file: {basename}")
+        
+        level = match.group(1)
         instance_name = f"input_{level}_{match.group(2)}"
         return os.path.join("instances/input_first", level, f"{instance_name}.json"), instance_name
-    else:
-        # V1 Logic
-        instance_name = f"{level}_{match.group(2)}"
-        return os.path.join("instances/benchmark", level, f"{instance_name}.json"), instance_name
 
 def main():
     summary_data = []
@@ -70,11 +59,11 @@ def main():
         try:
             instance_path, instance_name = get_instance_path(schedule_path)
             
-            # For flat files, the output validation is just appended with _validation
+            # Output validation file is saved next to the schedule
             validation_out_path = schedule_path.replace('.json', '_validation.json')
 
             if not os.path.exists(instance_path):
-                print(f"Instance file missing for {instance_name} at {instance_path}")
+                print(f"❌ Instance file missing for {instance_name} at {instance_path}")
                 continue
 
             with open(instance_path, 'r') as f:
@@ -121,7 +110,7 @@ def main():
         except Exception as e:
             print(f"Error processing {schedule_path}: {e}")
 
-    # Save to a separate CSV file so it doesn't overwrite the Codex summary
+    # Save to the same solver CSV
     reports_dir = "reports"
     os.makedirs(reports_dir, exist_ok=True)
     csv_path = os.path.join(reports_dir, "solver_validation_summary.csv")
