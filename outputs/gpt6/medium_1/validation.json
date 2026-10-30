@@ -1,0 +1,39 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V2 reports return at 12:20 (740 mins), but physical route dictates return at 730 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R5 starts at 08:50, but earliest possible is 560 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V3 reports return at 14:27 (867 mins), but physical route dictates return at 877 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V4 reports return at 12:10 (730 mins), but physical route dictates return at 728 mins."
+    },
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 11, 'priority_weight': 21, 'mean_travel_minutes': 89.5, 'vehicles_used': 4, 'requests_fulfilled': 11} does not match recomputed {'households_served': 10, 'requests_fulfilled': 11, 'priority_weight': 18, 'mean_travel_minutes': 101.25, 'vehicles_used': 4}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 10,
+    "requests_fulfilled": 11,
+    "priority_weight": 18,
+    "mean_travel_minutes": 101.25,
+    "vehicles_used": 4
+  },
+  "claimed_metrics": {
+    "households_served": 11,
+    "priority_weight": 21,
+    "mean_travel_minutes": 89.5,
+    "vehicles_used": 4,
+    "requests_fulfilled": 11
+  }
+}

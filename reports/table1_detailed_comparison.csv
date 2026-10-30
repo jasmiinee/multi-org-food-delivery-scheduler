@@ -1,0 +1,121 @@
+Instance,Metric,CP-SAT,Direct LLM,Difference
+easy_001,Validity,Yes,Yes,–
+,Households served,6/6,6/6,0
+,Priority weight,10,10,0
+,Requests fulfilled,7/7,7/7,0
+,Mean travel (min),42.0,68.5,+26.50
+easy_002,Validity,Yes,No,Mismatch
+,Households served,7/7,7/7,0
+,Priority weight,12,12,0
+,Requests fulfilled,9/9,9/9,0
+,Mean travel (min),31.75,37.25,+5.50
+easy_003,Validity,Yes,No,Mismatch
+,Households served,8/8,8/8,0
+,Priority weight,14,14,0
+,Requests fulfilled,9/9,9/9,0
+,Mean travel (min),42.75,68.0,+25.25
+easy_004,Validity,Yes,Yes,–
+,Households served,7/7,7/7,0
+,Priority weight,12,12,0
+,Requests fulfilled,8/8,8/8,0
+,Mean travel (min),31.5,43.33,+11.83
+easy_005,Validity,Yes,Yes,–
+,Households served,8/8,8/8,0
+,Priority weight,15,15,0
+,Requests fulfilled,10/10,10/10,0
+,Mean travel (min),56.5,81.0,+24.50
+medium_001,Validity,Yes,No,Mismatch
+,Households served,11/12,10/12,-1
+,Priority weight,21,18,-3
+,Requests fulfilled,12/14,11/14,-1
+,Mean travel (min),102.5,101.25,-1.25
+medium_002,Validity,Yes,No,Mismatch
+,Households served,13/13,11/13,-2
+,Priority weight,35,30,-5
+,Requests fulfilled,15/16,13/16,-2
+,Mean travel (min),78.83,87.33,+8.50
+medium_003,Validity,Yes,No,Mismatch
+,Households served,13/14,11/14,-2
+,Priority weight,25,22,-3
+,Requests fulfilled,13/17,11/17,-2
+,Mean travel (min),133.25,120.25,-13.00
+medium_004,Validity,Yes,No,Mismatch
+,Households served,13/15,12/15,-1
+,Priority weight,25,21,-4
+,Requests fulfilled,13/18,13/18,0
+,Mean travel (min),89.0,94.75,+5.75
+medium_005,Validity,Yes,No,Mismatch
+,Households served,13/14,12/14,-1
+,Priority weight,28,27,-1
+,Requests fulfilled,13/17,12/17,-1
+,Mean travel (min),77.5,71.33,-6.17
+hard_001,Validity,Yes,No,Mismatch
+,Households served,24/28,11/28,-13
+,Priority weight,55,22,-33
+,Requests fulfilled,33/44,12/44,-21
+,Mean travel (min),77.83,50.17,-27.66
+hard_002,Validity,Yes,No,Mismatch
+,Households served,27/28,12/28,-15
+,Priority weight,60,23,-37
+,Requests fulfilled,38/44,14/44,-24
+,Mean travel (min),77.25,39.2,-38.05
+hard_003,Validity,Yes,No,Mismatch
+,Households served,27/28,11/28,-16
+,Priority weight,60,30,-30
+,Requests fulfilled,35/44,12/44,-23
+,Mean travel (min),85.92,67.33,-18.59
+hard_004,Validity,Yes,No,Mismatch
+,Households served,29/30,11/30,-18
+,Priority weight,63,25,-38
+,Requests fulfilled,36/44,12/44,-24
+,Mean travel (min),49.25,27.83,-21.42
+hard_005,Validity,Yes,No,Mismatch
+,Households served,18/22,9/22,-9
+,Priority weight,40,20,-20
+,Requests fulfilled,22/27,9/27,-13
+,Mean travel (min),101.88,68.44,-33.44
+hard_006,Validity,Yes,No,Mismatch
+,Households served,17/24,7/24,-10
+,Priority weight,32,13,-19
+,Requests fulfilled,19/29,9/29,-10
+,Mean travel (min),101.88,64.44,-37.44
+hard_007,Validity,Yes,No,Mismatch
+,Households served,20/23,17/23,-3
+,Priority weight,50,44,-6
+,Requests fulfilled,25/28,21/28,-4
+,Mean travel (min),124.78,109.78,-15.00
+hard_008,Validity,Yes,No,Mismatch
+,Households served,16/25,8/25,-8
+,Priority weight,30,13,-17
+,Requests fulfilled,16/30,9/30,-7
+,Mean travel (min),125.0,97.57,-27.43
+hard_009,Validity,Yes,No,Mismatch
+,Households served,16/24,12/24,-4
+,Priority weight,34,23,-11
+,Requests fulfilled,16/29,12/29,-4
+,Mean travel (min),109.0,102.67,-6.33
+hard_010,Validity,Yes,No,Mismatch
+,Households served,16/20,7/20,-9
+,Priority weight,32,12,-20
+,Requests fulfilled,17/24,7/24,-10
+,Mean travel (min),148.0,72.86,-75.14
+hard_011,Validity,Yes,No,Mismatch
+,Households served,12/25,9/25,-3
+,Priority weight,26,21,-5
+,Requests fulfilled,12/30,9/30,-3
+,Mean travel (min),91.88,74.0,-17.88
+hard_012,Validity,Yes,No,Mismatch
+,Households served,20/21,18/21,-2
+,Priority weight,44,38,-6
+,Requests fulfilled,22/25,20/25,-2
+,Mean travel (min),125.75,123.25,-2.50
+hard_013,Validity,Yes,No,Mismatch
+,Households served,19/22,12/22,-7
+,Priority weight,39,23,-16
+,Requests fulfilled,20/27,12/27,-8
+,Mean travel (min),98.12,119.5,+21.38
+hard_014,Validity,Yes,No,Mismatch
+,Households served,13/25,8/25,-5
+,Priority weight,27,14,-13
+,Requests fulfilled,13/30,10/30,-3
+,Mean travel (min),103.5,96.5,-7.00

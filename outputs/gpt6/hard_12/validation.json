@@ -1,0 +1,39 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V3 reports return at 11:35 (695 mins), but physical route dictates return at 705 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V6 reports return at 14:07 (847 mins), but physical route dictates return at 857 mins."
+    },
+    {
+      "code": "TIME_WINDOW",
+      "message": "Request R22 starts at 09:21, outside window [520, 540]."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V8 reports return at 10:24 (624 mins), but physical route dictates return at 634 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V9 reports return at 14:16 (856 mins), but physical route dictates return at 866 mins."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 18,
+    "requests_fulfilled": 20,
+    "priority_weight": 38,
+    "mean_travel_minutes": 123.25,
+    "vehicles_used": 8
+  },
+  "claimed_metrics": {
+    "households_served": 18,
+    "priority_weight": 38,
+    "mean_travel_minutes": 123.25,
+    "vehicles_used": 8,
+    "requests_fulfilled": 20
+  }
+}

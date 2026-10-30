@@ -1,0 +1,35 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "OTHER",
+      "message": "Household H9 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "OTHER",
+      "message": "Household H4 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V1 reports return at 13:47 (827 mins), but physical route dictates return at 837 mins."
+    },
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 10, 'priority_weight': 20, 'mean_travel_minutes': 81.5, 'vehicles_used': 4, 'requests_fulfilled': 11} does not match recomputed {'households_served': 11, 'requests_fulfilled': 11, 'priority_weight': 22, 'mean_travel_minutes': 120.25, 'vehicles_used': 4}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 11,
+    "requests_fulfilled": 11,
+    "priority_weight": 22,
+    "mean_travel_minutes": 120.25,
+    "vehicles_used": 4
+  },
+  "claimed_metrics": {
+    "households_served": 10,
+    "priority_weight": 20,
+    "mean_travel_minutes": 81.5,
+    "vehicles_used": 4,
+    "requests_fulfilled": 11
+  }
+}

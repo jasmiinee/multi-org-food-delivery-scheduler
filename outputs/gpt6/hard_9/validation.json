@@ -1,0 +1,39 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V3 has 1 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V7 reports return at 11:50 (710 mins), but physical route dictates return at 720 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V8 has 1 chilled crates, max is 0."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V9 has 2 chilled crates, max is 0."
+    },
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 12, 'priority_weight': 24, 'mean_travel_minutes': 102.67, 'vehicles_used': 6, 'requests_fulfilled': 12} does not match recomputed {'households_served': 12, 'requests_fulfilled': 12, 'priority_weight': 23, 'mean_travel_minutes': 102.67, 'vehicles_used': 6}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 12,
+    "requests_fulfilled": 12,
+    "priority_weight": 23,
+    "mean_travel_minutes": 102.67,
+    "vehicles_used": 6
+  },
+  "claimed_metrics": {
+    "households_served": 12,
+    "priority_weight": 24,
+    "mean_travel_minutes": 102.67,
+    "vehicles_used": 6,
+    "requests_fulfilled": 12
+  }
+}

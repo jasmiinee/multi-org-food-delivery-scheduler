@@ -1,0 +1,67 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R24 starts at 11:25, but earliest possible is 710 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V1 reports return at 12:15 (735 mins), but physical route dictates return at 745 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V3 has 1 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V5 reports return at 10:10 (610 mins), but physical route dictates return at 605 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V5 has 2 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V6 reports return at 13:35 (815 mins), but physical route dictates return at 814 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V6 has 1 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V7 reports return at 13:31 (811 mins), but physical route dictates return at 818 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R4 starts at 10:10, but earliest possible is 611 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V9 reports return at 11:01 (661 mins), but physical route dictates return at 666 mins."
+    },
+    {
+      "code": "SHIFT",
+      "message": "Vehicle V9 trip (560-661) exceeds driver Driver_9's shift (620-920)."
+    },
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 9, 'priority_weight': 18, 'mean_travel_minutes': 38.67, 'vehicles_used': 9, 'requests_fulfilled': 9} does not match recomputed {'households_served': 7, 'requests_fulfilled': 9, 'priority_weight': 13, 'mean_travel_minutes': 64.44, 'vehicles_used': 9}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 7,
+    "requests_fulfilled": 9,
+    "priority_weight": 13,
+    "mean_travel_minutes": 64.44,
+    "vehicles_used": 9
+  },
+  "claimed_metrics": {
+    "households_served": 9,
+    "priority_weight": 18,
+    "mean_travel_minutes": 38.67,
+    "vehicles_used": 9,
+    "requests_fulfilled": 9
+  }
+}

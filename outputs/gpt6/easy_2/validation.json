@@ -1,0 +1,27 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V2 reports return at 14:13 (853 mins), but physical route dictates return at 863 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V3 reports return at 14:38 (878 mins), but physical route dictates return at 879 mins."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 7,
+    "requests_fulfilled": 9,
+    "priority_weight": 12,
+    "mean_travel_minutes": 37.25,
+    "vehicles_used": 4
+  },
+  "claimed_metrics": {
+    "households_served": 7,
+    "priority_weight": 12,
+    "mean_travel_minutes": 37.25,
+    "vehicles_used": 4,
+    "requests_fulfilled": 9
+  }
+}

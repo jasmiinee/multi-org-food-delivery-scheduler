@@ -1,0 +1,39 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "OTHER",
+      "message": "Household H19 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "OTHER",
+      "message": "Household H1 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "OTHER",
+      "message": "Household H12 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "OTHER",
+      "message": "Household H18 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "OTHER",
+      "message": "Household H4 is in unserved_households but has fulfilled requests."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 12,
+    "requests_fulfilled": 12,
+    "priority_weight": 23,
+    "mean_travel_minutes": 119.5,
+    "vehicles_used": 6
+  },
+  "claimed_metrics": {
+    "households_served": 12,
+    "priority_weight": 23,
+    "mean_travel_minutes": 119.5,
+    "vehicles_used": 6,
+    "requests_fulfilled": 12
+  }
+}

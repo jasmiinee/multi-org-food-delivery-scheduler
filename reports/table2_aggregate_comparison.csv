@@ -1,0 +1,6 @@
+Metric,Direct LLM,CP-SAT
+Feasibility rate (%),12.5%,100.0%
+Average households served,10.17,15.54
+Average priority weight,20.92,32.88
+Average requests fulfilled,11.29,18.04
+Average travel time (min),78.61,87.73

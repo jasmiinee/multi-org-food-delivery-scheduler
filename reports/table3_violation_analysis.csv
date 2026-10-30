@@ -1,0 +1,11 @@
+Constraint,Constraint description,Number of violations,Percentage of invalid schedules affected
+Organisation eligibility,Requests must be served by vehicles and volunteers belonging to the same organisation.,0,0.0%
+Routing,Each vehicle must complete a single trip starting and ending at its home depot.,0,0.0%
+Timing,"Service times must account for travel time, service duration and waiting.",19,90.5%
+Time windows,Each delivery must start within its specified time window.,2,9.5%
+Shifts,"The entire trip, from loading to return, must fall within every team member's shift.",6,28.6%
+Assistant assignment,Each assistant can be assigned to at most one vehicle.,0,0.0%
+Seat capacity,The driver and assistants must not exceed the vehicle's seating capacity.,0,0.0%
+Vehicle capacity,Ambient and chilled loads must not exceed their respective vehicle capacities.,6,28.6%
+Specialised needs,At least one team member must be trained when serving a household requiring specialised assistance.,2,9.5%
+Other / Objective,"Reported metrics do not match the physical route, or output format was invalid.",12,57.1%

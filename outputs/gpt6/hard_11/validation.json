@@ -1,0 +1,27 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V3 reports return at 11:57 (717 mins), but physical route dictates return at 707 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V3 has 1 chilled crates, max is 0."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 9,
+    "requests_fulfilled": 9,
+    "priority_weight": 21,
+    "mean_travel_minutes": 74.0,
+    "vehicles_used": 7
+  },
+  "claimed_metrics": {
+    "households_served": 9,
+    "priority_weight": 21,
+    "mean_travel_minutes": 74.0,
+    "vehicles_used": 7,
+    "requests_fulfilled": 9
+  }
+}

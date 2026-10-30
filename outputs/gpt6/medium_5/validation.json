@@ -1,0 +1,23 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 12, 'priority_weight': 29, 'mean_travel_minutes': 71.33, 'vehicles_used': 6, 'requests_fulfilled': 12} does not match recomputed {'households_served': 12, 'requests_fulfilled': 12, 'priority_weight': 27, 'mean_travel_minutes': 71.33, 'vehicles_used': 6}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 12,
+    "requests_fulfilled": 12,
+    "priority_weight": 27,
+    "mean_travel_minutes": 71.33,
+    "vehicles_used": 6
+  },
+  "claimed_metrics": {
+    "households_served": 12,
+    "priority_weight": 29,
+    "mean_travel_minutes": 71.33,
+    "vehicles_used": 6,
+    "requests_fulfilled": 12
+  }
+}

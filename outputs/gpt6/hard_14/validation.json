@@ -1,0 +1,27 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R6 starts at 10:45, but earliest possible is 660 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V9 reports return at 11:40 (700 mins), but physical route dictates return at 690 mins."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 8,
+    "requests_fulfilled": 10,
+    "priority_weight": 14,
+    "mean_travel_minutes": 96.5,
+    "vehicles_used": 6
+  },
+  "claimed_metrics": {
+    "households_served": 8,
+    "priority_weight": 14,
+    "mean_travel_minutes": 96.5,
+    "vehicles_used": 6,
+    "requests_fulfilled": 10
+  }
+}

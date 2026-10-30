@@ -1,9 +1,0 @@
-Instance,Codex Feasible,Solver Feasible,Codex HH,Solver HH,Codex Travel,Solver Travel,Travel Gap (%)
-input_hard_001,True,True,18/22,18/22,102.5,101.88,0.61
-input_hard_006,True,True,16/20,16/20,152.43,148.0,2.99
-input_hard_009,True,True,19/22,19/22,100.0,98.12,1.92
-input_hard_010,False,True,-,13/25,,103.5,
-hard_1,True,True,24/28,24/28,79.67,77.83,2.36
-hard_2,False,True,12/28,27/28,39.2,77.25,-49.26
-hard_3,False,True,11/28,27/28,67.33,85.92,-21.64
-hard_4,False,True,11/30,29/30,27.83,49.25,-43.49

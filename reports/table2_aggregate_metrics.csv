@@ -1,3 +1,0 @@
-Method,Feasibility Rate,Avg Travel Time,Avg Households Served
-Codex (Direct LLM),71.4%,111.29,17.8
-Solver (CP-SAT),100.0%,101.43,19.57

@@ -4,46 +4,27 @@ import re
 import csv
 from validator import ScheduleValidator
 
-SOLVER_FILES = [
-    # V2 Files
-    "outputs/solver_v2/input_hard_001.json",
-    "outputs/solver_v2/input_hard_002.json",
-    "outputs/solver_v2/input_hard_003.json",
-    "outputs/solver_v2/input_hard_004.json",
-    "outputs/solver_v2/input_hard_005.json",
-    "outputs/solver_v2/input_hard_006.json",
-    "outputs/solver_v2/input_hard_007.json",
-    "outputs/solver_v2/input_hard_008.json",
-    "outputs/solver_v2/input_hard_009.json",
-    "outputs/solver_v2/input_hard_010.json",
-    
-    # V2.1 Files
-    "outputs/solver_v2.1/hard_1.json",
-    "outputs/solver_v2.1/hard_2.json",
-    "outputs/solver_v2.1/hard_3.json",
-    "outputs/solver_v2.1/hard_4.json"
-]
+# Dynamically generate paths for the new solver outputs
+SOLVER_FILES = []
+# Easy: 001 to 005
+SOLVER_FILES.extend([f"outputs/solver/easy/input_easy_{i:03d}.json" for i in range(1, 6)])
+# Medium: 001 to 005
+SOLVER_FILES.extend([f"outputs/solver/medium/input_medium_{i:03d}.json" for i in range(1, 6)])
+# Hard: 001 to 014
+SOLVER_FILES.extend([f"outputs/solver/hard/hard_{i:03d}.json" for i in range(1, 15)])
 
-def get_instance_path(filepath: str) -> tuple[str, str]:
-    """Extracts the instance name and builds the path for V2 and V2.1."""
-    basename = os.path.basename(filepath).replace('.json', '')
+def get_instance_path(schedule_path: str) -> tuple[str, str]:
+    """Extracts the instance name and builds the path from the new structure."""
+    basename = os.path.basename(schedule_path).replace('.json', '')
     
-    # V2.1 Logic
-    if "solver_v2.1" in filepath:
-        # basename is like "hard_1"
-        instance_path = os.path.join("instances/v2.1/hard", basename, f"{basename}.json")
-        return instance_path, basename
-
-    # V2 Logic
-    else:
-        # basename is like "input_hard_001"
-        match = re.match(r"^(?:input_)?(easy|medium|hard)_(\d{3})", basename)
-        if not match:
-            raise ValueError(f"Could not parse instance name from file: {basename}")
-        
-        level = match.group(1)
-        instance_name = f"input_{level}_{match.group(2)}"
-        return os.path.join("instances/input_first", level, f"{instance_name}.json"), instance_name
+    # The parent directory (easy, medium, hard) tells us the level
+    level = os.path.basename(os.path.dirname(schedule_path))
+    
+    # The solver files match the instance names exactly (e.g., input_easy_001, hard_001)
+    instance_name = basename
+    instance_path = os.path.join("instances/input_first", level, f"{instance_name}.json")
+    
+    return instance_path, instance_name
 
 def main():
     summary_data = []

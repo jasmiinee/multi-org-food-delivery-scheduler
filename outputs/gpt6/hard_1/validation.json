@@ -1,0 +1,43 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V2 reports return at 10:06 (606 mins), but physical route dictates return at 588 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V4 reports return at 12:09 (729 mins), but physical route dictates return at 719 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V6 reports return at 10:11 (611 mins), but physical route dictates return at 601 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V7 reports return at 11:15 (675 mins), but physical route dictates return at 685 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V8 reports return at 10:56 (656 mins), but physical route dictates return at 666 mins."
+    },
+    {
+      "code": "SHIFT",
+      "message": "Vehicle V12 trip (535-580) exceeds driver Driver_12's shift (560-800)."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 11,
+    "requests_fulfilled": 12,
+    "priority_weight": 22,
+    "mean_travel_minutes": 50.17,
+    "vehicles_used": 12
+  },
+  "claimed_metrics": {
+    "households_served": 11,
+    "priority_weight": 22,
+    "mean_travel_minutes": 50.17,
+    "vehicles_used": 12,
+    "requests_fulfilled": 12
+  }
+}

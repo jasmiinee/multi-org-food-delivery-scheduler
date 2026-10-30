@@ -1,0 +1,83 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V1 reports return at 14:22 (862 mins), but physical route dictates return at 872 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V4 reports return at 11:58 (718 mins), but physical route dictates return at 723 mins."
+    },
+    {
+      "code": "TIME_WINDOW",
+      "message": "Request R3 starts at 10:48, outside window [620, 640]."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V6 reports return at 11:16 (676 mins), but physical route dictates return at 686 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R4 starts at 09:40, but earliest possible is 603 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R26 starts at 10:05, but earliest possible is 627 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V7 reports return at 13:43 (823 mins), but physical route dictates return at 833 mins."
+    },
+    {
+      "code": "AMBIENT_CAPACITY",
+      "message": "Vehicle V7 has 11 ambient crates, max is 8."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R15 starts at 11:30, but earliest possible is 700 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V8 reports return at 12:29 (749 mins), but physical route dictates return at 729 mins."
+    },
+    {
+      "code": "SHIFT",
+      "message": "Vehicle V8 trip (500-749) exceeds driver Driver_8's shift (500-740)."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R6 starts at 11:05, but earliest possible is 672 mins."
+    },
+    {
+      "code": "TRAINING",
+      "message": "Household H23 needs trained volunteer, but vehicle V9 lacks one."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R14 starts at 12:35, but earliest possible is 785 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V9 reports return at 13:31 (811 mins), but physical route dictates return at 793 mins."
+    },
+    {
+      "code": "OBJECTIVE_MISMATCH",
+      "message": "Claimed objective {'households_served': 14, 'priority_weight': 35, 'mean_travel_minutes': 73.67, 'vehicles_used': 9, 'requests_fulfilled': 16} does not match recomputed {'households_served': 17, 'requests_fulfilled': 21, 'priority_weight': 44, 'mean_travel_minutes': 109.78, 'vehicles_used': 9}."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 17,
+    "requests_fulfilled": 21,
+    "priority_weight": 44,
+    "mean_travel_minutes": 109.78,
+    "vehicles_used": 9
+  },
+  "claimed_metrics": {
+    "households_served": 14,
+    "priority_weight": 35,
+    "mean_travel_minutes": 73.67,
+    "vehicles_used": 9,
+    "requests_fulfilled": 16
+  }
+}

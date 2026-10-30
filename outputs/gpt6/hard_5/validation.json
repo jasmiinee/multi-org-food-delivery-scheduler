@@ -1,0 +1,55 @@
+{
+  "is_feasible": false,
+  "violations": [
+    {
+      "code": "OTHER",
+      "message": "Household H5 is in unserved_households but has fulfilled requests."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V2 reports return at 12:10 (730 mins), but physical route dictates return at 740 mins."
+    },
+    {
+      "code": "SHIFT",
+      "message": "Vehicle V2 trip (615-730) exceeds driver Driver_2's shift (480-720)."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V2 has 1 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V3 reports return at 13:36 (816 mins), but physical route dictates return at 826 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V4 reports return at 14:38 (878 mins), but physical route dictates return at 888 mins."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Request R20 starts at 11:30, but earliest possible is 695 mins."
+    },
+    {
+      "code": "CHILLED_CAPACITY",
+      "message": "Vehicle V8 has 2 chilled crates, max is 0."
+    },
+    {
+      "code": "TIME_PROPAGATION",
+      "message": "Vehicle V9 reports return at 10:51 (651 mins), but physical route dictates return at 661 mins."
+    }
+  ],
+  "recomputed_metrics": {
+    "households_served": 9,
+    "requests_fulfilled": 9,
+    "priority_weight": 20,
+    "mean_travel_minutes": 68.44,
+    "vehicles_used": 9
+  },
+  "claimed_metrics": {
+    "households_served": 9,
+    "priority_weight": 20,
+    "mean_travel_minutes": 68.44,
+    "vehicles_used": 9,
+    "requests_fulfilled": 9
+  }
+}
