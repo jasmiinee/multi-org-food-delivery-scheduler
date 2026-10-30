@@ -1,0 +1,435 @@
+{
+  "metadata": {
+    "instance_id": "input_easy_003",
+    "difficulty": "easy",
+    "scenario": "unclassified",
+    "seed": 20363029,
+    "generator_version": "2.1.0-input-first",
+    "cold_chain_time_limit_enabled": false,
+    "protocol_version": "v2",
+    "generation_method": "input_first",
+    "feasibility_status": "not_checked",
+    "challenge_profile": "chilled_deliveries"
+  },
+  "parameters": {
+    "service_minutes": 10,
+    "loading_minutes": 5,
+    "time_unit": "minutes_from_midnight",
+    "window_semantics": "service_start",
+    "max_trips_per_vehicle": 1,
+    "duplicate_policy": "independent_requests"
+  },
+  "organisations": [
+    {
+      "id": "O1",
+      "depot": "D1",
+      "shifts": [
+        {
+          "id": "O1_DAY",
+          "start": 480,
+          "end": 1020
+        },
+        {
+          "id": "O1_EARLY",
+          "start": 480,
+          "end": 1020
+        },
+        {
+          "id": "O1_LATE",
+          "start": 480,
+          "end": 1020
+        }
+      ]
+    },
+    {
+      "id": "O2",
+      "depot": "D2",
+      "shifts": [
+        {
+          "id": "O2_DAY",
+          "start": 490,
+          "end": 1030
+        },
+        {
+          "id": "O2_EARLY",
+          "start": 490,
+          "end": 1030
+        },
+        {
+          "id": "O2_LATE",
+          "start": 490,
+          "end": 1030
+        }
+      ]
+    }
+  ],
+  "households": [
+    {
+      "id": "H1",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H2",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    },
+    {
+      "id": "H3",
+      "needs_trained_volunteer": false,
+      "priority": 2
+    },
+    {
+      "id": "H4",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H5",
+      "needs_trained_volunteer": true,
+      "priority": 1
+    },
+    {
+      "id": "H6",
+      "needs_trained_volunteer": false,
+      "priority": 1
+    },
+    {
+      "id": "H7",
+      "needs_trained_volunteer": true,
+      "priority": 2
+    },
+    {
+      "id": "H8",
+      "needs_trained_volunteer": false,
+      "priority": 3
+    }
+  ],
+  "volunteers": [
+    {
+      "id": "Driver_1",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_DAY",
+      "trained": true,
+      "vehicle_id": "V1"
+    },
+    {
+      "id": "Driver_2",
+      "organisation": "O1",
+      "role": "driver",
+      "shift_id": "O1_EARLY",
+      "trained": false,
+      "vehicle_id": "V2"
+    },
+    {
+      "id": "O1_TrainedAssistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O1_Assistant",
+      "organisation": "O1",
+      "role": "assistant",
+      "shift_id": "O1_LATE",
+      "trained": false,
+      "vehicle_id": null
+    },
+    {
+      "id": "Driver_3",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_DAY",
+      "trained": true,
+      "vehicle_id": "V3"
+    },
+    {
+      "id": "Driver_4",
+      "organisation": "O2",
+      "role": "driver",
+      "shift_id": "O2_EARLY",
+      "trained": true,
+      "vehicle_id": "V4"
+    },
+    {
+      "id": "O2_TrainedAssistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_DAY",
+      "trained": true,
+      "vehicle_id": null
+    },
+    {
+      "id": "O2_Assistant",
+      "organisation": "O2",
+      "role": "assistant",
+      "shift_id": "O2_LATE",
+      "trained": false,
+      "vehicle_id": null
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "V1",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_1",
+      "seats": 2,
+      "ambient_capacity": 12,
+      "chilled_capacity": 5
+    },
+    {
+      "id": "V2",
+      "organisation": "O1",
+      "home_depot": "D1",
+      "driver_id": "Driver_2",
+      "seats": 2,
+      "ambient_capacity": 12,
+      "chilled_capacity": 0
+    },
+    {
+      "id": "V3",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_3",
+      "seats": 3,
+      "ambient_capacity": 14,
+      "chilled_capacity": 4
+    },
+    {
+      "id": "V4",
+      "organisation": "O2",
+      "home_depot": "D2",
+      "driver_id": "Driver_4",
+      "seats": 2,
+      "ambient_capacity": 12,
+      "chilled_capacity": 0
+    }
+  ],
+  "requests": [
+    {
+      "organisation": "O1",
+      "household": "H5",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 2,
+      "window_start": 620,
+      "window_end": 710,
+      "id": "R1"
+    },
+    {
+      "organisation": "O1",
+      "household": "H7",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 1,
+      "window_start": 585,
+      "window_end": 675,
+      "id": "R2"
+    },
+    {
+      "organisation": "O1",
+      "household": "H2",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 735,
+      "window_end": 825,
+      "id": "R3"
+    },
+    {
+      "organisation": "O1",
+      "household": "H1",
+      "depot": "D1",
+      "ambient_crates": 2,
+      "chilled_crates": 2,
+      "window_start": 585,
+      "window_end": 675,
+      "id": "R4"
+    },
+    {
+      "organisation": "O1",
+      "household": "H3",
+      "depot": "D1",
+      "ambient_crates": 2,
+      "chilled_crates": 0,
+      "window_start": 800,
+      "window_end": 920,
+      "id": "R5"
+    },
+    {
+      "organisation": "O1",
+      "household": "H6",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 760,
+      "window_end": 880,
+      "id": "R6"
+    },
+    {
+      "organisation": "O2",
+      "household": "H8",
+      "depot": "D2",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 640,
+      "window_end": 730,
+      "id": "R7"
+    },
+    {
+      "organisation": "O1",
+      "household": "H4",
+      "depot": "D1",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 755,
+      "window_end": 875,
+      "id": "R8"
+    },
+    {
+      "organisation": "O2",
+      "household": "H6",
+      "depot": "D2",
+      "ambient_crates": 1,
+      "chilled_crates": 0,
+      "window_start": 885,
+      "window_end": 975,
+      "id": "R9"
+    }
+  ],
+  "duplicate_households": [
+    {
+      "household": "H6",
+      "request_ids": [
+        "R6",
+        "R9"
+      ]
+    }
+  ],
+  "travel_times": {
+    "D1": {
+      "D1": 0,
+      "D2": 25,
+      "H1": 22,
+      "H2": 18,
+      "H3": 33,
+      "H4": 11,
+      "H5": 33,
+      "H6": 10,
+      "H7": 21,
+      "H8": 20
+    },
+    "D2": {
+      "D1": 25,
+      "D2": 0,
+      "H1": 16,
+      "H2": 31,
+      "H3": 14,
+      "H4": 28,
+      "H5": 15,
+      "H6": 18,
+      "H7": 6,
+      "H8": 7
+    },
+    "H1": {
+      "D1": 22,
+      "D2": 16,
+      "H1": 0,
+      "H2": 18,
+      "H3": 13,
+      "H4": 19,
+      "H5": 13,
+      "H6": 13,
+      "H7": 13,
+      "H8": 13
+    },
+    "H2": {
+      "D1": 18,
+      "D2": 31,
+      "H1": 18,
+      "H2": 0,
+      "H3": 31,
+      "H4": 9,
+      "H5": 30,
+      "H6": 16,
+      "H7": 27,
+      "H8": 26
+    },
+    "H3": {
+      "D1": 33,
+      "D2": 14,
+      "H1": 13,
+      "H2": 31,
+      "H3": 0,
+      "H4": 32,
+      "H5": 2,
+      "H6": 24,
+      "H7": 16,
+      "H8": 17
+    },
+    "H4": {
+      "D1": 11,
+      "D2": 28,
+      "H1": 19,
+      "H2": 9,
+      "H3": 32,
+      "H4": 0,
+      "H5": 31,
+      "H6": 11,
+      "H7": 23,
+      "H8": 22
+    },
+    "H5": {
+      "D1": 33,
+      "D2": 15,
+      "H1": 13,
+      "H2": 30,
+      "H3": 2,
+      "H4": 31,
+      "H5": 0,
+      "H6": 23,
+      "H7": 16,
+      "H8": 17
+    },
+    "H6": {
+      "D1": 10,
+      "D2": 18,
+      "H1": 13,
+      "H2": 16,
+      "H3": 24,
+      "H4": 11,
+      "H5": 23,
+      "H6": 0,
+      "H7": 13,
+      "H8": 12
+    },
+    "H7": {
+      "D1": 21,
+      "D2": 6,
+      "H1": 13,
+      "H2": 27,
+      "H3": 16,
+      "H4": 23,
+      "H5": 16,
+      "H6": 13,
+      "H7": 0,
+      "H8": 1
+    },
+    "H8": {
+      "D1": 20,
+      "D2": 7,
+      "H1": 13,
+      "H2": 26,
+      "H3": 17,
+      "H4": 22,
+      "H5": 17,
+      "H6": 12,
+      "H7": 1,
+      "H8": 0
+    }
+  }
+}

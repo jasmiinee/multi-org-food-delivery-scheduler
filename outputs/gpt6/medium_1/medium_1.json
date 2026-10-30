@@ -1,0 +1,207 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 11,
+        "priority_weight": 21,
+        "mean_travel_minutes": 89.5,
+        "vehicles_used": 4,
+        "requests_fulfilled": 11
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [
+                "O1_TrainedAssistant"
+            ],
+            "loading_start": "08:23",
+            "departure": "08:28",
+            "route": [
+                {
+                    "request": "R7",
+                    "household": "H12",
+                    "service_start": "08:56"
+                },
+                {
+                    "request": "R9",
+                    "household": "H1",
+                    "service_start": "10:30"
+                },
+                {
+                    "request": "R12",
+                    "household": "H8",
+                    "service_start": "13:15"
+                }
+            ],
+            "return": "14:00"
+        },
+        {
+            "vehicle": "V2",
+            "driver": "Driver_2",
+            "assistants": [],
+            "loading_start": "08:05",
+            "departure": "08:10",
+            "route": [
+                {
+                    "request": "R3",
+                    "household": "H11",
+                    "service_start": "08:45"
+                },
+                {
+                    "request": "R11",
+                    "household": "H4",
+                    "service_start": "10:30"
+                },
+                {
+                    "request": "R1",
+                    "household": "H5",
+                    "service_start": "11:40"
+                }
+            ],
+            "return": "12:20"
+        },
+        {
+            "vehicle": "V3",
+            "driver": "Driver_3",
+            "assistants": [
+                "O2_TrainedAssistant"
+            ],
+            "loading_start": "08:35",
+            "departure": "08:40",
+            "route": [
+                {
+                    "request": "R5",
+                    "household": "H6",
+                    "service_start": "08:50"
+                },
+                {
+                    "request": "R13",
+                    "household": "H1",
+                    "service_start": "12:30"
+                },
+                {
+                    "request": "R14",
+                    "household": "H2",
+                    "service_start": "13:55"
+                }
+            ],
+            "return": "14:27"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [],
+            "loading_start": "10:05",
+            "departure": "10:10",
+            "route": [
+                {
+                    "request": "R4",
+                    "household": "H9",
+                    "service_start": "10:27"
+                },
+                {
+                    "request": "R6",
+                    "household": "H7",
+                    "service_start": "11:25"
+                }
+            ],
+            "return": "12:10"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R2",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible allocation remains within the available vehicle capacity and service windows."
+        },
+        {
+            "request": "R3",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R4",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R5",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R6",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R7",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R8",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible allocation remains within the available vehicle capacity and service windows."
+        },
+        {
+            "request": "R9",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R10",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The available chilled capacity and service windows prevent allocation in this candidate schedule."
+        },
+        {
+            "request": "R11",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R12",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R13",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R14",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H3",
+            "reason": "Its only request, R2, is unserved."
+        },
+        {
+            "household": "H10",
+            "reason": "Its only request, R10, is unserved."
+        }
+    ]
+}

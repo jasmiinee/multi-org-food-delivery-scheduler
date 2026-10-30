@@ -1,0 +1,304 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 7,
+        "priority_weight": 13,
+        "mean_travel_minutes": 36.43,
+        "vehicles_used": 7,
+        "requests_fulfilled": 7
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [],
+            "loading_start": "11:30",
+            "departure": "11:35",
+            "route": [
+                {
+                    "request": "R14",
+                    "household": "H3",
+                    "service_start": "11:50"
+                }
+            ],
+            "return": "12:30"
+        },
+        {
+            "vehicle": "V2",
+            "driver": "Driver_2",
+            "assistants": [],
+            "loading_start": "09:11",
+            "departure": "09:16",
+            "route": [
+                {
+                    "request": "R17",
+                    "household": "H17",
+                    "service_start": "09:55"
+                }
+            ],
+            "return": "10:44"
+        },
+        {
+            "vehicle": "V3",
+            "driver": "Driver_3",
+            "assistants": [],
+            "loading_start": "10:00",
+            "departure": "10:05",
+            "route": [
+                {
+                    "request": "R7",
+                    "household": "H11",
+                    "service_start": "11:55"
+                }
+            ],
+            "return": "12:56"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [
+                "O2_TrainedAssistant"
+            ],
+            "loading_start": "11:29",
+            "departure": "11:34",
+            "route": [
+                {
+                    "request": "R22",
+                    "household": "H9",
+                    "service_start": "13:00"
+                }
+            ],
+            "return": "14:36"
+        },
+        {
+            "vehicle": "V5",
+            "driver": "Driver_5",
+            "assistants": [],
+            "loading_start": "08:36",
+            "departure": "08:41",
+            "route": [
+                {
+                    "request": "R8",
+                    "household": "H12",
+                    "service_start": "09:00"
+                }
+            ],
+            "return": "09:29"
+        },
+        {
+            "vehicle": "V7",
+            "driver": "Driver_7",
+            "assistants": [
+                "O3_TrainedAssistant"
+            ],
+            "loading_start": "11:45",
+            "departure": "11:50",
+            "route": [
+                {
+                    "request": "R13",
+                    "household": "H6",
+                    "service_start": "11:55"
+                }
+            ],
+            "return": "12:10"
+        },
+        {
+            "vehicle": "V9",
+            "driver": "Driver_9",
+            "assistants": [],
+            "loading_start": "12:20",
+            "departure": "12:25",
+            "route": [
+                {
+                    "request": "R20",
+                    "household": "H7",
+                    "service_start": "13:05"
+                }
+            ],
+            "return": "13:55"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R2",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R3",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R5",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R6",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R7",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R8",
+            "status": "fulfilled",
+            "vehicle": "V5",
+            "reason": null
+        },
+        {
+            "request": "R9",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R10",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R11",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R12",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R13",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R14",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R15",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R16",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R17",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R18",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R19",
+            "status": "unserved",
+            "reason": "Not assigned; the available schedule does not allocate a feasible trip to this request."
+        },
+        {
+            "request": "R20",
+            "status": "fulfilled",
+            "vehicle": "V9",
+            "reason": null
+        },
+        {
+            "request": "R21",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R22",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R23",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        },
+        {
+            "request": "R24",
+            "status": "unserved",
+            "reason": "Not assigned; no feasible trip is allocated within the available schedule."
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H1",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H2",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H4",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H5",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H8",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H10",
+            "reason": "Neither independent request for this household was fulfilled."
+        },
+        {
+            "household": "H13",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H14",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H15",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H16",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H18",
+            "reason": "No request for this household was fulfilled."
+        },
+        {
+            "household": "H19",
+            "reason": "Neither independent request for this household was fulfilled."
+        },
+        {
+            "household": "H20",
+            "reason": "No request for this household was fulfilled."
+        }
+    ]
+}

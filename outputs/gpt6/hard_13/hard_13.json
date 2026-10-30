@@ -1,0 +1,358 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 12,
+        "priority_weight": 23,
+        "mean_travel_minutes": 119.5,
+        "vehicles_used": 6,
+        "requests_fulfilled": 12
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [
+                "O1_TrainedAssistant"
+            ],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R18",
+                    "household": "H19",
+                    "service_start": "09:30"
+                },
+                {
+                    "request": "R21",
+                    "household": "H13",
+                    "service_start": "10:20"
+                },
+                {
+                    "request": "R11",
+                    "household": "H18",
+                    "service_start": "11:55"
+                },
+                {
+                    "request": "R16",
+                    "household": "H12",
+                    "service_start": "12:55"
+                }
+            ],
+            "return": "14:04"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R27",
+                    "household": "H20",
+                    "service_start": "08:50"
+                },
+                {
+                    "request": "R23",
+                    "household": "H7",
+                    "service_start": "09:45"
+                },
+                {
+                    "request": "R25",
+                    "household": "H22",
+                    "service_start": "11:20"
+                }
+            ],
+            "return": "12:22"
+        },
+        {
+            "vehicle": "V6",
+            "driver": "Driver_6",
+            "assistants": [
+                "O2_Assistant"
+            ],
+            "loading_start": "10:10",
+            "departure": "10:15",
+            "route": [
+                {
+                    "request": "R7",
+                    "household": "H5",
+                    "service_start": "13:10"
+                }
+            ],
+            "return": "14:02"
+        },
+        {
+            "vehicle": "V7",
+            "driver": "Driver_7",
+            "assistants": [
+                "O3_TrainedAssistant"
+            ],
+            "loading_start": "08:20",
+            "departure": "08:25",
+            "route": [
+                {
+                    "request": "R8",
+                    "household": "H1",
+                    "service_start": "12:40"
+                },
+                {
+                    "request": "R24",
+                    "household": "H3",
+                    "service_start": "13:35"
+                }
+            ],
+            "return": "14:18"
+        },
+        {
+            "vehicle": "V8",
+            "driver": "Driver_8",
+            "assistants": [],
+            "loading_start": "08:20",
+            "departure": "08:25",
+            "route": [
+                {
+                    "request": "R12",
+                    "household": "H15",
+                    "service_start": "10:55"
+                }
+            ],
+            "return": "12:01"
+        },
+        {
+            "vehicle": "V9",
+            "driver": "Driver_9",
+            "assistants": [
+                "O3_Assistant"
+            ],
+            "loading_start": "10:20",
+            "departure": "10:25",
+            "route": [
+                {
+                    "request": "R22",
+                    "household": "H4",
+                    "service_start": "11:25"
+                }
+            ],
+            "return": "12:27"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No feasible O2 vehicle assignment was selected for this request."
+        },
+        {
+            "request": "R2",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The available O1 vehicle assignments do not provide a feasible selected route with sufficient chilled capacity."
+        },
+        {
+            "request": "R3",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O2 vehicle has a trained team member and a feasible route for this request."
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The selected O3 routes do not provide a feasible assignment with sufficient chilled capacity."
+        },
+        {
+            "request": "R5",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The available O3 routes cannot reach H21 within its service-start window."
+        },
+        {
+            "request": "R6",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The selected O2 late vehicle has no chilled capacity, and no other selected O2 route accommodates this delivery."
+        },
+        {
+            "request": "R7",
+            "status": "fulfilled",
+            "vehicle": "V6",
+            "reason": null
+        },
+        {
+            "request": "R8",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R9",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O2 route reaches H11 within its service-start window."
+        },
+        {
+            "request": "R10",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The selected O2 routes do not provide a feasible trained-team assignment within the shift."
+        },
+        {
+            "request": "R11",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R12",
+            "status": "fulfilled",
+            "vehicle": "V8",
+            "reason": null
+        },
+        {
+            "request": "R13",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O1 route provides a feasible assignment with a trained team member for H16."
+        },
+        {
+            "request": "R14",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The selected O3 routes cannot reach H10 within its service-start window."
+        },
+        {
+            "request": "R15",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O3 route provides an additional feasible trained-team delivery to H14."
+        },
+        {
+            "request": "R16",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R17",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O1 route provides a feasible trained-team delivery with sufficient chilled capacity."
+        },
+        {
+            "request": "R18",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R19",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "The selected O3 routes cannot reach H18 within its service-start window."
+        },
+        {
+            "request": "R20",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O2 route provides a feasible trained-team delivery to H14 within the driver's shift."
+        },
+        {
+            "request": "R21",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R22",
+            "status": "fulfilled",
+            "vehicle": "V9",
+            "reason": null
+        },
+        {
+            "request": "R23",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R24",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R25",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R26",
+            "status": "unserved",
+            "vehicle": null,
+            "reason": "No selected O2 route provides sufficient chilled capacity for this delivery."
+        },
+        {
+            "request": "R27",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H2",
+            "reason": "Its only request, R17, is unserved because no selected O1 route accommodates the trained-team and chilled-capacity requirements."
+        },
+        {
+            "household": "H6",
+            "reason": "Its only request, R2, is unserved because no selected O1 route accommodates the chilled-capacity requirement."
+        },
+        {
+            "household": "H8",
+            "reason": "Its only request, R10, is unserved because no selected O2 trained-team route accommodates its service window and shift constraints."
+        },
+        {
+            "household": "H9",
+            "reason": "Its only request, R6, is unserved because no selected O2 route accommodates the chilled-capacity requirement."
+        },
+        {
+            "household": "H10",
+            "reason": "Its only request, R14, is unserved because the selected O3 routes cannot reach H10 within its service window."
+        },
+        {
+            "household": "H11",
+            "reason": "Its only request, R9, is unserved because no selected O2 route reaches H11 within its service window."
+        },
+        {
+            "household": "H14",
+            "reason": "Both requests, R15 and R20, are unserved because no selected route accommodates the trained-team requirement and service windows."
+        },
+        {
+            "household": "H17",
+            "reason": "Its only request, R1, is unserved because no selected O2 route accommodates its service window."
+        },
+        {
+            "household": "H19",
+            "reason": "Its only request, R18, is fulfilled by V1."
+        },
+        {
+            "household": "H1",
+            "reason": "R8 is fulfilled by V7, while R3 is unserved because no selected O2 route accommodates the trained-team requirement."
+        },
+        {
+            "household": "H12",
+            "reason": "R16 is fulfilled by V1, while R4 is unserved because no selected O3 route accommodates its chilled-capacity requirement."
+        },
+        {
+            "household": "H18",
+            "reason": "R11 is fulfilled by V1, while R19 is unserved because no selected O3 route accommodates its service window."
+        },
+        {
+            "household": "H4",
+            "reason": "R22 is fulfilled by V9, while R26 is unserved because no selected O2 route accommodates its chilled-capacity requirement."
+        }
+    ]
+}

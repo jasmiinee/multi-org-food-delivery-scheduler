@@ -1,0 +1,360 @@
+{
+    "status": "candidate",
+    "objective": {
+        "households_served": 9,
+        "priority_weight": 21,
+        "mean_travel_minutes": 74.0,
+        "vehicles_used": 7,
+        "requests_fulfilled": 9
+    },
+    "vehicles": [
+        {
+            "vehicle": "V1",
+            "driver": "Driver_1",
+            "assistants": [
+                "O1_TrainedAssistant"
+            ],
+            "loading_start": "10:00",
+            "departure": "10:05",
+            "route": [
+                {
+                    "request": "R30",
+                    "household": "H18",
+                    "service_start": "10:25"
+                },
+                {
+                    "request": "R23",
+                    "household": "H13",
+                    "service_start": "12:25"
+                }
+            ],
+            "return": "13:29"
+        },
+        {
+            "vehicle": "V2",
+            "driver": "Driver_2",
+            "assistants": [],
+            "loading_start": "08:00",
+            "departure": "08:05",
+            "route": [
+                {
+                    "request": "R1",
+                    "household": "H3",
+                    "service_start": "08:55"
+                }
+            ],
+            "return": "09:31"
+        },
+        {
+            "vehicle": "V3",
+            "driver": "Driver_3",
+            "assistants": [],
+            "loading_start": "10:00",
+            "departure": "10:05",
+            "route": [
+                {
+                    "request": "R15",
+                    "household": "H14",
+                    "service_start": "10:55"
+                }
+            ],
+            "return": "11:57"
+        },
+        {
+            "vehicle": "V4",
+            "driver": "Driver_4",
+            "assistants": [
+                "O2_TrainedAssistant"
+            ],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R12",
+                    "household": "H2",
+                    "service_start": "09:30"
+                }
+            ],
+            "return": "09:48"
+        },
+        {
+            "vehicle": "V5",
+            "driver": "Driver_5",
+            "assistants": [],
+            "loading_start": "08:10",
+            "departure": "08:15",
+            "route": [
+                {
+                    "request": "R13",
+                    "household": "H1",
+                    "service_start": "10:05"
+                }
+            ],
+            "return": "10:59"
+        },
+        {
+            "vehicle": "V6",
+            "driver": "Driver_6",
+            "assistants": [],
+            "loading_start": "12:25",
+            "departure": "12:30",
+            "route": [
+                {
+                    "request": "R16",
+                    "household": "H23",
+                    "service_start": "13:15"
+                }
+            ],
+            "return": "14:10"
+        },
+        {
+            "vehicle": "V7",
+            "driver": "Driver_7",
+            "assistants": [
+                "O3_TrainedAssistant"
+            ],
+            "loading_start": "08:20",
+            "departure": "08:25",
+            "route": [
+                {
+                    "request": "R24",
+                    "household": "H24",
+                    "service_start": "08:55"
+                },
+                {
+                    "request": "R2",
+                    "household": "H9",
+                    "service_start": "12:05"
+                }
+            ],
+            "return": "12:52"
+        }
+    ],
+    "request_status": [
+        {
+            "request": "R1",
+            "status": "fulfilled",
+            "vehicle": "V2",
+            "reason": null
+        },
+        {
+            "request": "R2",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R3",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, capacity, and time-window constraints."
+        },
+        {
+            "request": "R4",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle and route constraints."
+        },
+        {
+            "request": "R5",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, chilled-capacity, and time-window constraints."
+        },
+        {
+            "request": "R6",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, training, and time-window constraints."
+        },
+        {
+            "request": "R7",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, training, and time-window constraints."
+        },
+        {
+            "request": "R8",
+            "status": "unserved",
+            "reason": "The earliest feasible arrival from D3 is after the service window closes."
+        },
+        {
+            "request": "R9",
+            "status": "unserved",
+            "reason": "The available early O2 vehicle has no chilled capacity, and the remaining vehicle allocation does not accommodate this request."
+        },
+        {
+            "request": "R10",
+            "status": "unserved",
+            "reason": "The available late O3 driver cannot reach H8 within the service-start window."
+        },
+        {
+            "request": "R11",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because the O2 vehicle allocation prioritizes distinct households and higher-priority feasible requests."
+        },
+        {
+            "request": "R12",
+            "status": "fulfilled",
+            "vehicle": "V4",
+            "reason": null
+        },
+        {
+            "request": "R13",
+            "status": "fulfilled",
+            "vehicle": "V5",
+            "reason": null
+        },
+        {
+            "request": "R14",
+            "status": "unserved",
+            "reason": "The available O1 late vehicle has insufficient chilled capacity for this request."
+        },
+        {
+            "request": "R15",
+            "status": "fulfilled",
+            "vehicle": "V3",
+            "reason": null
+        },
+        {
+            "request": "R16",
+            "status": "fulfilled",
+            "vehicle": "V6",
+            "reason": null
+        },
+        {
+            "request": "R17",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle and capacity constraints."
+        },
+        {
+            "request": "R18",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, chilled-capacity, and time-window constraints."
+        },
+        {
+            "request": "R19",
+            "status": "unserved",
+            "reason": "The available O3 late vehicle cannot reach H5 within the service-start window."
+        },
+        {
+            "request": "R20",
+            "status": "unserved",
+            "reason": "The available O3 late vehicle has insufficient chilled capacity for this request."
+        },
+        {
+            "request": "R21",
+            "status": "unserved",
+            "reason": "The available O3 late vehicle has insufficient chilled capacity for this request."
+        },
+        {
+            "request": "R22",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle and time-window constraints."
+        },
+        {
+            "request": "R23",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        },
+        {
+            "request": "R24",
+            "status": "fulfilled",
+            "vehicle": "V7",
+            "reason": null
+        },
+        {
+            "request": "R25",
+            "status": "unserved",
+            "reason": "The available O3 late vehicle has insufficient chilled capacity for this request."
+        },
+        {
+            "request": "R26",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, chilled-capacity, and time-window constraints."
+        },
+        {
+            "request": "R27",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because of competing vehicle, training, and route constraints."
+        },
+        {
+            "request": "R28",
+            "status": "unserved",
+            "reason": "Not selected in the candidate schedule because the O2 vehicle allocation prioritizes other feasible requests."
+        },
+        {
+            "request": "R29",
+            "status": "unserved",
+            "reason": "The available O2 late vehicle has insufficient chilled capacity for this request."
+        },
+        {
+            "request": "R30",
+            "status": "fulfilled",
+            "vehicle": "V1",
+            "reason": null
+        }
+    ],
+    "unserved_households": [
+        {
+            "household": "H4",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H5",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H6",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H7",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H8",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H10",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H11",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H12",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H15",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H16",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H17",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H19",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H20",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H21",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H22",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        },
+        {
+            "household": "H25",
+            "reason": "No request for this household is fulfilled in the candidate schedule."
+        }
+    ]
+}

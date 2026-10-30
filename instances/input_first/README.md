@@ -1,21 +1,53 @@
-# Input-first hard candidates (protocol v2)
+# Input-first candidates (protocol v2)
 
-These ten synthetic cases were generated from resources, geography and requests without constructing a route or schedule. Each case has a structured JSON file and an equivalent natural-language text file in hard/. There are no witness files.
+The hard/ folder contains fourteen JSON/text pairs named hard_001 through hard_014. The first four are user-authored cases moved from instances/v2.1/hard/. The remaining ten are generated input-first cases. There are no witness files.
 
-All cases have three organisations and nine vehicles. The feasibility of complete household coverage, complete request coverage and the optimal objective values has not been solved. "Hard" describes the intended challenge profile; solver-based calibration is still required.
+The ten generated hard cases have three organisations and nine vehicles. The four user-authored cases have 12 vehicles and 28-30 households. The feasibility of complete household coverage, complete request coverage and the optimal objective values has not been solved. "Hard" describes the intended challenge profile; solver-based calibration is still required.
+
+## Easy and medium cases
+
+Five fresh easy cases and five fresh medium cases are saved in easy/ and medium/, with one JSON input and one equivalent natural-language text file per case. These use the same v2 independent-request constraints and objective order as hard/. They are sampled directly from input profiles and are not conversions of the v1 witness-based cases.
+
+| Level | IDs | Households | Requests | Organisations / vehicles | Intended difficulty controls |
+|---|---|---:|---:|---|---|
+| Easy | input_easy_001 through input_easy_005 | 6-8 | 7-10 | 2 / 4 | Compact geography, 90-120 minute windows, long shifts, larger capacities and more trained drivers |
+| Medium | input_medium_001 through input_medium_005 | 12-15 | 14-18 | 2-3 / 4-6 | 20-60 minute windows, early/day shifts, smaller capacities and competing chilled/training requirements |
+
+The new cases use base seed 20261029. The actual seed is base seed + 100000 for easy or + 200000 for medium, then + 1000 per profile index. Repetitions add their zero-based repetition index. Per-level provenance and counts are recorded in generation_manifest_easy.json and generation_manifest_medium.json. generation_manifest.json records the ten generated hard cases in cases, the four user-authored cases in manual_cases, and a complete old-to-new ID mapping.
+
+Recreate the easy and medium batches in a fresh directory:
+
+    python -m generator.generate_input_first --output-dir instances/input_first_copy --difficulty easy medium --seed 20261029
+
+The generator defaults to hard when --difficulty is omitted, preserving the original hard generation command. Multiple levels can be selected with --difficulty easy medium hard. Five profiles exist at each of easy and medium, while hard has ten. --per-profile controls repetitions for each selected profile.
+
+Easy and medium are intended difficulty levels, not solver-certified labels. Complete household/request coverage and optimal schedules remain unchecked; no witness files or schedules are generated. Use --protocol v2 for every level. A batch run over instances/input_first/ now includes all twenty-four text instances.
+
+## Hard cases
+
+| Instance | Previous location / ID | Households | Requests | Duplicate households |
+|---|---|---:|---:|---:|
+| hard_001 | v2.1/hard/hard_1, input_hard_101 | 28 | 44 | 15 |
+| hard_002 | v2.1/hard/hard_2, input_hard_102 | 28 | 44 | 15 |
+| hard_003 | v2.1/hard/hard_3, input_hard_103 | 28 | 44 | 16 |
+| hard_004 | v2.1/hard/hard_4, input_hard_104 | 30 | 44 | 14 |
+
+The original generated input_hard_001 through input_hard_010 became hard_005 through hard_014, respectively. JSON metadata IDs and text headers match filenames. Historical experiment outputs retain their original identifiers.
+
+The generator now names hard outputs hard_005 onward by default, reserving 001-004 for the user-authored cases. --start-number can select another range. Generation in a fresh directory recreates only the ten synthetic hard cases, not the four user-authored ones.
 
 | Instance | Households | Requests | Duplicate households | Intended pressure |
 |---|---:|---:|---:|---|
-| input_hard_001 | 22 | 27 | 5 | Mixed resource and time-window constraints |
-| input_hard_002 | 24 | 29 | 5 | Windows of only 10-20 minutes |
-| input_hard_003 | 23 | 28 | 5 | Untrained drivers competing for one trained assistant per organisation |
-| input_hard_004 | 25 | 30 | 5 | Many chilled requests and limited refrigerated capacity |
-| input_hard_005 | 24 | 29 | 5 | Staggered early, day and late shifts |
-| input_hard_006 | 20 | 24 | 4 | Long depot-to-household travel and organisation restrictions |
-| input_hard_007 | 25 | 30 | 5 | Aggregate ambient demand exceeding the fleet's capacity |
-| input_hard_008 | 21 | 25 | 4 | A chilled delivery needing training, but an untrained refrigerated driver has no assistant seat |
-| input_hard_009 | 22 | 27 | 5 | A trained assistant's shift ending before a specialised delivery window |
-| input_hard_010 | 25 | 30 | 5 | Combined capacity, refrigeration, training and tight-window pressure |
+| hard_005 | 22 | 27 | 5 | Mixed resource and time-window constraints |
+| hard_006 | 24 | 29 | 5 | Windows of only 10-20 minutes |
+| hard_007 | 23 | 28 | 5 | Untrained drivers competing for one trained assistant per organisation |
+| hard_008 | 25 | 30 | 5 | Many chilled requests and limited refrigerated capacity |
+| hard_009 | 24 | 29 | 5 | Staggered early, day and late shifts |
+| hard_010 | 20 | 24 | 4 | Long depot-to-household travel and organisation restrictions |
+| hard_011 | 25 | 30 | 5 | Aggregate ambient demand exceeding the fleet's capacity |
+| hard_012 | 21 | 25 | 4 | A chilled delivery needing training, but an untrained refrigerated driver has no assistant seat |
+| hard_013 | 22 | 27 | 5 | A trained assistant's shift ending before a specialised delivery window |
+| hard_014 | 25 | 30 | 5 | Combined capacity, refrigeration, training and tight-window pressure |
 
 Profile labels and this table are for benchmark authors. The text supplied to the model contains the input facts and rules, without these labels or any reference answer.
 
@@ -75,7 +107,7 @@ Existing files are protected against overwrite unless --overwrite is explicitly 
 4. Have Member 3 update the independent validator. Repeated household IDs on different organisations' deliveries are allowed; repeated request IDs are not. Recompute all three coverage metrics, per-request statuses, loads, training, seats, timing and full-trip shift compatibility. Missing a second request must not be treated as alternative coverage.
 5. Inspect a dry-run request before making new model calls:
 
-       python scripts/run_codex_model.py --instance-text instances/input_first/hard/input_hard_001.txt --protocol v2 --model gpt-6.1-sol --output-dir outputs/codex_v2 --dry-run
+       python scripts/run_codex_model.py --instance-text instances/input_first/hard/hard_005.txt --protocol v2 --model gpt-6.1-sol --output-dir outputs/codex_v2 --dry-run
 
 6. Freeze the prompt/model/settings and run the direct method and tool-assisted method on identical natural-language inputs. Start with two pilot cases, then use the same predetermined number of repetitions, such as three per case. Preserve all attempts and failures. Do not expose JSON input, challenge labels, solver answers or witnesses to the direct model.
 

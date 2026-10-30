@@ -1,0 +1,496 @@
+{
+  "status": "candidate",
+  "objective": {
+    "households_served": 11,
+    "priority_weight": 22,
+    "mean_travel_minutes": 50.17,
+    "vehicles_used": 12,
+    "requests_fulfilled": 12
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R40",
+          "household": "H11",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:35"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [],
+      "loading_start": "08:37",
+      "departure": "08:42",
+      "route": [
+        {
+          "request": "R33",
+          "household": "H2",
+          "service_start": "09:10"
+        }
+      ],
+      "return": "10:06"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [],
+      "loading_start": "10:34",
+      "departure": "10:39",
+      "route": [
+        {
+          "request": "R7",
+          "household": "H14",
+          "service_start": "11:10"
+        }
+      ],
+      "return": "11:51"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "10:36",
+      "departure": "10:41",
+      "route": [
+        {
+          "request": "R18",
+          "household": "H4",
+          "service_start": "11:15"
+        }
+      ],
+      "return": "12:09"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [],
+      "loading_start": "08:30",
+      "departure": "08:35",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H9",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:35"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": [],
+      "loading_start": "08:44",
+      "departure": "08:49",
+      "route": [
+        {
+          "request": "R26",
+          "household": "H6",
+          "service_start": "09:20"
+        }
+      ],
+      "return": "10:11"
+    },
+    {
+      "vehicle": "V7",
+      "driver": "Driver_7",
+      "assistants": [],
+      "loading_start": "10:10",
+      "departure": "10:15",
+      "route": [
+        {
+          "request": "R20",
+          "household": "H15",
+          "service_start": "10:45"
+        }
+      ],
+      "return": "11:15"
+    },
+    {
+      "vehicle": "V8",
+      "driver": "Driver_8",
+      "assistants": [],
+      "loading_start": "09:59",
+      "departure": "10:04",
+      "route": [
+        {
+          "request": "R1",
+          "household": "H12",
+          "service_start": "10:30"
+        }
+      ],
+      "return": "10:56"
+    },
+    {
+      "vehicle": "V9",
+      "driver": "Driver_9",
+      "assistants": [],
+      "loading_start": "08:35",
+      "departure": "08:40",
+      "route": [
+        {
+          "request": "R2",
+          "household": "H23",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:30"
+    },
+    {
+      "vehicle": "V10",
+      "driver": "Driver_10",
+      "assistants": [],
+      "loading_start": "08:42",
+      "departure": "08:47",
+      "route": [
+        {
+          "request": "R25",
+          "household": "H24",
+          "service_start": "09:00"
+        }
+      ],
+      "return": "09:23"
+    },
+    {
+      "vehicle": "V11",
+      "driver": "Driver_11",
+      "assistants": [],
+      "loading_start": "11:42",
+      "departure": "11:47",
+      "route": [
+        {
+          "request": "R36",
+          "household": "H9",
+          "service_start": "12:10"
+        }
+      ],
+      "return": "12:43"
+    },
+    {
+      "vehicle": "V12",
+      "driver": "Driver_12",
+      "assistants": [],
+      "loading_start": "08:55",
+      "departure": "09:00",
+      "route": [
+        {
+          "request": "R31",
+          "household": "H25",
+          "service_start": "09:15"
+        }
+      ],
+      "return": "09:40"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V8",
+      "reason": null
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V9",
+      "reason": null
+    },
+    {
+      "request": "R3",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R5",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R6",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R8",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R9",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R10",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R11",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R12",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R13",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R14",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R15",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R16",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R17",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R18",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R19",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R20",
+      "status": "fulfilled",
+      "vehicle": "V7",
+      "reason": null
+    },
+    {
+      "request": "R21",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R22",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R23",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R24",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R25",
+      "status": "fulfilled",
+      "vehicle": "V10",
+      "reason": null
+    },
+    {
+      "request": "R26",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R27",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R28",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R29",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R30",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R31",
+      "status": "fulfilled",
+      "vehicle": "V12",
+      "reason": null
+    },
+    {
+      "request": "R32",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R33",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R34",
+      "status": "unserved",
+      "reason": "Ambient crate demand exceeds every available vehicle's ambient capacity."
+    },
+    {
+      "request": "R35",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R36",
+      "status": "fulfilled",
+      "vehicle": "V11",
+      "reason": null
+    },
+    {
+      "request": "R37",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R38",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R39",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R40",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R41",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R42",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R43",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    },
+    {
+      "request": "R44",
+      "status": "unserved",
+      "reason": "No vehicle assigned; the available schedule prioritizes other deliveries."
+    }
+  ],
+  "unserved_households": [
+    {
+      "household": "H1",
+      "reason": "Neither independent request R3 nor R19 is fulfilled."
+    },
+    {
+      "household": "H3",
+      "reason": "Request R24 is unserved because no trained O1 delivery vehicle was assigned."
+    },
+    {
+      "household": "H5",
+      "reason": "Neither independent request R15 nor R21 is fulfilled."
+    },
+    {
+      "household": "H7",
+      "reason": "Neither independent request R8 nor R22 is fulfilled."
+    },
+    {
+      "household": "H8",
+      "reason": "Neither independent request R10 nor R23 is fulfilled."
+    },
+    {
+      "household": "H10",
+      "reason": "Neither independent request R12 nor R34 is fulfilled."
+    },
+    {
+      "household": "H13",
+      "reason": "Request R37 is unserved because no vehicle was assigned."
+    },
+    {
+      "household": "H16",
+      "reason": "Requests R6, R14 and R27 are all unserved."
+    },
+    {
+      "household": "H17",
+      "reason": "Neither independent request R13 nor R38 is fulfilled."
+    },
+    {
+      "household": "H18",
+      "reason": "Neither independent request R16 nor R28 is fulfilled."
+    },
+    {
+      "household": "H19",
+      "reason": "Request R42 is unserved because no vehicle was assigned."
+    },
+    {
+      "household": "H20",
+      "reason": "Neither independent request R9 nor R43 is fulfilled."
+    },
+    {
+      "household": "H21",
+      "reason": "Request R41 is unserved because no vehicle was assigned."
+    },
+    {
+      "household": "H22",
+      "reason": "Request R35 is unserved because no vehicle was assigned."
+    },
+    {
+      "household": "H26",
+      "reason": "Request R39 is unserved because no vehicle was assigned."
+    },
+    {
+      "household": "H27",
+      "reason": "Request R30 is unserved because no trained O3 delivery team was assigned."
+    },
+    {
+      "household": "H28",
+      "reason": "Request R32 is unserved because no vehicle was assigned."
+    }
+  ]
+}

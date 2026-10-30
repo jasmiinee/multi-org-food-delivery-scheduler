@@ -1,0 +1,59 @@
+{
+  "generator_version": "2.1.0-input-first",
+  "protocol": "v2",
+  "base_seed": 20261029,
+  "construction": "Resources, geography and requests are sampled before any scheduling. No solver, route construction, feasibility rejection or witness generation is used.",
+  "selection": "Every generated case is retained; profile labels are not included in model input text.",
+  "cases": [
+    {
+      "instance_id": "input_easy_001",
+      "challenge_profile": "broad_windows",
+      "seed": 20361029,
+      "households": 6,
+      "requests": 7,
+      "duplicate_households": 1,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_easy_002",
+      "challenge_profile": "duplicate_deliveries",
+      "seed": 20362029,
+      "households": 7,
+      "requests": 9,
+      "duplicate_households": 2,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_easy_003",
+      "challenge_profile": "chilled_deliveries",
+      "seed": 20363029,
+      "households": 8,
+      "requests": 9,
+      "duplicate_households": 1,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_easy_004",
+      "challenge_profile": "trained_teams",
+      "seed": 20364029,
+      "households": 7,
+      "requests": 8,
+      "duplicate_households": 1,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "input_easy_005",
+      "challenge_profile": "mixed_priorities",
+      "seed": 20365029,
+      "households": 8,
+      "requests": 10,
+      "duplicate_households": 2,
+      "vehicles": 4,
+      "feasibility_status": "not_checked"
+    }
+  ]
+}

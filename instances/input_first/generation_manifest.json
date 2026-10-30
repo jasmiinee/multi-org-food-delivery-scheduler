@@ -6,104 +6,177 @@
   "selection": "Every generated case is retained; profile labels are not included in model input text.",
   "cases": [
     {
-      "instance_id": "input_hard_001",
+      "instance_id": "hard_005",
       "challenge_profile": "mixed_resource_pressure",
       "seed": 20261023,
       "households": 22,
       "requests": 27,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_001"
     },
     {
-      "instance_id": "input_hard_002",
+      "instance_id": "hard_006",
       "challenge_profile": "tight_windows",
       "seed": 20262023,
       "households": 24,
       "requests": 29,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_002"
     },
     {
-      "instance_id": "input_hard_003",
+      "instance_id": "hard_007",
       "challenge_profile": "scarce_training",
       "seed": 20263023,
       "households": 23,
       "requests": 28,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_003"
     },
     {
-      "instance_id": "input_hard_004",
+      "instance_id": "hard_008",
       "challenge_profile": "chilled_capacity_pressure",
       "seed": 20264023,
       "households": 25,
       "requests": 30,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_004"
     },
     {
-      "instance_id": "input_hard_005",
+      "instance_id": "hard_009",
       "challenge_profile": "staggered_shifts",
       "seed": 20265023,
       "households": 24,
       "requests": 29,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_005"
     },
     {
-      "instance_id": "input_hard_006",
+      "instance_id": "hard_010",
       "challenge_profile": "distant_depots",
       "seed": 20266023,
       "households": 20,
       "requests": 24,
       "duplicate_households": 4,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_006"
     },
     {
-      "instance_id": "input_hard_007",
+      "instance_id": "hard_011",
       "challenge_profile": "aggregate_ambient_shortage",
       "seed": 20267023,
       "households": 25,
       "requests": 30,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_007"
     },
     {
-      "instance_id": "input_hard_008",
+      "instance_id": "hard_012",
       "challenge_profile": "one_seat_training_conflict",
       "seed": 20268023,
       "households": 21,
       "requests": 25,
       "duplicate_households": 4,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_008"
     },
     {
-      "instance_id": "input_hard_009",
+      "instance_id": "hard_013",
       "challenge_profile": "training_shift_gap",
       "seed": 20269023,
       "households": 22,
       "requests": 27,
       "duplicate_households": 5,
       "vehicles": 9,
-      "feasibility_status": "not_checked"
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_009"
     },
     {
-      "instance_id": "input_hard_010",
+      "instance_id": "hard_014",
       "challenge_profile": "combined_pressure",
       "seed": 20270023,
       "households": 25,
       "requests": 30,
       "duplicate_households": 5,
       "vehicles": 9,
+      "feasibility_status": "not_checked",
+      "previous_instance_id": "input_hard_010"
+    }
+  ],
+  "manual_cases": [
+    {
+      "instance_id": "hard_001",
+      "previous_instance_id": "input_hard_101",
+      "previous_path": "instances/v2.1/hard/hard_1/hard_1.json",
+      "source_method": "user_authored_text",
+      "households": 28,
+      "requests": 44,
+      "duplicate_households": 15,
+      "vehicles": 12,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "hard_002",
+      "previous_instance_id": "input_hard_102",
+      "previous_path": "instances/v2.1/hard/hard_2/hard_2.json",
+      "source_method": "user_authored_text",
+      "households": 28,
+      "requests": 44,
+      "duplicate_households": 15,
+      "vehicles": 12,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "hard_003",
+      "previous_instance_id": "input_hard_103",
+      "previous_path": "instances/v2.1/hard/hard_3/hard_3.json",
+      "source_method": "user_authored_text",
+      "households": 28,
+      "requests": 44,
+      "duplicate_households": 16,
+      "vehicles": 12,
+      "feasibility_status": "not_checked"
+    },
+    {
+      "instance_id": "hard_004",
+      "previous_instance_id": "input_hard_104",
+      "previous_path": "instances/v2.1/hard/hard_4/hard_4.json",
+      "source_method": "user_authored_text",
+      "households": 30,
+      "requests": 44,
+      "duplicate_households": 14,
+      "vehicles": 12,
       "feasibility_status": "not_checked"
     }
-  ]
+  ],
+  "naming": "hard_001-hard_004 are user-authored cases; hard_005-hard_014 are the original generated cases in order. cases records generation provenance; manual_cases records the moved cases.",
+  "previous_to_current_ids": {
+    "input_hard_101": "hard_001",
+    "input_hard_102": "hard_002",
+    "input_hard_103": "hard_003",
+    "input_hard_104": "hard_004",
+    "input_hard_001": "hard_005",
+    "input_hard_002": "hard_006",
+    "input_hard_003": "hard_007",
+    "input_hard_004": "hard_008",
+    "input_hard_005": "hard_009",
+    "input_hard_006": "hard_010",
+    "input_hard_007": "hard_011",
+    "input_hard_008": "hard_012",
+    "input_hard_009": "hard_013",
+    "input_hard_010": "hard_014"
+  }
 }
