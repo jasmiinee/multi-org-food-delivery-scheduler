@@ -143,7 +143,7 @@ class Schedule(StrictModel):
 
 # V2 is a separate contract; the original classes retain the legacy semantics.
 class InputFirstMetadata(Metadata):
-    difficulty: Literal["hard"]
+    difficulty: Literal["easy", "medium", "hard"]
     scenario: Literal["unclassified"]
     protocol_version: Literal["v2"]
     generation_method: Literal["input_first"]

@@ -1,0 +1,211 @@
+Food-delivery scheduling instance: input_medium_002
+Difficulty: medium
+Protocol: v2 (independent requests)
+
+Rules and objective
+- Duplicate requests are separate deliveries. Fulfil both when jointly feasible under the objective order; do not merge their items or windows.
+- A household is served when at least one of its requests is fulfilled; count the household and its priority once.
+- Every unfulfilled request is unserved and needs a reason, even if another organisation delivered to its household. Do not use covered_by_alternative.
+- Each service takes 10 minutes.
+- Loading takes 5 minutes immediately before departure.
+- A delivery window constrains the service start time. Early arrival is allowed, followed by waiting.
+- Every used vehicle makes one loop from and back to its own depot, and makes at most one trip.
+- A vehicle may serve only requests belonging to its own organisation.
+- Drivers use only their own vehicle. Assistants may join at most one vehicle from their organisation.
+- Seats include the driver. The full trip, including loading and return, must fit every team member's shift.
+- Ambient and chilled crate capacities are separate. Chilled crates require sufficient chilled capacity.
+- There is no separate time-based cold-chain limit in this version.
+- A specialised-needs household requires at least one trained driver or assistant on its vehicle.
+- Each request may be fulfilled at most once. Different organisations may each fulfil their own request for the same household.
+- First maximize distinct households served; then their priority weight counted once per household; then maximize fulfilled requests; then minimize mean travel per used vehicle; then vehicles used; then vehicle ID.
+- Mean travel is total depot and inter-stop travel divided by used vehicles; loading, waiting and service are excluded.
+
+Organisations and shifts
+- O1: depot D1; shifts: O1_DAY 08:00-16:00, O1_EARLY 08:00-13:00, O1_LATE 10:00-16:00.
+- O2: depot D2; shifts: O2_DAY 08:10-16:10, O2_EARLY 08:10-13:10, O2_LATE 10:10-16:10.
+- O3: depot D3; shifts: O3_DAY 08:20-16:20, O3_EARLY 08:20-13:20, O3_LATE 10:20-16:20.
+
+Households
+- H1: priority 2; needs trained volunteer: no.
+- H2: priority 2; needs trained volunteer: no.
+- H3: priority 3; needs trained volunteer: no.
+- H4: priority 3; needs trained volunteer: no.
+- H5: priority 3; needs trained volunteer: no.
+- H6: priority 3; needs trained volunteer: no.
+- H7: priority 3; needs trained volunteer: no.
+- H8: priority 2; needs trained volunteer: yes.
+- H9: priority 3; needs trained volunteer: yes.
+- H10: priority 3; needs trained volunteer: yes.
+- H11: priority 3; needs trained volunteer: yes.
+- H12: priority 3; needs trained volunteer: yes.
+- H13: priority 2; needs trained volunteer: yes.
+
+Volunteers
+- Driver_1: driver for O1; shift O1_DAY; trained: yes; own vehicle: V1.
+- Driver_2: driver for O1; shift O1_EARLY; trained: no; own vehicle: V2.
+- O1_TrainedAssistant: assistant for O1; shift O1_DAY; trained: yes; own vehicle: none.
+- O1_Assistant: assistant for O1; shift O1_LATE; trained: no; own vehicle: none.
+- Driver_3: driver for O2; shift O2_DAY; trained: no; own vehicle: V3.
+- Driver_4: driver for O2; shift O2_EARLY; trained: no; own vehicle: V4.
+- O2_TrainedAssistant: assistant for O2; shift O2_DAY; trained: yes; own vehicle: none.
+- O2_Assistant: assistant for O2; shift O2_LATE; trained: no; own vehicle: none.
+- Driver_5: driver for O3; shift O3_DAY; trained: no; own vehicle: V5.
+- Driver_6: driver for O3; shift O3_EARLY; trained: no; own vehicle: V6.
+- O3_TrainedAssistant: assistant for O3; shift O3_DAY; trained: yes; own vehicle: none.
+- O3_Assistant: assistant for O3; shift O3_LATE; trained: no; own vehicle: none.
+
+Vehicles
+- V1: O1, depot D1, driver Driver_1, seats 2, ambient capacity 8, chilled capacity 3.
+- V2: O1, depot D1, driver Driver_2, seats 2, ambient capacity 8, chilled capacity 0.
+- V3: O2, depot D2, driver Driver_3, seats 3, ambient capacity 10, chilled capacity 4.
+- V4: O2, depot D2, driver Driver_4, seats 2, ambient capacity 8, chilled capacity 0.
+- V5: O3, depot D3, driver Driver_5, seats 3, ambient capacity 8, chilled capacity 4.
+- V6: O3, depot D3, driver Driver_6, seats 3, ambient capacity 7, chilled capacity 0.
+
+Delivery requests
+- R1: O1 serves H6 from D1; ambient 1; chilled 0; window 09:45-10:15; trained volunteer needed: no; household priority 3.
+- R2: O1 serves H13 from D1; ambient 1; chilled 0; window 09:00-09:45; trained volunteer needed: yes; household priority 2.
+- R3: O2 serves H11 from D2; ambient 3; chilled 0; window 11:50-12:20; trained volunteer needed: yes; household priority 3.
+- R4: O2 serves H1 from D2; ambient 3; chilled 0; window 10:50-11:50; trained volunteer needed: no; household priority 2.
+- R5: O3 serves H8 from D3; ambient 1; chilled 2; window 10:40-11:10; trained volunteer needed: yes; household priority 2.
+- R6: O3 serves H2 from D3; ambient 2; chilled 0; window 12:20-12:50; trained volunteer needed: no; household priority 2.
+- R7: O1 serves H10 from D1; ambient 1; chilled 0; window 09:35-10:35; trained volunteer needed: yes; household priority 3.
+- R8: O2 serves H12 from D2; ambient 3; chilled 1; window 13:50-14:20; trained volunteer needed: yes; household priority 3.
+- R9: O1 serves H5 from D1; ambient 1; chilled 1; window 09:10-09:40; trained volunteer needed: no; household priority 3.
+- R10: O3 serves H7 from D3; ambient 2; chilled 0; window 10:35-11:20; trained volunteer needed: no; household priority 3.
+- R11: O2 serves H8 from D2; ambient 3; chilled 1; window 14:00-15:00; trained volunteer needed: yes; household priority 2.
+- R12: O3 serves H4 from D3; ambient 2; chilled 0; window 12:45-13:15; trained volunteer needed: no; household priority 3.
+- R13: O3 serves H3 from D3; ambient 3; chilled 0; window 08:35-09:20; trained volunteer needed: no; household priority 3.
+- R14: O3 serves H9 from D3; ambient 2; chilled 2; window 13:05-13:35; trained volunteer needed: yes; household priority 3.
+- R15: O2 serves H4 from D2; ambient 2; chilled 1; window 13:40-14:40; trained volunteer needed: no; household priority 3.
+- R16: O2 serves H3 from D2; ambient 1; chilled 0; window 10:10-10:40; trained volunteer needed: no; household priority 3.
+
+Duplicate households
+- H3: independent requests R13, R16; each requires its own delivery.
+- H4: independent requests R12, R15; each requires its own delivery.
+- H8: independent requests R5, R11; each requires its own delivery.
+
+Travel times in minutes (symmetric)
+origin,destination,minutes
+D1,D2,35
+D1,D3,35
+D1,H1,46
+D1,H2,39
+D1,H3,26
+D1,H4,36
+D1,H5,7
+D1,H6,39
+D1,H7,56
+D1,H8,35
+D1,H9,21
+D1,H10,28
+D1,H11,10
+D1,H12,43
+D1,H13,35
+D2,D3,35
+D2,H1,36
+D2,H2,32
+D2,H3,14
+D2,H4,49
+D2,H5,41
+D2,H6,15
+D2,H7,36
+D2,H8,15
+D2,H9,43
+D2,H10,28
+D2,H11,41
+D2,H12,24
+D2,H13,43
+D3,H1,13
+D3,H2,6
+D3,H3,23
+D3,H4,18
+D3,H5,42
+D3,H6,25
+D3,H7,27
+D3,H8,22
+D3,H9,24
+D3,H10,10
+D3,H11,32
+D3,H12,20
+D3,H13,10
+H1,H2,8
+H1,H3,28
+H1,H4,28
+H1,H5,52
+H1,H6,23
+H1,H7,16
+H1,H8,22
+H1,H9,36
+H1,H10,19
+H1,H11,44
+H1,H12,14
+H1,H13,21
+H2,H3,22
+H2,H4,24
+H2,H5,45
+H2,H6,20
+H2,H7,21
+H2,H8,18
+H2,H9,29
+H2,H10,12
+H2,H11,37
+H2,H12,14
+H2,H13,16
+H3,H4,36
+H3,H5,32
+H3,H6,14
+H3,H7,33
+H3,H8,10
+H3,H9,30
+H3,H10,15
+H3,H11,29
+H3,H12,20
+H3,H13,30
+H4,H5,40
+H4,H6,41
+H4,H7,44
+H4,H8,38
+H4,H9,16
+H4,H10,22
+H4,H11,28
+H4,H12,37
+H4,H13,9
+H5,H6,45
+H5,H7,63
+H5,H8,42
+H5,H9,25
+H5,H10,34
+H5,H11,12
+H5,H12,50
+H5,H13,40
+H6,H7,22
+H6,H8,4
+H6,H9,40
+H6,H10,21
+H6,H11,42
+H6,H12,9
+H6,H13,34
+H7,H8,24
+H7,H9,50
+H7,H10,30
+H7,H11,56
+H7,H12,14
+H7,H13,36
+H8,H9,36
+H8,H10,17
+H8,H11,38
+H8,H12,10
+H8,H13,30
+H9,H10,21
+H9,H11,13
+H9,H12,40
+H9,H13,18
+H10,H11,26
+H10,H12,20
+H10,H13,15
+H11,H12,44
+H11,H13,29
+H12,H13,29
+
+Produce the final schedule using the required JSON output format. Include every request in request_status.

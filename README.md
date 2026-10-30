@@ -30,8 +30,10 @@ instances/
     easy/                        Five easy cases
     medium/                      Five medium cases
     hard/                        Five legacy hard cases
-  input_first/                   V2 guide and generation manifest
-    hard/                        Ten input-first JSON/NL pairs; no witnesses
+  input_first/                   V2 guide and per-level generation manifests
+    easy/                        Five input-first V2 JSON/NL pairs
+    medium/                      Five input-first V2 JSON/NL pairs
+    hard/                        Four user-authored + ten generated pairs, hard_001-hard_014
 prompts/direct_v1.txt             Legacy alternatives policy
 prompts/direct_v2.txt             Independent-request policy and request-count objective
 scripts/
@@ -72,11 +74,17 @@ On Windows PowerShell, activate with:
 .venv\Scripts\Activate.ps1
 ```
 
-## Generate input-first hard cases (V2)
+## Generate input-first cases (V2)
 
-Ten new cases are in `instances/input_first/hard/`, each with JSON and natural-language text. The generator samples resource limits, geography, requests and windows without constructing schedules, invoking a solver, filtering by feasibility or saving witnesses. All cases are structurally valid hard candidates with serviceability still unclassified.
+Twenty-four V2 cases are under `instances/input_first/`: five in `easy/`, five in `medium/`, and fourteen in `hard/`, each with JSON and natural-language text. Hard cases are named `hard_001` through `hard_014`; the first four are the moved user-authored V2.1 cases, followed by the ten generated cases. The generator samples resource limits, geography, requests and windows without constructing schedules, invoking a solver, filtering by feasibility or saving witnesses. All cases are structurally valid candidates with serviceability still unclassified; intended difficulty is controlled by size, geography, windows, shifts, capacities and training.
 
 See [the V2 case guide and next steps](instances/input_first/README.md) for the ten challenge profiles, the changes from the attached proposal, and the solver/validator handoff. This protocol intentionally overrides the proposal's alternative-request rule and witness-first construction; the 45-minute chilled limit remains disabled by user instruction.
+
+Recreate the easy and medium sets in a fresh directory:
+
+```bash
+python -m generator.generate_input_first --output-dir instances/input_first_easy_medium_copy --difficulty easy medium --seed 20261029
+```
 
 Generate another set in a fresh directory:
 

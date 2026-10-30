@@ -58,7 +58,11 @@
           "type": "string"
         },
         "difficulty": {
-          "const": "hard",
+          "enum": [
+            "easy",
+            "medium",
+            "hard"
+          ],
           "title": "Difficulty",
           "type": "string"
         },

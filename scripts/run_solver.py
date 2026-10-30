@@ -1,11 +1,10 @@
-"""Run the CP-SAT solver on v1 benchmarks and v2 input-first instances.
+"""Run the CP-SAT solver on input-first v2 instances.
 
 From the project root, run:
     .venv-solver/bin/python scripts/run_solver.py
 
-V1 benchmark, v2 input-first, and v2.1 results go to outputs/solver/,
-outputs/solver_v2/, and outputs/solver_v2.1/ respectively. Override each
-directory with its corresponding option.
+Results go to outputs/solver/{easy,medium,hard}/ by default; override the
+root output directory with --output-dir.
 """
 
 from __future__ import annotations
@@ -17,9 +16,7 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-V1_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "benchmark"
-V2_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "input_first"
-V21_INSTANCE_ROOT = PROJECT_ROOT / "instances" / "v2.1"
+INSTANCE_ROOT = PROJECT_ROOT / "instances" / "input_first"
 
 
 def main() -> int:
@@ -28,60 +25,43 @@ def main() -> int:
         "--output-dir",
         type=Path,
         default=Path("outputs/solver"),
-        help="Output directory for v1 benchmark results (default: outputs/solver)",
-    )
-    parser.add_argument(
-        "--v2-output-dir",
-        type=Path,
-        default=Path("outputs/solver_v2"),
-        help="Output directory for v2 input-first results (default: outputs/solver_v2)",
-    )
-    parser.add_argument(
-        "--v21-output-dir",
-        type=Path,
-        default=Path("outputs/solver_v2.1"),
-        help="Output directory for v2.1 results (default: outputs/solver_v2.1)",
+        help="Root output directory (default: outputs/solver)",
     )
     parser.add_argument("--time-limit", type=float, default=60.0)
     parser.add_argument("--workers", type=int, default=8)
     args = parser.parse_args()
 
-    output_dirs = {
-        "v1": args.output_dir,
-        "v2": args.v2_output_dir,
-        "v2.1": args.v21_output_dir,
-    }
-    for protocol, path in output_dirs.items():
-        if not path.is_absolute():
-            output_dirs[protocol] = PROJECT_ROOT / path
+    output_dir = args.output_dir
+    if not output_dir.is_absolute():
+        output_dir = PROJECT_ROOT / output_dir
 
     instances = [
-        (path, "v1")
-        for path in V1_INSTANCE_ROOT.rglob("*.json")
-        if not path.name.endswith(".witness.json")
-    ] + [
-        (path, "v2")
-        for path in V2_INSTANCE_ROOT.rglob("*.json")
-        if not path.name.endswith(".witness.json")
-        and path.name != "generation_manifest.json"
-    ] + [
-        (path, "v2.1")
-        for path in V21_INSTANCE_ROOT.rglob("*.json")
+        path
+        for path in INSTANCE_ROOT.rglob("*.json")
         if not path.name.endswith(".witness.json")
         and path.name != "generation_manifest.json"
     ]
-    instances.sort(key=lambda item: (item[1], str(item[0])))
+    instances.sort(key=str)
     if not instances:
         print("No instance JSON files found.", file=sys.stderr)
         return 1
 
     failures = 0
-    for instance_path, protocol in instances:
-        output_dir = output_dirs[protocol]
-        output_dir.mkdir(parents=True, exist_ok=True)
+    for instance_path in instances:
+        relative_instance = instance_path.relative_to(INSTANCE_ROOT)
+        difficulty = relative_instance.parts[0]
+        if difficulty not in {"easy", "medium", "hard"}:
+            print(
+                f"Skipping instance outside easy/medium/hard folders: {instance_path}",
+                file=sys.stderr,
+            )
+            continue
+
+        difficulty_dir = output_dir / difficulty
+        difficulty_dir.mkdir(parents=True, exist_ok=True)
         name = instance_path.stem
-        result_path = output_dir / f"{name}.json"
-        error_path = output_dir / f"{name}.stderr.log"
+        result_path = difficulty_dir / f"{name}.json"
+        error_path = difficulty_dir / f"{name}.stderr.log"
         command = [
             sys.executable,
             "-m",
@@ -119,9 +99,7 @@ def main() -> int:
                 result_path.unlink()
 
     print(f"Finished: {len(instances) - failures}/{len(instances)} succeeded.")
-    print(f"V1 benchmark results: {output_dirs['v1']}")
-    print(f"V2 input-first results: {output_dirs['v2']}")
-    print(f"V2.1 results: {output_dirs['v2.1']}")
+    print(f"Input-first results: {output_dir}/{{easy,medium,hard}}/")
     return 1 if failures else 0
 
 
