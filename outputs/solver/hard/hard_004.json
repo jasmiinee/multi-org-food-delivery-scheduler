@@ -55,12 +55,12 @@
         {
           "request": "R1",
           "household": "H1",
-          "service_start": "09:05"
+          "service_start": "09:02"
         },
         {
           "request": "R28",
           "household": "H4",
-          "service_start": "09:20"
+          "service_start": "09:16"
         },
         {
           "request": "R30",
@@ -112,7 +112,7 @@
         {
           "request": "R20",
           "household": "H24",
-          "service_start": "09:48"
+          "service_start": "09:35"
         },
         {
           "request": "R29",
@@ -137,15 +137,15 @@
         {
           "request": "R35",
           "household": "H14",
-          "service_start": "09:40"
+          "service_start": "09:43"
         },
         {
           "request": "R5",
           "household": "H11",
-          "service_start": "09:54"
+          "service_start": "09:57"
         }
       ],
-      "return": "10:17"
+      "return": "10:20"
     },
     {
       "vehicle": "V6",
@@ -247,7 +247,7 @@
         {
           "request": "R40",
           "household": "H18",
-          "service_start": "09:56"
+          "service_start": "09:59"
         },
         {
           "request": "R10",

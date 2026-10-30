@@ -1,0 +1,252 @@
+{
+  "status": "optimal",
+  "objective": {
+    "households_served": 13,
+    "priority_weight": 35,
+    "mean_travel_minutes": 78.83,
+    "vehicles_used": 6,
+    "requests_fulfilled": 15
+  },
+  "vehicles": [
+    {
+      "vehicle": "V1",
+      "driver": "Driver_1",
+      "assistants": [],
+      "loading_start": "08:00",
+      "departure": "08:05",
+      "route": [
+        {
+          "request": "R9",
+          "household": "H5",
+          "service_start": "09:10"
+        }
+      ],
+      "return": "09:27"
+    },
+    {
+      "vehicle": "V2",
+      "driver": "Driver_2",
+      "assistants": [
+        "O1_TrainedAssistant"
+      ],
+      "loading_start": "08:00",
+      "departure": "08:05",
+      "route": [
+        {
+          "request": "R2",
+          "household": "H13",
+          "service_start": "09:00"
+        },
+        {
+          "request": "R7",
+          "household": "H10",
+          "service_start": "09:35"
+        },
+        {
+          "request": "R1",
+          "household": "H6",
+          "service_start": "10:06"
+        }
+      ],
+      "return": "10:55"
+    },
+    {
+      "vehicle": "V3",
+      "driver": "Driver_3",
+      "assistants": [
+        "O2_TrainedAssistant"
+      ],
+      "loading_start": "09:51",
+      "departure": "09:56",
+      "route": [
+        {
+          "request": "R16",
+          "household": "H3",
+          "service_start": "10:10"
+        },
+        {
+          "request": "R3",
+          "household": "H11",
+          "service_start": "11:50"
+        },
+        {
+          "request": "R8",
+          "household": "H12",
+          "service_start": "13:50"
+        },
+        {
+          "request": "R11",
+          "household": "H8",
+          "service_start": "15:00"
+        }
+      ],
+      "return": "15:25"
+    },
+    {
+      "vehicle": "V4",
+      "driver": "Driver_4",
+      "assistants": [],
+      "loading_start": "09:51",
+      "departure": "09:56",
+      "route": [
+        {
+          "request": "R4",
+          "household": "H1",
+          "service_start": "11:18"
+        }
+      ],
+      "return": "12:04"
+    },
+    {
+      "vehicle": "V5",
+      "driver": "Driver_5",
+      "assistants": [
+        "O3_TrainedAssistant"
+      ],
+      "loading_start": "08:20",
+      "departure": "08:25",
+      "route": [
+        {
+          "request": "R13",
+          "household": "H3",
+          "service_start": "09:20"
+        },
+        {
+          "request": "R5",
+          "household": "H8",
+          "service_start": "10:40"
+        },
+        {
+          "request": "R12",
+          "household": "H4",
+          "service_start": "12:53"
+        },
+        {
+          "request": "R14",
+          "household": "H9",
+          "service_start": "13:35"
+        }
+      ],
+      "return": "14:09"
+    },
+    {
+      "vehicle": "V6",
+      "driver": "Driver_6",
+      "assistants": [],
+      "loading_start": "08:20",
+      "departure": "08:25",
+      "route": [
+        {
+          "request": "R10",
+          "household": "H7",
+          "service_start": "10:35"
+        },
+        {
+          "request": "R6",
+          "household": "H2",
+          "service_start": "12:20"
+        }
+      ],
+      "return": "12:36"
+    }
+  ],
+  "request_status": [
+    {
+      "request": "R1",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R2",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R3",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R4",
+      "status": "fulfilled",
+      "vehicle": "V4",
+      "reason": null
+    },
+    {
+      "request": "R5",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R11",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R6",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R7",
+      "status": "fulfilled",
+      "vehicle": "V2",
+      "reason": null
+    },
+    {
+      "request": "R8",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R9",
+      "status": "fulfilled",
+      "vehicle": "V1",
+      "reason": null
+    },
+    {
+      "request": "R10",
+      "status": "fulfilled",
+      "vehicle": "V6",
+      "reason": null
+    },
+    {
+      "request": "R12",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R15",
+      "status": "unserved",
+      "vehicle": null,
+      "reason": "No feasible route was found within vehicle, shift, window, and volunteer constraints."
+    },
+    {
+      "request": "R13",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    },
+    {
+      "request": "R16",
+      "status": "fulfilled",
+      "vehicle": "V3",
+      "reason": null
+    },
+    {
+      "request": "R14",
+      "status": "fulfilled",
+      "vehicle": "V5",
+      "reason": null
+    }
+  ],
+  "unserved_households": []
+}
