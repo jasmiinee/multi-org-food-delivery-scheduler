@@ -1,204 +1,198 @@
 # Multi-Organisation Daily Food Delivery Coordination
 
-## Scope decision
+This project compares two ways of solving a daily delivery scheduling problem from the same natural-language requirements:
 
-This version retains separate ambient and chilled vehicle capacities. A request with chilled crates must use a vehicle whose chilled capacity is large enough. It deliberately **does not implement a separate 45-minute chilled-delivery time limit**.
+- **Direct LLM:** GPT-6 produces a complete schedule from the description.
+- **LLM-to-solver:** an LLM converts the description into structured instance JSON, which the local Python system validates and passes to the OR-Tools CP-SAT solver.
 
-Two experimental protocols are preserved. **V1** (`instances/benchmark/`, `prompts/direct_v1.txt`) treats duplicate requests as alternatives and uses witness-first generation. **V2** (`instances/input_first/`, `prompts/direct_v2.txt`) samples inputs before any scheduling and allows both organisations to fulfil their own request. V2 maximizes distinct households, then their priority weight, then fulfilled requests, before minimizing mean travel and vehicles. Each household and its priority count once. Unfulfilled requests remain unserved rather than covered by another organisation. Both protocols keep the separate chilled-delivery time limit disabled.
+Both approaches use the same delivery requirements, travel times, constraints and objective order. Their schedules must be independently checked before comparing solution quality.
 
-This bundle uses `mean_travel_minutes`, defined as the sum of all depot and inter-stop travel legs divided by the number of used vehicles. Loading, waiting and service time are excluded. If no vehicle is used, the mean is defined as 0. The worked schedule has 101 total travel minutes across 3 used vehicles, so its reported mean is 33.67 minutes.
+## Workflow
 
-Because a per-vehicle mean can decrease when work is split across more vehicles, it may favour a larger fleet. The current objective follows the proposal: minimize mean travel first, then minimize vehicles used only when the means are tied.
+```text
+Natural-language scheduling instance
+                 |
+        +--------+--------+
+        |                 |
+   Direct LLM       LLM interpretation
+        |                 |
+ Candidate schedule   Instance JSON
+        |                 |
+        |           Input validation
+        |                 |
+        |           CP-SAT scheduling
+        |                 |
+        +--------+--------+
+                 |
+     Independent schedule validation
+                 |
+      Feasibility and objective comparison
+```
 
-## Comparison being supported
+The model interactions take place outside the local solver, using the ChatGPT website. The Python solver reads JSON; it does not interpret the natural-language text itself.
 
-Both experimental methods receive the same natural-language instance.
+## Scheduling rules
 
-- **Direct method:** the frontier model produces a final schedule JSON without an optimization solver.
-- **Tool-assisted method:** the frontier model translates the description into a formal specification; the other workstream passes that specification to a CP-SAT solver.
+The formulation uses a closed-world assumption: the supplied facts and stated constraints define the scheduling problem. Use the explicit travel-time table and resource data rather than adding assumptions about geography or operations.
+
+- Every request may be fulfilled at most once, using its own organisation's vehicle, volunteers and depot.
+- Requests from different organisations for the same household are independent deliveries. Both should be fulfilled when jointly feasible under the objective order. Each retains its own items, delivery window and service duration.
+- A household counts as served when at least one of its requests is fulfilled. Its household count and priority weight are counted once.
+- Every request must appear in `request_status`, either `fulfilled` with an assigned vehicle or `unserved` with a reason. Another organisation's delivery does not change an unfulfilled request's status.
+- Each used vehicle makes one trip starting and ending at its home depot. Its designated driver uses that vehicle; each assistant may join at most one vehicle from their organisation.
+- Seats include the driver. The complete trip, from loading through return, must fit every assigned team member's shift.
+- Ambient and chilled crate capacities are checked separately over all requests assigned to a vehicle.
+- Each delivery to a household requiring trained assistance must have a trained driver or assistant on that delivery's vehicle.
+- Delivery windows constrain service-start times. Early arrival and waiting are permitted. Travel, loading and service durations must be included in the timetable.
+- The supplied instances use five minutes of loading and ten minutes of service per fulfilled request. The structured parameters record these durations.
+
+## Objective order
+
+Schedules are compared lexicographically, preserving each earlier objective before improving the next:
+
+1. Maximise distinct households served.
+2. Maximise their total priority weight, counted once per household.
+3. Maximise fulfilled requests, including additional deliveries to households already served.
+4. Minimise mean travel minutes per used vehicle.
+5. Minimise vehicles used, followed by a vehicle-ID tie-break.
+
+Mean travel is total depot-to-stop, inter-stop and return-to-depot travel divided by the number of used vehicles. Loading, waiting and service are excluded. The mean is zero when no vehicle is used.
+
+Because the denominator is the number of used vehicles, minimising mean travel can favour splitting deliveries across more vehicles. Fleet size is minimised only after the earlier objectives are tied.
+
+## Dataset
+
+The dataset contains **24 natural-language scheduling instances**: five easy, five medium and fourteen hard. The instances were constructed through manual scenario design and Python scripting, varying household demand, vehicle availability, volunteer qualifications and delivery windows. All input requirements were specified before solving, without deriving them from a pre-existing feasible schedule.
+
+Each description follows a consistent structure covering organisations, shifts, households, volunteers, vehicles, requests and travel times. A corresponding JSON file records the same facts for input validation and solver execution. Difficulty varies through instance size, geographical spread, window tightness and resource scarcity; the labels describe intended challenge levels rather than proving computational difficulty.
+
+Travel times are integer-minute values, obtained from rounded-up Euclidean distances between synthetic coordinates or directly specified values. They are recorded explicitly in complete symmetric tables and used consistently by both approaches and the independent validator.
+
+| Level | Cases | Input filename stems |
+|---|---:|---|
+| Easy | 5 | `input_easy_001` to `input_easy_005` |
+| Medium | 5 | `input_medium_001` to `input_medium_005` |
+| Hard | 14 | `hard_001` to `hard_014` |
+
+For every case, the `.txt` file is the natural-language input and the matching `.json` file is its structured representation. Give the direct LLM the text and output requirements, without supplying the instance JSON or solver schedules.
 
 ## Directory guide
 
+The following paths are relevant to the current experiment:
+
 ```text
-models.py                        Shared Python instance and schedule models
-requirements.txt                 Python dependencies (Pydantic)
-schemas/                         Separate V1 and V2 input/output contracts
-generator/                       Legacy witness-first and new input-first generators; NL renderer
-instances/
-  example/                       Worked proposal input: JSON and natural language
-  benchmark/
-    easy/                        Five easy cases
-    medium/                      Five medium cases
-    hard/                        Five legacy hard cases
-  input_first/                   V2 guide and per-level generation manifests
-    easy/                        Five input-first V2 JSON/NL pairs
-    medium/                      Five input-first V2 JSON/NL pairs
-    hard/                        Four user-authored + ten generated pairs, hard_001-hard_014
-prompts/direct_v1.txt             Legacy alternatives policy
-prompts/direct_v2.txt             Independent-request policy and request-count objective
-scripts/
-  run_codex_model.py              Codex trials with explicit --protocol v1 or v2
-  check_schedule_shape.py         JSON parsing helpers and structural checks
-examples/                        Worked candidate schedule used by the tests
+models.py                         Pydantic models for inputs and schedules
+requirements.txt                  Pydantic and OR-Tools dependencies
+schemas/                          Machine-readable instance and schedule contracts
+instances/input_first/
+  easy/                           Five paired JSON/text instances
+  medium/                         Five paired JSON/text instances
+  hard/                           Fourteen paired JSON/text instances
+prompts/prompt.txt                Direct instructions, output schema and an embedded instance
+solver/csp_solver.py              CP-SAT model, staged optimisation and schedule extraction
+scripts/check_schedule_shape.py   Schedule parsing and structural checking helpers
+generator/                       Text rendering utilities and instance-construction scripts
 analysis/
-  error_taxonomy.csv             Shared validation violation codes
-  analyse_direct_results.py      Summarizes independently validated direct runs
-outputs/codex/                   Preserved V1 experiment artifacts
-  summary.csv                    Per-instance results and preliminary checks
-  summary.json                   Aggregate counts for the completed batch
-  <instance>_<timestamp>_<id>/    One directory per trial; contains:
-    parsed.json                  Parsed candidate schedule
-    raw_response.txt             Original model response
-    prompt.txt                   Exact text supplied to Codex
-    request.json, run.json        Invocation settings and completion metadata
-    events.jsonl, stderr.txt      Codex event stream and diagnostics
-    preliminary_validation.json  Preliminary checks from the completed batch
-outputs/codex_v2/                V2 trials, created when the new experiment is run
-tests/                           Input-first, protocol and legacy-compatibility tests
-.venv/                           Local Python environment (ignored by Git)
+  analyse_direct_results.py       Aggregation of runs with metadata and validator results
+  error_taxonomy.csv              Constraint-violation categories
+outputs/
+  gpt6/
+  solver/                          Saved direct-model responses, grouped by case
 ```
+
+The active input and output contracts are [the instance schema](schemas/instance_v2.schema.json) and [the schedule schema](schemas/schedule_v2.schema.json). These links identify the exact files used for independent-request scheduling.
+
+Direct responses use folders such as `outputs/gpt6/easy_1/easy_1.json`, `outputs/gpt6/medium_1/medium_1.json` and `outputs/gpt6/hard_1/hard_1.json`. Match each response to its input by difficulty and case number.
 
 ## Setup
 
-Use Python 3.11 or later.
+Use Python 3.11 with the pinned OR-Tools dependency. Run the following from the project root:
 
-```bash
+```text
 python -m venv .venv
-source .venv/Scripts/activate
-pip install -r requirements.txt
 ```
 
-On Windows PowerShell, activate with:
+Activate the environment in Windows PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-## Generate input-first cases (V2)
-
-Twenty-four V2 cases are under `instances/input_first/`: five in `easy/`, five in `medium/`, and fourteen in `hard/`, each with JSON and natural-language text. Hard cases are named `hard_001` through `hard_014`; the first four are the moved user-authored V2.1 cases, followed by the ten generated cases. The generator samples resource limits, geography, requests and windows without constructing schedules, invoking a solver, filtering by feasibility or saving witnesses. All cases are structurally valid candidates with serviceability still unclassified; intended difficulty is controlled by size, geography, windows, shifts, capacities and training.
-
-See [the V2 case guide and next steps](instances/input_first/README.md) for the ten challenge profiles, the changes from the attached proposal, and the solver/validator handoff. This protocol intentionally overrides the proposal's alternative-request rule and witness-first construction; the 45-minute chilled limit remains disabled by user instruction.
-
-Recreate the easy and medium sets in a fresh directory:
+Or in Git Bash on Windows:
 
 ```bash
-python -m generator.generate_input_first --output-dir instances/input_first_easy_medium_copy --difficulty easy medium --seed 20261029
+source .venv/Scripts/activate
 ```
 
-Generate another set in a fresh directory:
-
-```bash
-python -m generator.generate_input_first --output-dir instances/input_first_extra --seed 424242 --per-profile 3
-```
-
-Use `--protocol v2` for these inputs. V1 remains the default for the earlier benchmark. The runner rejects mismatched protocol/input combinations.
-
-## Generate legacy benchmark instances (V1)
-
-The generator builds a feasible witness schedule first and derives time windows and capacities around it. The witness is saved separately and must never be shown to the direct model.
-
-The included benchmark contains five instances at each level. Instances numbered `005` are deliberately partially serviceable: one non-duplicate household has ambient demand greater than every vehicle capacity in its organisation. This tests whether a method can maximize service and explain a necessary omission instead of inventing an invalid delivery.
-
-| Level | Organisations | Households | Duplicates | Main difficulty controls |
-|---|---:|---:|---:|---|
-| Easy | 2 | 6–8 | 1 | 40-minute window margin, 60-minute shift slack, four-crate route-capacity slack |
-| Medium | 2–3 | 12–15 | 2–3 | 20-minute window margin, 25-minute shift slack, two-crate route-capacity slack, one refrigerated route and one trained assistant per organisation |
-| Hard | 3 | 20–25 | 4–5 | 8-minute window margin, 5-minute shift slack, exact route capacities, one refrigerated route and one trained assistant per organisation, refrigerated alternative duplicates |
-
-```bash
-python -m generator.generate_instances \
-  --output-dir instances/benchmark \
-  --per-level 5 \
-  --seed 4248 \
-  --impossible-every 5
-```
-
-This creates paired files such as:
+Then install the dependencies:
 
 ```text
-instances/benchmark/easy/easy_001.json
-instances/benchmark/easy/easy_001.txt
-instances/benchmark/easy/easy_001.witness.json
+python -m pip install -r requirements.txt
 ```
 
-The JSON is the source of truth. The text file is the equivalent natural-language model input. The witness demonstrates one valid schedule (including justified omissions in partially serviceable cases); it is not guaranteed optimal.
+## Approach 1: Direct LLM scheduling
 
-## Render an existing instance
+1. Open a new ChatGPT conversation for the case.
+2. Use the scheduling instructions and required output schema from `prompts/prompt.txt`. Replace everything after its `INSTANCE:` heading with the complete text of the chosen instance; the file already contains one instance.
+3. Ask the model to construct the schedule directly, following the objective order and returning one JSON object. The direct-solving instructions prohibit external optimisers and tools.
+4. Save the response in the matching `outputs/gpt6/` case folder. Preserve unsuccessful responses as part of the experiment rather than silently replacing them.
+5. Check the JSON structure, then submit the schedule and its matching input to the independent validator.
+
+The response must have these top-level fields:
+
+| Field | Contents |
+|---|---|
+| `status` | `candidate` for a direct model response pending validation |
+| `objective` | Household count, priority weight, fulfilled-request count, mean travel and vehicles used |
+| `vehicles` | Assigned teams, loading and departure times, ordered stops, service-start times and depot return |
+| `request_status` | Exactly one entry for every request, with its assignment or omission reason |
+| `unserved_households` | Households for which no request was fulfilled, with reasons |
+
+Schedule times use `HH:MM`. Mean travel is reported to two decimal places. A model's reported objectives must be recomputed from its actual schedule.
+
+## Approach 2: LLM-to-solver translation
+
+Provide the natural-language description and the instance schema to the LLM. Ask it to preserve identifiers, organisations, resources, item quantities, qualifications, shifts, windows and travel times, and return instance JSON rather than a schedule. Clock times are represented as minutes from midnight, such as `09:00` becoming `540`. Expand a symmetric travel table into both directions and include zero diagonal entries.
+
+The translation may use an LLM-generated parsing script. Check the extracted representation against the source text: structural validity alone does not establish that every fact was translated correctly. Resolve missing or contradictory facts before scheduling rather than inventing values.
+
+Run the solver on one structured instance:
+
+```text
+python -m solver.csp_solver instances/input_first/easy/input_easy_001.json --time-limit 60 --workers 8
+```
+
+For a hard case:
+
+```text
+python -m solver.csp_solver instances/input_first/hard/hard_001.json --time-limit 60 --workers 8
+```
+
+The solver validates the input model, creates assignment, route, timing and resource constraints, and optimises the objectives in stages. It prints the resulting schedule JSON to standard output. The time limit applies to each optimisation call; a complete case can involve several calls.
+
+To save a result using Git Bash, choose a new output filename:
 
 ```bash
-python -m generator.render_natural_language \
-  instances/example/final_proposal_example.json \
-  --output instances/example/final_proposal_example.txt
+mkdir -p outputs/solver_runs
+python -m solver.csp_solver instances/input_first/easy/input_easy_001.json --time-limit 60 --workers 8 > outputs/solver_runs/easy_1.json
 ```
 
-## Run with Codex (no API key)
+Shell redirection replaces an existing file of the same name. A `feasible` result is an incumbent without a complete optimality proof; an `optimal` result indicates that the solver established the required objective stages. A timeout or failure to find a schedule does not establish infeasibility.
 
-For the new input-first cases, use the V2 prompt and schema explicitly:
+## Validation and evaluation
 
-```bash
-python scripts/run_codex_model.py --instances-dir instances/input_first/hard --protocol v2 --model gpt-6.1-sol --output-dir outputs/codex_v2
+Structural checks and scheduling checks serve different purposes. For a saved direct response, this command checks the current Pydantic schedule contract:
+
+```text
+python -c "from pathlib import Path; from models import IndependentSchedule; IndependentSchedule.model_validate_json(Path('outputs/gpt6/easy_1/easy_1.json').read_text(encoding='utf-8')); print('Schedule structure is valid.')"
 ```
 
-Add `--dry-run` to inspect requests without model calls. Complete the V2 solver/validator checks described in the case guide before interpreting model results. The examples below remain available for the legacy V1 benchmark.
+The JSON must contain the response object itself, without surrounding Markdown fences. This check does not establish scheduling feasibility.
 
-Use `scripts/run_codex_model.py` to run the direct method through Codex CLI with your ChatGPT sign-in. Codex availability and usage limits depend on your ChatGPT access.
+The independent validator must check entity references, organisation ownership, repeated requests, capacities, seating, volunteer assignments, trained assistance, timing, shifts and request-status consistency. It must also recompute distinct households served, their priority weight, fulfilled requests, mean travel and fleet size. Apply the same checks to both approaches.
 
-On Windows, the runner checks PATH and then automatically finds the Codex executable bundled with the VS Code or VS Code Insiders extension. You can run the Python commands below even when Git Bash cannot find a bare `codex` command. It uses your existing ChatGPT sign-in.
+Compare objective values using the stated hierarchy only after feasibility has been established. Lower travel in an invalid schedule is not evidence of a better solution.
 
-For a standalone CLI installed on PATH, check it and sign in if needed:
+`analysis/analyse_direct_results.py` expects per-run `run.json` metadata and optional `validation.json` results. It does not directly discover the bare response files in `outputs/gpt6/`. Any results aggregation must match the saved response layout and retain the independent validator's outcomes.
 
-```bash
-codex --version
-codex login
-codex login status
-```
-
-In Git Bash on Windows, activate the existing environment with `source .venv/Scripts/activate`. From the project root, generate a schedule for one instance:
-
-```bash
-python scripts/run_codex_model.py --instance-text instances/benchmark/easy/easy_001.txt --model gpt-6.1-sol --output-dir outputs/codex
-```
-
-Generate one candidate for every benchmark instance:
-
-```bash
-python scripts/run_codex_model.py --instances-dir instances/benchmark --model gpt-6.1-sol --output-dir outputs/codex
-```
-
-Use a Codex model available to your sign-in. The example model matches the model configured when this workflow was added. Reasoning effort defaults to `medium`; pin another supported value with `--reasoning-effort`. Each instance has a 600-second limit, adjustable with `--timeout`. Add `--dry-run` to save prompts without invoking Codex. To choose a specific executable, supply its full path with `--codex "C:/path/to/codex.exe"`. An invalid explicit override produces an error instead of selecting a different installation.
-
-Every trial starts a new ephemeral session in an empty temporary working directory. It sends only the natural-language instance, the direct prompt, output schema and an instruction to avoid tools. User configuration, inherited project guidance, memories, shell execution, web search, apps and other tool features are disabled for these trials. The runner uses your existing ChatGPT sign-in.
-
-Each output directory contains `prompt.txt`, `request.json`, `events.jsonl`, `stderr.txt`, `raw_response.txt`, `run.json`, and `parsed.json` when parsing succeeds. The runner records CLI version, model, reasoning effort, usage and process failures. A completed trial with no observed tool events has `direct_protocol_valid: true`. Any observed tool use disqualifies it as a direct trial. Parsing and schema checks do not establish scheduling feasibility or optimality.
-
-Use the same model and reasoning settings in the eventual tool-assisted method. Describe these results as a Codex-based direct baseline in the report, since Codex adds its own agent instructions around the project prompt.
-
-## Check an output's shape
-
-This checks only JSON structure, not scheduling feasibility. Add `--protocol v2` for a V2 candidate:
-
-```bash
-python scripts/check_schedule_shape.py examples/direct_candidate_example.json
-```
-
-## Summarize results
-
-The saved `outputs/codex/summary.csv` and `summary.json` describe the completed batch and its preliminary checks. The analysis command below produces final results after an independent validator adds `validation.json` to each run directory. Preliminary checks do not establish travel optimality.
-
-```bash
-python analysis/analyse_direct_results.py \
-  --runs outputs/codex \
-  --output analysis/direct_results.csv
-```
-
-## Fair experimental protocol
-
-- Use the same model version for the direct and tool-assisted methods.
-- Give both methods the same natural-language instances.
-- Use the same supported sampling and reasoning settings for both methods and record all decoding settings. Omit temperature for models that do not support it.
-- Run the same number of repetitions for each method and difficulty level.
-- Keep all raw outputs, including parse failures.
-- Do not expose structured JSON or witness schedules to the direct model.
-- Report parse rate, feasible-schedule rate, households served, priority score, mean-travel gap and violation categories.
-
+For reproducible experiments, record the model used, run date, exact prompt, raw response, attempt count, solver settings and validation results. Keep the same input facts and evaluation rules across both approaches.
